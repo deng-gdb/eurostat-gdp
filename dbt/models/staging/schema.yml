@@ -1,0 +1,8 @@
+version: 2
+sources:
+  - name: staging
+    database: free-tier-project-397608
+    schema: eurostat
+    tables:
+        - name: nama-10r-2gdp
+
