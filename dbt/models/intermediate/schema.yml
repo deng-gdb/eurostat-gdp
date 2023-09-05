@@ -1,0 +1,17 @@
+version: 2
+
+models:
+    - name: unpivoted_nama-10r-2gdp
+      description: Unpivoted source dataset.
+      columns:
+        - name: unit
+          description: Unit of measure
+        - name: geo
+          description: Geopolitical entity (reporting)
+        - name: year
+          description: Reported year
+        - name: value
+          description: The target value
+
+    - name: selected_distint_years
+      description: All distinct years values from the source dataset.
