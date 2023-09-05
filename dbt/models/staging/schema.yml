@@ -12,16 +12,16 @@ models:
         Eurostat dataset: Gross domestic product (GDP) at current market prices by NUTS 2 regions.
         Dataset code: nama_10r_2gdp.
       columns:
-        - name: string_field_0
+        - name: unit
           description: Unit of measure
           tests:
             - not_null:
-                    severity: warn
-        - name: string_field_1
+                  severity: warn
+        - name: geo
           description: Geopolitical entity (reporting)
           tests:
             - not_null:
-                    severity: warn
+                  severity: warn
         - name: string_field_2
           description: The target value in the unit of measure for 2021 year
         - name: string_field_3
