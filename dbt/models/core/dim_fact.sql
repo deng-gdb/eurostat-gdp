@@ -4,5 +4,5 @@ select unit,
        geo,
        year,
        value
-  from {{ ref('unpivoted_nama-10r-2gdp') }}
+  from {{ ref('casted_to_numeric_nama-10r-2gdp') }}
  
