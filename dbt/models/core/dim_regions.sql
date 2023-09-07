@@ -1,4 +1,4 @@
-{{ config(materialized='table', schema='development_core') }}
+{{ config(materialized='table', schema='core') }}
 
 select {{ dbt_utils.generate_surrogate_key(['notation']) }} as region_id,
        Notation   as notation,
