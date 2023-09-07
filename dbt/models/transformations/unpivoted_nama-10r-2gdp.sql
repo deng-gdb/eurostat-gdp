@@ -1,5 +1,6 @@
 {{ config(materialized='view', schema='transformations') }}
 
+
 select unit,
        geo,
        year,
