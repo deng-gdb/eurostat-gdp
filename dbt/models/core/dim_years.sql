@@ -1,4 +1,4 @@
-{{ config(materialized='table', schema='core') }}
+{{ config(materialized='table', schema='development_core') }}
 
 select {{ dbt_utils.generate_surrogate_key(['year']) }} as year_id,
        year
