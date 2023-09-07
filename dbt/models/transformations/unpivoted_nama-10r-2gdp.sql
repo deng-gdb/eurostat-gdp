@@ -1,4 +1,5 @@
-{{ config(materialized='view', schema='development_transformations') }}
+{{ config(materialized='view', schema='transformations') }}
+
 
 select unit,
        geo,
