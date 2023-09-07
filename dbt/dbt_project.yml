@@ -30,8 +30,8 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   eurostat_gdp:
-    # All models from the development_staging should be materialized as views
-    development_staging:
+    # All models from the staging should be materialized as views
+    staging:
       materialized: view
 
 seeds:
