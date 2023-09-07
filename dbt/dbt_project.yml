@@ -38,4 +38,4 @@ models:
 seeds:
   eurostat_gdp:
     # All seeds in the project should be created in the staging schema
-    +schema: staging
+    +schema: development_staging
