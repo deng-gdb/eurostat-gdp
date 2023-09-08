@@ -14,9 +14,7 @@
       - DB schemas: `eurostat_gdp_prod_staging` and `eurostat_gdp_prod_core`. Intermediate non-core DB objects are carried over into the separate staging schema in order to simplify the work of the end-users.
 - The following configuration steps reflect these suppositions.
 
-
-
-## 1. Setting up dbt Cloud project.
+## 2. Setting up dbt Cloud project.
 1. Create a [dbt CLoud account](https://www.getdbt.com/signup/) or login to an existing account.
 2. Go to **_Account Settings_** -> **_User Profile_** -> **_Personal Profile_** -> **_Linked Accounts_** -> **_Link_** -> **_Authorize dbt Cloud_**
       - Under choosen linked repo account -> Configure integration in GitHub -> Install dbt Cloud -> Install
@@ -33,13 +31,13 @@
     - Setup a Repository for the dbt project.
       - Choose the corresponding Repository from the provided list. This list is formed based on the information from your Repo account which is linked to your dbt User Profile.
   
-## 2. Setting up GitHub repository.
+## 3. Setting up GitHub repository.
 In the selected repository create the following branches: 
 - **dbt-dev.** This is the individual branch of the developer. Each developer from dev team has its own developing branch.
 - **dbt-qa.** This branch contains all merged changes from the whole dev team.
-- **dbt-prod.** It is actually branch for prod environment. This branch is used to separate dbt code from the other code in the repository which is stored in the main branch.
-
-## 3. Configure your Dev environment in the dbt Cloud IDE.
+- **dbt-prod.** It is actually branch for prod environment.
+  
+## 4. Configure your Dev environment in the dbt Cloud IDE.
 - Open dbt Cloud IDE. It is your Dev environment.
 - Setup working branch for the IDE: `dbt-dev`
   
