@@ -13,7 +13,10 @@
   - prod environment contains:
       - GitHub branch: `dbt-prod`. This branch is used to separate dbt code from the other code in the repository which is stored in the main branch. 
       - DB schemas: `eurostat_gdp_prod_staging` and `eurostat_gdp_prod_core`. Intermediate non-core DB objects are carried over into the separate staging schema in order to simplify the work of the end-users.
-- It is supposed that a continuous integration job will run when a pull request will be created in **dbt-dev** branch in order to merge changes to the **dbt-qa** branch. 
+- It is supposed that a continuous integration job will run when a pull request will be created in **dbt-dev** branch in order to merge changes to the **dbt-qa** branch.
+- It is supposed that objects in the **eurostat_gdp_dev** DB schema will be created when a developer will run the corresponding dbt commands in the dbt Cloud IDE during the development proccess.
+- It is supposed that objects in the **eurostat_gdp_qa** and **eurostat_gdp_prod** DB schemas will be created when the corresponding deployment jobы will be launched manually or through the dbt Cloud scheduler.
+- The listed above suppositions take into account some limitations for the free dbt cloud pricing plan which is used for this project. 
 - The following configuration steps reflect these suppositions.
 
 ## 2. Setting up dbt Cloud project.
