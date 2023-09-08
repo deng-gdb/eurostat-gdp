@@ -1,4 +1,21 @@
 
+## 1. General suppositions.
+- It is supposed that the dbt project team contains separate dev and qa teams.
+- It is supposed that the dbt project has 3 environments: dev, qa and prod.
+- It is supposed that each environment contains its own GitHub branch and DB schemas.
+  - dev environment contains:
+      - GitHub branch: `dbt-dev`
+      - DB schema: `eurostat_gdp_dev`
+  - qa environment contains:
+      - GitHub branch: `dbt-qa` 
+      - DB schemas: `eurostat_gdp_qa_staging` and `eurostat_gdp_qa_core`. Intermediate non-core DB objects are carried over into the separate staging schema in order to simplify the work of the end-users.
+  - prod environment contains:
+      - GitHub branch: `dbt-prod`. This branch is used to separate dbt code from the other code in the repository which is stored in the main branch. 
+      - DB schemas: `eurostat_gdp_prod_staging` and `eurostat_gdp_prod_core`. Intermediate non-core DB objects are carried over into the separate staging schema in order to simplify the work of the end-users.
+- The following configuration steps reflect these suppositions.
+
+
+
 ## 1. Setting up dbt Cloud project.
 1. Create a [dbt CLoud account](https://www.getdbt.com/signup/) or login to an existing account.
 2. Go to **_Account Settings_** -> **_User Profile_** -> **_Personal Profile_** -> **_Linked Accounts_** -> **_Link_** -> **_Authorize dbt Cloud_**
