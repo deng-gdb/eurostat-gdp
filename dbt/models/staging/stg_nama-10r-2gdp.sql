@@ -1,4 +1,4 @@
-{{ config(materialized='view', schema='staging') }}
+{{ config(materialized='view') }}
 
 select trim(string_field_0)  as unit,
        trim(string_field_1)  as geo,
