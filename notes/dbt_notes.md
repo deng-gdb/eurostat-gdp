@@ -1,8 +1,9 @@
 
 ## 1. General suppositions.
 - It is supposed that the dbt project team contains separate dev and qa teams.
-- It is supposed that the dbt project has 3 environments: dev, qa and prod.
-- It is supposed that each environment contains its own GitHub branch and DB schemas.
+- It is supposed that the dbt project has 3 basic environments: dev, qa and prod.
+- It is supposed that the dbt project has 1 additional continuous integration environment: ci. 
+- It is supposed that each basic environment contains its own GitHub branch and DB schemas.
   - dev environment contains:
       - GitHub branch: `dbt-dev`
       - DB schema: `eurostat_gdp_dev`
@@ -46,3 +47,11 @@ In the selected GitHub repository create the following branches:
 - Setup **Dataset:** `eurostat_gdp` and **Target Name:** `dev`.
 
     ![dev-conf](../img/p2.png)
+
+## 5. Configure CI environment.
+- Create continuous integration environment: **_Deploy_** -> **_Environments_** -> **_Create Environment_**
+- Setup the values provided on the following picture:
+
+   ![ci-conf](../img/p3.png)
+
+  
