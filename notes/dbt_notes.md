@@ -32,13 +32,18 @@
       - Choose the corresponding Repository from the provided list. This list is formed based on the information from your Repo account which is linked to your dbt User Profile.
   
 ## 3. Setting up GitHub repository.
-In the selected repository create the following branches: 
-- **dbt-dev.** This is the individual branch of the developer. Each developer from dev team has its own developing branch.
-- **dbt-qa.** This branch contains all merged changes from the whole dev team.
-- **dbt-prod.** It is actually branch for prod environment.
+In the selected GitHub repository create the following branches: 
+- `dbt-dev`. This is the individual branch of the developer. Each developer from dev team has its own developing branch.
+- `dbt-qa`. This branch contains all merged changes from the whole dev team.
+- `dbt-prod`. It is actually branch for prod environment.
   
-## 4. Configure your Dev environment in the dbt Cloud IDE.
-- Open dbt Cloud IDE. It is your Dev environment.
+## 4. Configure Dev environment.
+- Open dbt Cloud IDE.
 - Setup working branch for the IDE: `dbt-dev`
   
 ![dev-branch](../img/p1.png)
+
+- Open **_Account Settings_** -> **_User Profile_** -> **_Credentials_** -> **_Development Credentials_**
+- Setup **Dataset:** `eurostat_gdp` and **Target Name:** `dev`.
+
+![dev-conf](../img/p2.png)
