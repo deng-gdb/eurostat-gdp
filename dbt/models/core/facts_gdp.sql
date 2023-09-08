@@ -48,8 +48,8 @@ select
     units.unit_id,
     regions.region_id,
     years.year_id,
-    facts.value 
-    '1' as test_fiels
+    facts.value, 
+    '1' as test_field
   from facts
       inner join years
          on facts.year = years.year
