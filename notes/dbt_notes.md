@@ -53,13 +53,13 @@ In the selected GitHub repository create the following branches:
 1. Create continuous integration deployment environment: **_Deploy_** -> **_Environments_** -> **_Create Environment_**  
    Setup the values provided on the following picture during the creation:
 
-   ![ci-conf](../img/p3.png)
+    ![ci-conf](../img/p3.png)
 
 2. Create Deployment job in the created CI environment: **_Deploy_** -> **_Jobs_** -> **_Create Job_**  
    Setup the values provided on the following pictures during the creation:
 
-  ![ci-conf](../img/p4.png)
+    ![ci-conf](../img/p4.png)
 
-  ![ci-conf](../img/p5.png)
+    ![ci-conf](../img/p5.png)
 
-  ![ci-conf](../img/p6.png)
+    ![ci-conf](../img/p6.png)
