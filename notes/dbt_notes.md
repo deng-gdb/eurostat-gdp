@@ -41,9 +41,8 @@ In the selected GitHub repository create the following branches:
 - Open dbt Cloud IDE.
 - Setup working branch for the IDE: `dbt-dev`
   
-![dev-branch](../img/p1.png)
-
+    ![dev-branch](../img/p1.png)
 - Open **_Account Settings_** -> **_User Profile_** -> **_Credentials_** -> **_Development Credentials_**
 - Setup **Dataset:** `eurostat_gdp` and **Target Name:** `dev`.
 
-![dev-conf](../img/p2.png)
+    ![dev-conf](../img/p2.png)
