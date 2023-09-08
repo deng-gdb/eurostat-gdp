@@ -1,6 +1,6 @@
 {{ config(materialized='view') }}
 
-
+-- check check
 select trim(string_field_0)  as unit,
        trim(string_field_1)  as geo,
        trim(string_field_2)  as `2021`,
