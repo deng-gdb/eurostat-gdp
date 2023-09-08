@@ -56,8 +56,10 @@ In the selected GitHub repository create the following branches:
    ![ci-conf](../img/p3.png)
 
 - Create Deployment job in the CI environment: **_Deploy_** -> **_Jobs_** -> **_Create Job_**
-- Setup the values provided on the following picture during the creation:
+- Setup the values provided on the following pictures during the creation:
 
   ![ci-conf](../img/p4.png)
+
+  ![ci-conf](../img/p5.png)
 
   
