@@ -17,11 +17,13 @@
       - Choose the corresponding Repository from the provided list. This list is formed based on the information from your Repo account which is linked to your dbt User Profile.
   
 ## 2. Setting up GitHub repository.
-- in the selected repository create the following branches: 
-  - **dbt-dev.** This is the individual branch of the developer. Each developer from dev team has its own developing branch.
-  - **dbt-qa.** This branch contains all merged changes from the whole dev team.
-  - **dbt-prod.** It is actually branch for prod environment. This branch is used to separate dbt code from the other code in the repository which is stored in the main branch.
+In the selected repository create the following branches: 
+- **dbt-dev.** This is the individual branch of the developer. Each developer from dev team has its own developing branch.
+- **dbt-qa.** This branch contains all merged changes from the whole dev team.
+- **dbt-prod.** It is actually branch for prod environment. This branch is used to separate dbt code from the other code in the repository which is stored in the main branch.
 
 ## 3. Configure your Dev environment in the dbt Cloud IDE.
 - Open dbt Cloud IDE. It is your Dev environment.
-- Setup working branch for the IDE: `dbt-dev` 
+- Setup working branch for the IDE: `dbt-dev`
+  
+![dev-branch](../img/p1.png)
