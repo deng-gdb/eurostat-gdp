@@ -1,4 +1,4 @@
-{{ config(materialized='table', schema='core') }}
+{{ config(materialized='table') }}
 
 
 with
