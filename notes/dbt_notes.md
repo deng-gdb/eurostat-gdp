@@ -1,4 +1,7 @@
-
+# Index
+- [General suppositions](#general-suppositions)
+- [Configuration steps](#configuration-steps)
+  - [1. Setting up dbt Cloud project](#1-setting-up-dbt-cloud-project)
 
 # General suppositions.
 - It is supposed that the dbt project team contains separate dev and qa teams.
@@ -119,7 +122,7 @@ In the selected GitHub repository create the following branches:
 - dbt Cloud will launch the continuous integration job `CI Check`.
 - If the previous step passed without any issues, the developer mannually launch the job `Deploy to QA`. This job will create/update the corresponding objects in the `eurostat_gdp_qa_staging` and `eurostat_gdp_qa_core` schemas.
     - _`The job launched manually due to limitations for the free dbt Cloud pricing plan. This plan doesn't allow the using of dbt Cloud API Access.`_
-    - _`The alternative solution for other pricing plans you can find [here.](https://docs.getdbt.com/guides/orchestration/custom-cicd-pipelines/3-dbt-cloud-job-on-merge)`_
+    - _`The alternative solution for other pricing plans you can find` [here.](https://docs.getdbt.com/guides/orchestration/custom-cicd-pipelines/3-dbt-cloud-job-on-merge)_
 - QA team begins their work.
 - If there are no issues were found by the qa team, the new pull request should be created in GitHub in the `dbt-qa` branch to merge changes into the `dbt-prod` branch.
 - If the previous step passed without any issues, the developer(or qa) mannually launch the job `Deploy to Prod`. This job will create/update the corresponding objects in the `eurostat_gdp_prod_staging` and `eurostat_gdp_prod_core` schemas.
