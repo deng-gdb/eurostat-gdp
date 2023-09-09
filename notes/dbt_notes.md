@@ -76,8 +76,9 @@ In the selected GitHub repository create the following branches:
 2. Create Deployment job in the created QA environment: **_Deploy_** -> **_Jobs_** -> **_Create Job_**  
    Setup the values provided on the following pictures during the creation:
 
-    ![ci-conf](../img/p4.png)
+    ![ci-conf](../img/p8.png)
 
-    ![ci-conf](../img/p5.png)
+    ![ci-conf](../img/p9.png)
 
-    ![ci-conf](../img/p6.png)
+    You could disable dbt Cloud scheduler as on the following picture, or setup the corresponding values for the scheduler - doesn't matter.
+    ![ci-conf](../img/p10.png)
