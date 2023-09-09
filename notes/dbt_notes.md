@@ -1,6 +1,6 @@
 >[Back to index](../README.md)
 
-# dbt part implementation details and the model deployment guidance
+# dbt part implementation details and model deployment guidance
 
 This document contains details of the implementation of the dbt part of the project.
 
