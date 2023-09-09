@@ -15,8 +15,8 @@
       - DB schemas: `eurostat_gdp_prod_staging` and `eurostat_gdp_prod_core`. Intermediate non-core DB objects are carried over into the separate staging schema in order to simplify the work of the end-users.
 - It is supposed that a continuous integration job will run when a pull request will be created in **dbt-dev** branch in order to merge changes to the **dbt-qa** branch.
 - It is supposed that objects in the **eurostat_gdp_dev** DB schema will be created when a developer will run the corresponding dbt commands in the dbt Cloud IDE during the development proccess.
-- It is supposed that objects in the **eurostat_gdp_qa** and **eurostat_gdp_prod** DB schemas will be created when the corresponding deployment jobы will be launched manually or through the dbt Cloud scheduler.
-- The listed above suppositions take into account some limitations for the free dbt cloud pricing plan which is used for this project. 
+- It is supposed that objects in the **eurostat_gdp_qa** and **eurostat_gdp_prod** DB schemas will be created when the corresponding deployment jobs will be launched manually or through the dbt Cloud scheduler.
+- The listed above suppositions take into account some limitations for the free dbt Cloud pricing plan which is used for this project. 
 - The following configuration steps reflect these suppositions.
 
 ## 2. Setting up dbt Cloud project.
@@ -42,7 +42,7 @@ In the selected GitHub repository create the following branches:
 - `dbt-qa`. This branch contains all merged changes from the whole dev team.
 - `dbt-prod`. It is actually branch for prod environment.
   
-## 4. Configure Dev environment.
+## 4. Configure dev environment.
 - Open dbt Cloud IDE.
 - Setup working branch for the IDE: `dbt-dev`
   
@@ -52,7 +52,7 @@ In the selected GitHub repository create the following branches:
 
     ![dev-conf](../img/p2.png)
 
-## 5. Configure CI environment.
+## 5. Configure ci environment.
 1. Create continuous integration deployment environment: **_Deploy_** -> **_Environments_** -> **_Create Environment_**  
    Setup the values provided on the following picture during the creation:
 
@@ -66,3 +66,10 @@ In the selected GitHub repository create the following branches:
     ![ci-conf](../img/p5.png)
 
     ![ci-conf](../img/p6.png)
+
+## 6. Configure qa environment.
+1. Create qa deployment environment: **_Deploy_** -> **_Environments_** -> **_Create Environment_**  
+   Setup the values provided on the following picture during the creation:
+
+    ![ci-conf](../img/p7.png)
+
