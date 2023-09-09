@@ -1,6 +1,6 @@
 
 
-## 1. General suppositions.
+# General suppositions.
 - It is supposed that the dbt project team contains separate dev and qa teams.
 - It is supposed that the dbt project has 3 basic environments: dev, qa and prod.
 - It is supposed that the dbt project has 1 additional continuous integration environment: ci. 
@@ -21,8 +21,8 @@
 - The following configuration steps reflect these suppositions.
 
 
-
-## 2. Setting up dbt Cloud project.
+# Configuration steps
+## 1. Setting up dbt Cloud project.
 1. Create a [dbt CLoud account](https://www.getdbt.com/signup/) or login to an existing account.
 2. Go to **_Account Settings_** -> **_User Profile_** -> **_Personal Profile_** -> **_Linked Accounts_** -> **_Link_** -> **_Authorize dbt Cloud_**
       - Under choosen linked repo account -> Configure integration in GitHub -> Install dbt Cloud -> Install
@@ -41,7 +41,7 @@
 
 
   
-## 3. Setting up GitHub repository.
+## 2. Setting up GitHub repository.
 In the selected GitHub repository create the following branches: 
 - `dbt-dev`. This is the individual branch of the developer. Each developer from dev team has its own developing branch.
 - `dbt-qa`. This branch contains all merged changes from the whole dev team.
@@ -49,7 +49,7 @@ In the selected GitHub repository create the following branches:
 
 
 
-## 4. Configure dev environment.
+## 3. Configure dev environment.
 - Open dbt Cloud IDE.
 - Setup working branch for the IDE: `dbt-dev`
   
@@ -61,7 +61,7 @@ In the selected GitHub repository create the following branches:
 
 
 
-## 5. Configure ci environment.
+## 4. Configure ci environment.
 1. Create continuous integration deployment environment: **_Deploy_** -> **_Environments_** -> **_Create Environment_**  
    Setup the values provided on the following picture during the creation:
 
@@ -78,7 +78,7 @@ In the selected GitHub repository create the following branches:
 
 
 
-## 6. Configure qa environment.
+## 5. Configure qa environment.
 1. Create qa deployment environment: **_Deploy_** -> **_Environments_** -> **_Create Environment_**  
    Setup the values provided on the following picture during the creation:
 
@@ -96,8 +96,8 @@ In the selected GitHub repository create the following branches:
 
 
 
-## 7. Configure prod environment.
-1. Create qa deployment environment: **_Deploy_** -> **_Environments_** -> **_Create Environment_**  
+## 6. Configure prod environment.
+1. Create prod deployment environment: **_Deploy_** -> **_Environments_** -> **_Create Environment_**  
    Setup the values provided on the following picture during the creation:
 
     ![ci-conf](../img/p11.png)
@@ -111,3 +111,16 @@ In the selected GitHub repository create the following branches:
 
     You could disable dbt Cloud scheduler as on the following picture, or setup the corresponding values for the scheduler - doesn't matter.
     ![ci-conf](../img/p10.png)
+
+
+# The project team workflow.
+- Each developer from the dev team implements changes in the own `dbt-dev` branch. During the implementation process dbt creates the corresponding objects in the DB schema `eurostat_gdp_dev`.
+- After the completion of the implementation the developer commits changes in the repo and creates the pull request to merge changes from the `dbt-dev` to the `dbt-qa` branch.
+- dbt Cloud will launch the continuous integration job `CI Check`.
+- If the previous step passed without any issues, the developer mannually launch the job `Deploy to QA`. This job will create/update the corresponding objects in the `eurostat_gdp_qa_staging` and `eurostat_gdp_qa_core` schemas.
+    - _`The job launched manually due to limitations for the free dbt Cloud pricing plan. This plan doesn't allow the using of dbt Cloud API Access.`_
+    - _`The alternative solution for other pricing plans you can find [here.](https://docs.getdbt.com/guides/orchestration/custom-cicd-pipelines/3-dbt-cloud-job-on-merge)`_
+- QA team begins their work.
+- If there are no issues were found by the qa team, the new pull request should be created in GitHub in the `dbt-qa` branch to merge changes into the `dbt-prod` branch.
+- If the previous step passed without any issues, the developer(or qa) mannually launch the job `Deploy to Prod`. This job will create/update the corresponding objects in the `eurostat_gdp_prod_staging` and `eurostat_gdp_prod_core` schemas.
+- In order to keep the whole repository in the up-to-date state, once more pull request should be created in the `dbt-prod` branch in order to merge all changes to the `main` branch.
