@@ -2,6 +2,12 @@
 - [General suppositions](#general-suppositions)
 - [Configuration steps](#configuration-steps)
   - [1. Setting up dbt Cloud project](#1-setting-up-dbt-cloud-project)
+  - [2. Setting up GitHub repository](#2-setting-up-github-repository)
+  - [3. Configure dev environment](#3-configure-dev-environment)
+  - [4. Configure ci environment](#4-configure-ci-environment)
+  - [5. Configure qa environment](#5-configure-qa-environment)
+  - [6. Configure prod environment](#6-configure-prod-environment)
+- [The project team workflow](#the-project-team-workflow)
 
 # General suppositions.
 - It is supposed that the dbt project team contains separate dev and qa teams.
