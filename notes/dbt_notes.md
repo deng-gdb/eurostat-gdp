@@ -1,3 +1,7 @@
+# dbt part of the project
+
+This document contains details of the implementation of the dbt part of the project.
+
 # Index
 - [General suppositions](#general-suppositions)
 - [Configuration steps](#configuration-steps)
