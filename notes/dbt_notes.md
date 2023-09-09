@@ -19,6 +19,7 @@
 - The listed above suppositions take into account some limitations for the free dbt Cloud pricing plan which is used for this project. 
 - The following configuration steps reflect these suppositions.
 
+
 ## 2. Setting up dbt Cloud project.
 1. Create a [dbt CLoud account](https://www.getdbt.com/signup/) or login to an existing account.
 2. Go to **_Account Settings_** -> **_User Profile_** -> **_Personal Profile_** -> **_Linked Accounts_** -> **_Link_** -> **_Authorize dbt Cloud_**
@@ -35,13 +36,15 @@
       - Test the connection and click on **_Continue_** once the connection is tested successfully.
     - Setup a Repository for the dbt project.
       - Choose the corresponding Repository from the provided list. This list is formed based on the information from your Repo account which is linked to your dbt User Profile.
+
   
 ## 3. Setting up GitHub repository.
 In the selected GitHub repository create the following branches: 
 - `dbt-dev`. This is the individual branch of the developer. Each developer from dev team has its own developing branch.
 - `dbt-qa`. This branch contains all merged changes from the whole dev team.
 - `dbt-prod`. It is actually branch for prod environment.
-  
+
+
 ## 4. Configure dev environment.
 - Open dbt Cloud IDE.
 - Setup working branch for the IDE: `dbt-dev`
@@ -51,6 +54,7 @@ In the selected GitHub repository create the following branches:
 - Setup **Dataset:** `eurostat_gdp` and **Target Name:** `dev`.
 
     ![dev-conf](../img/p2.png)
+
 
 ## 5. Configure ci environment.
 1. Create continuous integration deployment environment: **_Deploy_** -> **_Environments_** -> **_Create Environment_**  
@@ -67,6 +71,7 @@ In the selected GitHub repository create the following branches:
 
     ![ci-conf](../img/p6.png)
 
+
 ## 6. Configure qa environment.
 1. Create qa deployment environment: **_Deploy_** -> **_Environments_** -> **_Create Environment_**  
    Setup the values provided on the following picture during the creation:
@@ -82,3 +87,10 @@ In the selected GitHub repository create the following branches:
 
     You could disable dbt Cloud scheduler as on the following picture, or setup the corresponding values for the scheduler - doesn't matter.
     ![ci-conf](../img/p10.png)
+
+
+## 7. Configure prod environment.
+1. Create qa deployment environment: **_Deploy_** -> **_Environments_** -> **_Create Environment_**  
+   Setup the values provided on the following picture during the creation:
+
+    ![ci-conf](../img/p7.png)
