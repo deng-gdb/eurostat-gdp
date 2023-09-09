@@ -27,3 +27,8 @@ Create the Service Account credentials file.
 ## Set up dbt Cloud and deploy dbt models in the Production environment using provided workflow
 
 Implementation details and the corresponding guidance you can find [here.](./notes/dbt_notes.md)
+
+## Create a dashboard
+
+Implementation details you can find [here.](./notes/dbt_dashboard.md)
+
