@@ -30,5 +30,5 @@ Implementation details and the corresponding guidance you can find [here.](./not
 
 ## Create a dashboard
 
-Implementation details you can find [here.](./notes/dbt_dashboard.md)
+Implementation details you can find [here.](./notes/dashboard_notes.md)
 
