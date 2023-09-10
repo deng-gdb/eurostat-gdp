@@ -4,6 +4,8 @@
 
 The dashboard used in this project was created with Google Looker.
 
+## Create Data source
+
 - Open [Google Looker Studio](https://lookerstudio.google.com/)
 - Create Data Source: Create -> Data source -> BigQuery
 - Looker Studio requires authorization to connect to your BigQuery projects -> Authorize
