@@ -1,10 +1,12 @@
 # Dataset
+
 - The sourse of the Regions dimension you can find [here.](http://dd.eionet.europa.eu/vocabulary/eurostat/sgm_reg/view)
 - The sourse of the Units dimension you can find [here.](http://dd.eionet.europa.eu/vocabulary/eurostat/unit/)
 
 # Reproduce the project
 
 ## Create a Google Cloud Project
+
 After you create the project, you will need to create a _Service Account_: 
 - ***IAM & Admin -> Service Accounts -> Create Service Account***
 - Enter the following information:
@@ -22,5 +24,11 @@ Create the Service Account credentials file.
   - Key type: `JSON`
 - Save the created Service Account credentials file on the local machine.
 
-## Setting up dbt Cloud
-  Details you can find [here](./notes/dbt_notes.md)
+## Set up dbt Cloud and deploy dbt models in the Production environment using provided workflow
+
+Implementation details and the corresponding guidance you can find [here.](./notes/dbt_notes.md)
+
+## Create a dashboard
+
+Implementation details you can find [here.](./notes/dashboard_notes.md)
+
