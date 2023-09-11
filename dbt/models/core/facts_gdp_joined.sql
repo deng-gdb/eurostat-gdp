@@ -47,9 +47,9 @@ facts as (
 )
 
 select    
-    units.unit_id,
-    regions.region_id,
-    years.year_id,
+    units.unit_name,
+    regions.region_name,
+    years.year,
     facts.value
   from facts
       inner join years

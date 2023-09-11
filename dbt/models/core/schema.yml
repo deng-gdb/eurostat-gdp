@@ -18,10 +18,10 @@ models:
         for reporting purposes.
       columns:
         - name: region_id
-          description: Primary key.
-        - name: notation
+          description: surrogate primary key.
+        - name: region_code
           description: Inner code of the region, used in the Eurostat classification.
-        - name: definition
+        - name: region_name
           description: Displayed value of the region.
 
     - name: dim_units
@@ -31,10 +31,10 @@ models:
         used in the Eurostat classification for reporting purposes.
       columns:
         - name: unit_id
-          description: Primary key.
-        - name: id
+          description: Surrogate primary key.
+        - name: unit_code
           description: Inner code of the unit of measure, used in the Eurostat classification.
-        - name: label
+        - name: unit_name
           description: Displayed value of the unit of measure.
 
     - name: facts_gdp
