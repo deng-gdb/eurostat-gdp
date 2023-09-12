@@ -30,4 +30,5 @@ select
  where exists (
     select unit
       from facts
+     where facts.unit = units.unit_code
  )
