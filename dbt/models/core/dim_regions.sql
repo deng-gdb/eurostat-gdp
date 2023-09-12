@@ -30,4 +30,5 @@ select
  where exists (
     select geo
       from facts
+     where facts.geo = regions.region_code
  )
