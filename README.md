@@ -30,7 +30,7 @@ Implementation details and the corresponding guidance you can find [here.](./not
 
 ## Create a dashboard
 
-the dashboard you can find [here.](https://lookerstudio.google.com/s/k_CdiYYrJTM)
+the dashboard you can find [here.](https://lookerstudio.google.com/reporting/5cb1caed-76fb-4a2f-bbd3-b9e2bb8269b1)
 
 The dashboard implementation details you can find [here.](./notes/dashboard_notes.md)
 
