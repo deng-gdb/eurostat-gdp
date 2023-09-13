@@ -49,6 +49,7 @@ facts as (
 select    
     units.unit_name,
     regions.region_name,
+    regions.region_code,
     years.year,
     facts.value
   from facts
