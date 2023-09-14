@@ -1,3 +1,10 @@
+# Index
+- [Dataset](#dataset)
+- [Reproduce the project](#reproduce_the_project)
+  - [Create a Google Cloud Project](#create_a_google_cloud_project)
+  - [Set up dbt Cloud and deploy dbt models in Production](#set_up_dbt_cloud_and_deploy_dbt_models_in_production)
+  - [Dashboard](#dashboard)
+
 # Dataset
 
 - This project is related to the processing of the Eurostat dataset: `"Gross domestic product (GDP) at current market prices by NUTS 2 regions"`. Eurostat online data code of this dataset: NAMA_10R_2GDP.
