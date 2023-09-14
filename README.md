@@ -24,11 +24,13 @@ Create the Service Account credentials file.
   - Key type: `JSON`
 - Save the created Service Account credentials file on the local machine.
 
-## Set up dbt Cloud and deploy dbt models in the Production environment using provided workflow
+## Set up dbt Cloud and deploy dbt models in Production
 
 Implementation details and the corresponding guidance you can find [here.](./notes/dbt_notes.md)
 
 ## Create a dashboard
 
-Implementation details you can find [here.](./notes/dashboard_notes.md)
+The dashboard you can find [here.](https://lookerstudio.google.com/reporting/5cb1caed-76fb-4a2f-bbd3-b9e2bb8269b1)
+
+The dashboard implementation details you can find [here.](./notes/dashboard_notes.md)
 
