@@ -8,6 +8,7 @@ regions as (
     select
         region_id,
         region_code,
+        eu_commission_region_code,
         region_name
 
     from {{ ref('dim_regions') }}
@@ -58,4 +59,4 @@ select
       inner join units 
          on units.unit_code = facts.unit
       inner join regions  
-         on regions.region_code = facts.geo
+         on regions.eu_commission_region_code = facts.geo
