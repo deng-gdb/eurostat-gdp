@@ -19,8 +19,10 @@ models:
       columns:
         - name: region_id
           description: surrogate primary key.
+        - name: eu_commission_region_code
+          description: Inner code of the region used by the European Commission.
         - name: region_code
-          description: Inner code of the region, used in the Eurostat classification.
+          description: Inner code of the region in accordance with the ISO 3166.
         - name: region_name
           description: Displayed value of the region.
 
