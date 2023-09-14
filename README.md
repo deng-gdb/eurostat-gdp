@@ -1,4 +1,5 @@
 # Index
+
 - [Dataset](#dataset)
 - [Reproduce the project](#reproduce-the-project)
   - [Create a Google Cloud Project](#create-a-google-cloud-project)
@@ -13,6 +14,12 @@
 - API for dataset access description is available at this [link.](https://wikis.ec.europa.eu/display/EUROSTATHELP/Transition+-+from+Eurostat+Bulk+Download+to+API)
 - The sourse of the Regions dimension you can find [here.](http://dd.eionet.europa.eu/vocabulary/eurostat/sgm_reg/view)
 - The sourse of the Units dimension you can find [here.](http://dd.eionet.europa.eu/vocabulary/eurostat/unit/)
+
+# Project details and implementation
+
+This project makes use the Google Cloud Platform, particularly Cloud Storage and BigQuery.
+
+The Data Warehouse development was performed with dbt Cloud. 
 
 # Reproduce the project
 
