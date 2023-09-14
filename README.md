@@ -1,6 +1,7 @@
 # Index
 
 - [Dataset](#dataset)
+- [Project details and implementation](#project-details-and-implementation)
 - [Reproduce the project](#reproduce-the-project)
   - [Create a Google Cloud Project](#create-a-google-cloud-project)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
