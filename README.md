@@ -38,6 +38,9 @@
 
 ## Data Warehouse and Data Modeling
 
+The project uses Google BigQuery as a Data Warehouse. 
+The Data Warehouse implementation details, Data Modeling guidance and the corresponding workflow you can find [here.](./notes/dbt_notes.md)
+
 ## Data Visualization
 
 Dashbord implementation details, the corresponding description and visualizations you can find [here.](./notes/dashboard_notes.md)
@@ -63,9 +66,6 @@ Create the Service Account credentials file.
   - Key type: `JSON`
 - Save the created Service Account credentials file on the local machine.
 
-## Set up dbt Cloud and deploy dbt models in Production
-
-Implementation details and the corresponding guidance you can find [here.](./notes/dbt_notes.md)
 
 
 
