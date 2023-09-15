@@ -21,7 +21,7 @@ The dashboard consist of tree pages: Table, Bar, Map.
 **Map:**
 ![dashboard](../img/dashboard3.jpg)
 
-Each page contains three dropboxes with the input parameters:
+Each page contains three drop boxes with the input parameters:
 
 **Geoplolitical entity:**
 ![dashboard](../img/dashboard5.jpg)
