@@ -24,10 +24,10 @@ The dashboard consist of tree pages: Table, Bar, Map.
 Each page contains three dropboxes with the input parameters:
 
 **Geoplolitical entity:**
-![dashboard](../img/dashboard4.jpg)
+![dashboard](../img/dashboard5.jpg)
 
 **Unit of measure:**
-![dashboard](../img/dashboard5.jpg)
+![dashboard](../img/dashboard4.jpg)
 
 **Time:**
 ![dashboard](../img/dashboard6.jpg)
