@@ -1,4 +1,17 @@
-{{ config(materialized='table') }}
+{{ config(
+       materialized='table',
+       partition_by={
+           "field": "year",
+           "data_type": "int64",
+           "range": {
+                "start": 2000,
+                "end": 3000,
+                "interval": 1
+            }
+       },
+       cluster_by = ["region_name", "unit_name"]   
+   ) 
+}}
 
 
 with
