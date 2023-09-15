@@ -1,7 +1,26 @@
+# Index
+
+- [Dataset](#dataset)
+- [Project details and implementation](#project-details-and-implementation)
+- [Reproduce the project](#reproduce-the-project)
+  - [Create a Google Cloud Project](#create-a-google-cloud-project)
+  - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
+  - [Dashboard](#dashboard)
+
 # Dataset
 
+- This project is related to the processing of the Eurostat dataset: `"Gross domestic product (GDP) at current market prices by NUTS 2 regions"`. Eurostat online data code of this dataset: NAMA_10R_2GDP.
+- The dataset is available at this [link.](https://ec.europa.eu/eurostat/web/products-datasets/-/nama_10r_2gdp)
+- Metadata regarding this dataset you can find [here.](https://ec.europa.eu/eurostat/cache/metadata/en/reg_eco10_esms.htm)
+- API for dataset access description is available at this [link.](https://wikis.ec.europa.eu/display/EUROSTATHELP/Transition+-+from+Eurostat+Bulk+Download+to+API)
 - The sourse of the Regions dimension you can find [here.](http://dd.eionet.europa.eu/vocabulary/eurostat/sgm_reg/view)
 - The sourse of the Units dimension you can find [here.](http://dd.eionet.europa.eu/vocabulary/eurostat/unit/)
+
+# Project details and implementation
+
+This project makes use the Google Cloud Platform, particularly Cloud Storage and BigQuery.
+
+The Data Warehouse development was performed with dbt Cloud. 
 
 # Reproduce the project
 
@@ -28,9 +47,12 @@ Create the Service Account credentials file.
 
 Implementation details and the corresponding guidance you can find [here.](./notes/dbt_notes.md)
 
-## Create a dashboard
+## Dashboard
 
-The dashboard you can find [here.](https://lookerstudio.google.com/reporting/5cb1caed-76fb-4a2f-bbd3-b9e2bb8269b1)
+- The dashboard used in this project was created in the Google Looker Studio. 
+- The Looker Studio is treated in the project as Front-End visualization tool only. All table joins and other actions, required for the visualization, were made by the dbt Cloud.
+- Due to the fact that Looker Studio Google Geo charts [doesn't support NUTs regions](https://support.google.com/looker-studio/answer/9843174#country&zippy=%2Cin-this-article), the "Map" page of the dashbord represents data for Country level regions only. The details regarding the NUTs regions you can find [here.](https://ec.europa.eu/eurostat/web/nuts/background)
+- The dashbord is based on the dataset `eurostat_gdp_prod_core.facts_gdp_joined` from the corresponding DB Prod environment.
+- **The dashboard you can find** [**here.**](https://lookerstudio.google.com/reporting/5cb1caed-76fb-4a2f-bbd3-b9e2bb8269b1)
 
-The dashboard implementation details you can find [here.](./notes/dashboard_notes.md)
 

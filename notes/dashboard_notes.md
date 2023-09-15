@@ -4,6 +4,7 @@
 
 - The dashboard used in this project was created in the Google Looker Studio. 
 - The Looker Studio is treated in the project as Front-End visualization tool only. All table joins and other actions, required for the visualization, were made in the dbt Cloud.
+- Due to the fact that Looker Studio Google Geo charts [doesn't support NUTs regions](https://support.google.com/looker-studio/answer/9843174#country&zippy=%2Cin-this-article), the "Map" page of the dashbord represents data for Country level regions only. 
 
 ## Create Data source
 
