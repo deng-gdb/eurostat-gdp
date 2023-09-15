@@ -1,11 +1,15 @@
 # Index
 
 - [Dataset](#dataset)
-- [Project details and implementation](#project-details-and-implementation)
+- [Technologies](#technologies)
+- [Data Pipeline Architecture and Workflow](#data-pipeline-architecture-and-workflow)
+  - [Data Ingestion, Orchestration and Data Lake](#data-ingestion-orchestration-and-data-lake)
+  - [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
+  - [Data Visualization](#data_visualization)
 - [Reproduce the project](#reproduce-the-project)
   - [Create a Google Cloud Project](#create-a-google-cloud-project)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
-  - [Dashboard](#dashboard)
+
 
 # Dataset
 
@@ -16,11 +20,21 @@
 - The sourse of the Regions dimension you can find [here.](http://dd.eionet.europa.eu/vocabulary/eurostat/sgm_reg/view)
 - The sourse of the Units dimension you can find [here.](http://dd.eionet.europa.eu/vocabulary/eurostat/unit/)
 
-# Project details and implementation
+# Technologies
 
 This project makes use the Google Cloud Platform, particularly Cloud Storage and BigQuery.
 
 The Data Warehouse development was performed with dbt Cloud. 
+
+# Data Pipeline Architecture and Workflow
+
+## Data Ingestion, Orchestration and Data Lake
+
+## Data Warehouse and Data Modeling
+
+## Data Visualization
+
+Dashbord implementation details, the corresponding description and visualizations you can find [here.](./notes/dashboard_notes.md)
 
 # Reproduce the project
 
@@ -47,8 +61,6 @@ Create the Service Account credentials file.
 
 Implementation details and the corresponding guidance you can find [here.](./notes/dbt_notes.md)
 
-## Dashboard
 
-Implementation details, corresponding description and visualizations you can find [here.](./notes/dashboard_notes.md)
 
 
