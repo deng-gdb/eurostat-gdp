@@ -1,7 +1,7 @@
 # Index
 
 - [Dataset](#dataset)
-- [Technologies](#technologies)
+- [Technologies and Tools](#technologies)
 - [Data Pipeline Architecture and Workflow](#data-pipeline-architecture-and-workflow)
   - [Data Ingestion, Orchestration and Data Lake](#data-ingestion-orchestration-and-data-lake)
   - [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
@@ -20,11 +20,17 @@
 - The sourse of the Regions dimension you can find [here.](http://dd.eionet.europa.eu/vocabulary/eurostat/sgm_reg/view)
 - The sourse of the Units dimension you can find [here.](http://dd.eionet.europa.eu/vocabulary/eurostat/unit/)
 
-# Technologies
+# Technologies and Tools
 
-This project makes use the Google Cloud Platform, particularly Cloud Storage and BigQuery.
-
-The Data Warehouse development was performed with dbt Cloud. 
+- Cloud: Google Cloud Platform
+- Infrastructure as Code: Terraform
+- Containerization: Docker
+- Workflow Orchestration: Prefect
+- Data Lake: Google Cloud Storage
+- Data Warehouse: BigQuery
+- Data Modeling and Transformations: dbt
+- Data Visualization: Looker Studio
+- Language: Python 
 
 # Data Pipeline Architecture and Workflow
 
