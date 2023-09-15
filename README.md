@@ -5,7 +5,7 @@
 - [Data Pipeline Architecture and Workflow](#data-pipeline-architecture-and-workflow)
   - [Data Ingestion, Orchestration and Data Lake](#data-ingestion-orchestration-and-data-lake)
   - [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
-  - [Data Visualization](#data_visualization)
+  - [Data Visualization](#data-visualization)
 - [Reproduce the project](#reproduce-the-project)
   - [Create a Google Cloud Project](#create-a-google-cloud-project)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
