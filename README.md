@@ -38,7 +38,7 @@
 
 ## Data Warehouse and Data Modeling
 
-The project uses Google BigQuery as a Data Warehouse. 
+The project uses Google BigQuery as a Data Warehouse.   
 The Data Warehouse implementation details, Data Modeling guidance and the corresponding workflow you can find [here.](./notes/dbt_notes.md)
 
 ## Data Visualization
