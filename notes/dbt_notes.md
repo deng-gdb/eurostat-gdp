@@ -13,6 +13,7 @@ This document contains details of the implementation of the dbt part of the proj
   - [4. Configure ci environment](#4-configure-ci-environment)
   - [5. Configure qa environment](#5-configure-qa-environment)
   - [6. Configure prod environment](#6-configure-prod-environment)
+  - [7. Configure the dbt project documentation building](#7-configure-the-dbt-project-documentation-building)
 - [The project team workflow](#the-project-team-workflow)
 
 # General suppositions.
@@ -127,6 +128,16 @@ In the selected GitHub repository create the following branches:
     You could disable dbt Cloud scheduler as on the following picture, or setup the corresponding values for the scheduler - doesn't matter.
     ![ci-conf](../img/p10.png)
 
+## 7. Configure the dbt project documentation building
+
+- Set up a documentation job  
+  - The process of creation of dbt project documentation could be tied to any existing jobs in the project. But in this project for the documentation creation a separate job is used.
+  - Create Deployment job in the Production environment: Deploy -> Jobs -> Create Job  
+    Setup the values provided on the following pictures during the creation:
+
+    ![ci-conf](../img/p9.png)
+    
+- The official guidance you can find at this link: [Build and view your docs with dbt Cloud.](https://docs.getdbt.com/docs/collaborate/build-and-view-your-docs#set-up-a-documentation-job)
 
 # The project team workflow.
 - Each developer from the dev team implements changes in the own `dbt-dev` branch. During the implementation process dbt creates the corresponding objects in the DB schema `eurostat_gdp_dev`.
