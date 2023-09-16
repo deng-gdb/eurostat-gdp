@@ -135,9 +135,9 @@ In the selected GitHub repository create the following branches:
   - Create Deployment job in the Production environment: Deploy -> Jobs -> Create Job  
     Setup the values provided on the following pictures during the creation:
 
-    ![ci-conf](../img/p13.png
+    ![docs](../img/p13.png
 
-    ![ci-conf](../img/p14.png)
+    ![docs](../img/p14.png)
     
 - The official guidance you can find at this link: [Build and view your docs with dbt Cloud.](https://docs.getdbt.com/docs/collaborate/build-and-view-your-docs#set-up-a-documentation-job)
 
