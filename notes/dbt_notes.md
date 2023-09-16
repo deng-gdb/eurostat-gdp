@@ -130,14 +130,21 @@ In the selected GitHub repository create the following branches:
 
 ## 7. Configure the dbt project documentation building
 
-- Set up a documentation job  
+- Set up a documentation job.  
   - The process of creation of dbt project documentation could be tied to any existing jobs in the project. But in this project for the documentation creation a separate job is used.
   - Create Deployment job in the Production environment: Deploy -> Jobs -> Create Job  
     Setup the values provided on the following pictures during the creation:
 
     ![docs](../img/p13.png)
 
-    ![docs](../img/p14.png) 
+    ![docs](../img/p14.png)  
+    
+- Configure project documentation.
+
+  - Go to Account Settings -> Project -> Artifacts
+  - In the field `Documentation` select the documentation job created on the previous step
+ 
+    ![docs](../img/p15.png)
     
 - The official guidance you can find at this link: [Build and view your docs with dbt Cloud.](https://docs.getdbt.com/docs/collaborate/build-and-view-your-docs#set-up-a-documentation-job)
 
