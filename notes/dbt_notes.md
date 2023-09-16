@@ -135,7 +135,7 @@ In the selected GitHub repository create the following branches:
   - Create Deployment job in the Production environment: Deploy -> Jobs -> Create Job  
     Setup the values provided on the following pictures during the creation:
 
-    ![docs](../img/p13.png
+    ![docs](../img/p13.png)
 
     ![docs](../img/p14.png) 
     
