@@ -51,6 +51,7 @@ Dashbord implementation details, the corresponding description and visualization
 
 To create a new Google Cloud project go to the [GCP dashboard](https://console.cloud.google.com/) and create a new project.
 
+
 After you have created the project, you need to create a _Service Account_ in the project: 
 - ***IAM & Admin -> Service Accounts -> Create Service Account***
 - Enter the following information:
@@ -61,14 +62,16 @@ After you have created the project, you need to create a _Service Account_ in th
     - `Storage Object Admin`
     - `Viewer`
 
-After that create the Service Account credentials file.
 
+After that create the Service Account credentials file.
 - Service Account -> Manage Keys
 - Add Key -> Create new key
   - Key type: `JSON`
 - Save the created Service Account credentials file on the local machine.
 
-
+Activate the following APIs in your GCP project:
+- https://console.cloud.google.com/apis/library/iam.googleapis.com
+- https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
 
 
 
