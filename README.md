@@ -7,7 +7,7 @@
   - [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
   - [Data Visualization](#data-visualization)
 - [Reproduce the project](#reproduce-the-project)
-  - [Create a Google Cloud Project](#create-a-google-cloud-project)
+  - [Create a GCP project](#create-a-gcp-project)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -47,9 +47,11 @@ Dashbord implementation details, the corresponding description and visualization
 
 # Reproduce the project
 
-## Create a Google Cloud Project
+## Create a GCP project
 
-After you create the project, you will need to create a _Service Account_: 
+To create a new Google Cloud project go to the [GCP dashboard](https://console.cloud.google.com/) and create a new project.
+
+After you have created the project, you need to create a _Service Account_ in the project: 
 - ***IAM & Admin -> Service Accounts -> Create Service Account***
 - Enter the following information:
   - _***Service Account ID***_. Provide `your own value` or hit `Generate` link.
@@ -59,7 +61,7 @@ After you create the project, you will need to create a _Service Account_:
     - `Storage Object Admin`
     - `Viewer`
 
-Create the Service Account credentials file.
+After that create the Service Account credentials file.
 
 - Service Account -> Manage Keys
 - Add Key -> Create new key
