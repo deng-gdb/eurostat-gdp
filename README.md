@@ -8,6 +8,7 @@
   - [Data Visualization](#data-visualization)
 - [Reproduce the project](#reproduce-the-project)
   - [Create a GCP project](#create-a-gcp-project)
+  - [Create and setup a VM instance in GCP Compute Engine](#create-and-setup-a-vm-instance-in-gcp-compute-engine)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -69,9 +70,20 @@ After that create the Service Account credentials file.
   - Key type: `JSON`
 - Save the created Service Account credentials file on the local machine.
 
-Activate the following APIs in your GCP project:
+Then activate the following APIs in your GCP project:
 - https://console.cloud.google.com/apis/library/iam.googleapis.com
 - https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
 
+## Create and setup a VM instance in GCP Compute Engine
 
-
+- Go the your GCP project dashboard _Compute Engine_ -> _VM instances_ -> _Create instance_
+- Add the following information (the provided iformormation complies with the GCP Free Tier limitations):
+  -  Name: whatever you want
+  -  Region: `us-east1` (this is a free tier limit)
+  -  Series: `E2`
+  -  Machine type: `e2-micro` (this is a free tier limit)
+  -  Boot disk:
+     - boot disk type: `Standard persistent disk` (this is a free tier limit)
+     - operating system: `Ubuntu`
+     - version: `Ubuntu 20.04 LTS`
+     - size: `30Gb`
