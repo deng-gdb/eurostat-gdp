@@ -7,8 +7,10 @@
   - [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
   - [Data Visualization](#data-visualization)
 - [Reproduce the project](#reproduce-the-project)
+  - [Prerequisites](#prerequisites)
   - [Create a GCP project](#create-a-gcp-project)
   - [Create and setup a VM instance in GCP Compute Engine](#create-and-setup-a-vm-instance-in-gcp-compute-engine)
+  - [Create an SSH key pair on local machine](#create-an-ssh-key-pair-on-local-machine)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -48,6 +50,14 @@ Dashbord implementation details, the corresponding description and visualization
 
 # Reproduce the project
 
+## Prerequisites
+
+The following items could be treated as prerequisites in order to reproduce the project:
+
+- An active [GCP account.](https://cloud.google.com)
+- It is supposed that we are going to connect to GCP VM from the local machine trough the SSH.
+- (Optional) A SSH client. It is supposed that you are using a Terminal and SSH.
+
 ## Create a GCP project
 
 To create a new Google Cloud project go to the [GCP dashboard](https://console.cloud.google.com/) and create a new project.
@@ -62,7 +72,6 @@ After you have created the project, you need to create a _Service Account_ in th
     - `Storage Admin`
     - `Storage Object Admin`
     - `Viewer`
-
 
 After that create the Service Account credentials file.
 - Service Account -> Manage Keys
@@ -87,3 +96,18 @@ Then activate the following APIs in your GCP project:
      - operating system: `Ubuntu`
      - version: `Ubuntu 20.04 LTS`
      - size: `30Gb`
+   
+## Set up SSH access to the Compute Engine virtual machine (VM) instances
+
+- Create an SSH key pair on local machine.  
+  - If you connect to GCP Compute Engine virtual machine (VM) instances using third party tools or OpenSSH, you need to add a key to your VM before you can connect. If you don't have an SSH key, you must create one.
+  - Create SSH key pair in accordance with the following GCP guidance: [Create SSH keys](https://cloud.google.com/compute/docs/connect/create-ssh-keys)  
+    - Open a terminal window and run the following command: `ssh-keygen -t rsa -f ~/.ssh/<key_file_name> -C <user_name> -b 2048`, where:   
+      - <key_file_name>: the name for your SSH key file, replace it by your own value  
+      - <user_name>: your username on the VM, replace it by your own value  
+    - This comand will create two files in the .ssh folder: <key_file_name> (private key) and <key_file_name>.pub (public key)
+  - Upload the created ssh public key to GCP  
+    - Copy the content of the <key_file_name>.pub  
+    - Go to the your `GCP project console -> Compute Engine -> Settings -> Metadata -> SSH keys -> Add SSH Key`.
+    - Insert the copied content of the <key_file_name>.pub -> Save.
+    - All instances in this project will use this ssh key.     
