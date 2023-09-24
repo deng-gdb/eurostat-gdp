@@ -11,7 +11,7 @@
   - [Create a GCP project](#create-a-gcp-project)
   - [Create and setup a VM instance in GCP Compute Engine](#create-and-setup-a-vm-instance-in-gcp-compute-engine)
   - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
-  - [Set up SSH access to the Compute Engine VM instances](#set-up-ssh-access-to-the-compute-engine-vm-instances)  
+  - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)  
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -103,7 +103,7 @@ The following items could be treated as prerequisites in order to reproduce the 
     - Copy this code and paste it into your terminal window prompt. 
   - Make sure that your project is selected with the command `gcloud config list`
    
-## Set up SSH access to the Compute Engine VM instances
+## Set up SSH access to the Compute Engine VM instances on local machine
 
 - **Create an SSH key pair on local machine.**  
   - If you connect to GCP Compute Engine virtual machine (VM) instances using third party tools or OpenSSH, you need to add a key to your VM before you can connect. If you don't have an SSH key, you must create one.
