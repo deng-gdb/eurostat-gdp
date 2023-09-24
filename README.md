@@ -75,7 +75,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 - After that create the Service Account credentials file.
   - **Service Account** -> **Manage Keys** -> **Add Key** -> **Create new key**  
   - Chose Key type: `JSON`
-- Download the created Service Account credentials file on the local machine and store it in your home folder, i.e. in `$HOME/.google/credentials/`.  
+- Download the created Service Account credentials file on the local machine and store it in your home folder, i.e. in the `$HOME/.google/`.  
 - Then activate the following APIs in your GCP project:  
   - https://console.cloud.google.com/apis/library/iam.googleapis.com
   - https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
@@ -97,7 +97,12 @@ The following items could be treated as prerequisites in order to reproduce the 
 ## Install and setup Google Cloud SDK on local machine
 
 - Download Google Cloud SDK from [this link](https://cloud.google.com/sdk/docs/install-sdk#linux) and install it.
-- 
+- Initialize the SDK following [these instructions.](https://cloud.google.com/sdk/docs/install-sdk)
+  - Run `gcloud init` from a terminal and follow the instructions:
+    - The system will generate a link and will ask you to go to the link in your browser.
+    - When you will go to this link Google will generate the verification code in gcloud CLI on the machine you want to log into.
+    - Copy this code and paste it into your terminal window prompt. 
+  - Make sure that your project is selected with the command gcloud config list
    
 ## Set up SSH access to the Compute Engine VM instances
 
