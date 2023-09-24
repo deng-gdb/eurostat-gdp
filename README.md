@@ -119,5 +119,14 @@ The following items could be treated as prerequisites in order to reproduce the 
   - Insert the copied content of the <key_file_name>.pub -> Save.
   - All instances in this project will use this ssh key.
 - **Cnfigure SSH access on the local machine.**
-  1. Start the created VM instance in the Google Cloud dashboard.
-  2.    
+  - Make sure that the gcloud SDK is configured for your project:
+    - Run `gcloud config list` to see your active gcp configuration details.
+    - If you have multiple google accounts but the active configuration does not match the account you want - run the following command: `gcloud config configurations activate my-account`
+    - If the active configuration matches your account but points to a different project - run the following command: `gcloud config set project my-project`
+  - Start the created VM instance in the Google Cloud dashboard.
+  - Go to the ~/.ssh folder and run `gcloud compute config-ssh`
+    - This comand creates `~/.ssh/config` file for your ssh gcp connection
+    - If you did not have already a SSH key, a pair of public and private SSH keys, this command will create them.
+    - The output of this command will provide you the host name for the ssh connection to your instance in the format: `instance.zone.project`.
+    - Now you should be able to open the SSH connection to your VM instance: `ssh instance.zone.project`
+    
