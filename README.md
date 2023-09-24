@@ -74,7 +74,12 @@ The following items could be treated as prerequisites in order to reproduce the 
 - After that create the Service Account credentials file.
   - **Service Account** -> **Manage Keys** -> **Add Key** -> **Create new key**  
   - Chose Key type: `JSON`
-- Download the created Service Account credentials file on the local machine and store it in your home folder, i.e. in the `$HOME/.google/`.  
+- Download the created Service Account credentials file to the **local machine** and store it in your home folder, i.e. in the `$HOME/.google/`.
+- Create an environment variable `GOOGLE_APPLICATION_CREDENTIALS` on the **local machine** and assign to it the path to the your json Service Account credentials file
+  - Open your .bashrc file: `nano .bashrc`
+  - At the end of the file, add the following row: `export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/<your_credentials>.json"`y
+  - Save you changes and close nano: `ctrl+O, ctrl+X`
+  - Log out of your current terminal session and log back in, or run `source ~/.bashrc` to activate the environment variable.
 - Then activate the following APIs in your GCP project:  
   - https://console.cloud.google.com/apis/library/iam.googleapis.com
   - https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
