@@ -106,18 +106,18 @@ The following items could be treated as prerequisites in order to reproduce the 
    
 ## Set up SSH access to the Compute Engine VM instances
 
-- Create an SSH key pair on local machine.  
+- **Create an SSH key pair on local machine.**  
   - If you connect to GCP Compute Engine virtual machine (VM) instances using third party tools or OpenSSH, you need to add a key to your VM before you can connect. If you don't have an SSH key, you must create one.
   - Create SSH key pair in accordance with the following GCP guidance: [Create SSH keys](https://cloud.google.com/compute/docs/connect/create-ssh-keys)  
     - Open a terminal window and run the following command: `ssh-keygen -t rsa -f ~/.ssh/<key_file_name> -C <user_name> -b 2048`, where:   
       - <key_file_name>: the name for your SSH key file, replace it by your own value  
       - <user_name>: your username on the VM, replace it by your own value  
     - This comand will create two files in the .ssh folder: <key_file_name> (private key) and <key_file_name>.pub (public key)
-  - Upload the created ssh public key to GCP  
-    - Copy the content of the <key_file_name>.pub  
-    - Go to the your `GCP project console -> Compute Engine -> Settings -> Metadata -> SSH keys -> Add SSH Key`.
-    - Insert the copied content of the <key_file_name>.pub -> Save.
-    - All instances in this project will use this ssh key.
-- Cnfigure SSH access on the local machine.
+- **Upload the created ssh public key to GCP Compute Engine.**     
+  - Copy the content of the <key_file_name>.pub  
+  - Go to the your `GCP project console -> Compute Engine -> Settings -> Metadata -> SSH keys -> Add SSH Key`.
+  - Insert the copied content of the <key_file_name>.pub -> Save.
+  - All instances in this project will use this ssh key.
+- **Cnfigure SSH access on the local machine.**
   1. Start the created VM instance in the Google Cloud dashboard.
   2.    
