@@ -62,28 +62,23 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 ## Create a GCP project
 
-To create a new Google Cloud project go to the [GCP dashboard](https://console.cloud.google.com/) and create a new project.
-
-
-After you have created the project, you need to create a _Service Account_ in the project: 
-- ***IAM & Admin -> Service Accounts -> Create Service Account***
-- Enter the following information:
-  - _***Service Account ID***_. Provide `your own value` or hit `Generate` link.
-  - Grant this service account access to the project with the following roles:
-    - `BigQuery Admin`
-    - `Storage Admin`
-    - `Storage Object Admin`
-    - `Viewer`
-
-After that create the Service Account credentials file.
-- Service Account -> Manage Keys
-- Add Key -> Create new key
-  - Key type: `JSON`
-- Save the created Service Account credentials file on the local machine.
-
-Then activate the following APIs in your GCP project:
-- https://console.cloud.google.com/apis/library/iam.googleapis.com
-- https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
+- To create a new Google Cloud project go to the [GCP dashboard](https://console.cloud.google.com/) and create a new project.
+- After you have created the project, you need to create a _Service Account_ in the project: 
+  - ***IAM & Admin -> Service Accounts -> Create Service Account***
+  - Enter the following information:
+    - _***Service Account ID***_. Provide `your own value` or hit `Generate` link.
+    - Grant this service account access to the project with the following roles:
+      - `BigQuery Admin`
+      - `Storage Admin`
+      - `Storage Object Admin`
+      - `Viewer`
+- After that create the Service Account credentials file.
+  - **Service Account** -> **Manage Keys** -> **Add Key** -> **Create new key**  
+  - Chose Key type: `JSON`
+- Download the created Service Account credentials file on the local machine and store it in your home folder, i.e. in `$HOME/.google/credentials/`.  
+- Then activate the following APIs in your GCP project:  
+  - https://console.cloud.google.com/apis/library/iam.googleapis.com
+  - https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
 
 ## Create and setup a VM instance in GCP Compute Engine
 
