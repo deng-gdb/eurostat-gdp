@@ -10,7 +10,9 @@
   - [Prerequisites](#prerequisites)
   - [Create a GCP project](#create-a-gcp-project)
   - [Create and setup a VM instance in GCP Compute Engine](#create-and-setup-a-vm-instance-in-gcp-compute-engine)
-  - [Create an SSH key pair on local machine](#create-an-ssh-key-pair-on-local-machine)
+  - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
+  - [Set up SSH access to the Compute Engine VM instances](#set-up-ssh-access-to-the-compute-engine-vm-instances)  
+    - [Create an SSH key pair on local machine](#create-an-ssh-key-pair-on-local-machine)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -96,8 +98,13 @@ Then activate the following APIs in your GCP project:
      - operating system: `Ubuntu`
      - version: `Ubuntu 20.04 LTS`
      - size: `30Gb`
+
+## Install and setup Google Cloud SDK on local machine
+
+- Download Google Cloud SDK from [this link](https://cloud.google.com/sdk/docs/install-sdk#linux) and install it.
+- 
    
-## Set up SSH access to the Compute Engine virtual machine (VM) instances
+## Set up SSH access to the Compute Engine VM instances
 
 - Create an SSH key pair on local machine.  
   - If you connect to GCP Compute Engine virtual machine (VM) instances using third party tools or OpenSSH, you need to add a key to your VM before you can connect. If you don't have an SSH key, you must create one.
@@ -110,4 +117,7 @@ Then activate the following APIs in your GCP project:
     - Copy the content of the <key_file_name>.pub  
     - Go to the your `GCP project console -> Compute Engine -> Settings -> Metadata -> SSH keys -> Add SSH Key`.
     - Insert the copied content of the <key_file_name>.pub -> Save.
-    - All instances in this project will use this ssh key.     
+    - All instances in this project will use this ssh key.
+- Cnfigure SSH access on the local machine.
+  1. Start the created VM instance in the Google Cloud dashboard.
+  2.    
