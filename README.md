@@ -102,7 +102,7 @@ The following items could be treated as prerequisites in order to reproduce the 
     - The system will generate a link and will ask you to go to the link in your browser.
     - When you will go to this link Google will generate the verification code in gcloud CLI on the machine you want to log into.
     - Copy this code and paste it into your terminal window prompt. 
-  - Make sure that your project is selected with the command gcloud config list
+  - Make sure that your project is selected with the command `gcloud config list`
    
 ## Set up SSH access to the Compute Engine VM instances
 
