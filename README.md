@@ -128,7 +128,7 @@ The following items could be treated as prerequisites in order to reproduce the 
     - If you did not have already a SSH key, a pair of public and private SSH keys, this command will create them.
     - The output of this command will provide you the host name for the ssh connection to your instance in the format: `<instance>.<zone>.<project>`.
     - Now you should be able to open the SSH connection to your VM instance: `ssh <instance>.<zone>.<project>`
-  - You should run this command `gcloud compute config-ssh` each time when your VMs instances are stopped and started again in order to update `~/.ssh/config` file and set up new value for External IP for your instance. This IP is changed every time when the instance stopped and restart again.
+  - **You should run this command** `gcloud compute config-ssh` **each time when your VMs instances are stopped and started again** in order to update `~/.ssh/config` file and set up new value for External IP for your instance. This IP is changed every time when the instance stopped and restart again.
   - Thease are some other usefull gcloud SDK commands:
     - `gcloud compute instances list` - provides a list of your available instances
     - `gcloud compute instances start <instance_name>` - starts your instance
