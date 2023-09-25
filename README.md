@@ -17,6 +17,7 @@
     - [Upload Google Application credentials to VM instance](#upload-google-application-credentials-to-vm-instance)
     - [Install Docker](#install-docker)
     - [Install Docker Compose](#install-docker-compose)
+    - [Install Miniconda](#install-miniconda)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -194,3 +195,9 @@ The following items could be treated as prerequisites in order to reproduce the 
   - Reload the environment variables jfor the current SSH session: `source .bashrc`
   - Check Docker compose installation: `docker-compose version`
 
+### Install Miniconda
+
+- `cd`
+- Download the latest Miniconda distribution: `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
+- Run the installer: `bash Miniconda3-latest-Linux-x86_64.sh' and follow the instructions.
+- Remove the distribution: `rm Miniconda3-latest-Linux-x86_64.sh`
