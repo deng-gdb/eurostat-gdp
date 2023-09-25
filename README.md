@@ -7,18 +7,19 @@
   - [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
   - [Data Visualization](#data-visualization)
 - [Reproduce the project](#reproduce-the-project)
-  - [Prerequisites](#prerequisites)
-  - [Create a GCP project](#create-a-gcp-project)
-  - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
-  - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
-  - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
-  - [Setup the created VM instance in GCP](#setup-the-created-vm-instance-in-gcp)
-    - [Start SSH connection to VM instance](#start-ssh-connection-to-vm-instance)
-    - [Upload Google Application credentials to VM instance](#upload-google-application-credentials-to-vm-instance)
-    - [Install Docker](#install-docker)
-    - [Install Docker Compose](#install-docker-compose)
-    - [Install Terraform](#install-terraform)
-    - [Install Miniconda](#install-miniconda)
+  - [Set up project environment](#set-up-project-environment)
+    - [Prerequisites](#prerequisites)
+    - [Create a GCP project](#create-a-gcp-project)
+    - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
+    - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
+    - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
+    - [Set up the created VM instance in GCP](#set-up-the-created-vm-instance-in-gcp)
+      - [Start SSH connection to VM instance](#start-ssh-connection-to-vm-instance)
+      - [Upload Google Application credentials to VM instance](#upload-google-application-credentials-to-vm-instance)
+      - [Install Docker](#install-docker)
+      - [Install Docker Compose](#install-docker-compose)
+      - [Install Terraform](#install-terraform)
+      - [Install Miniconda](#install-miniconda)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -58,7 +59,9 @@ Dashbord implementation details, the corresponding description and visualization
 
 # Reproduce the project
 
-## Prerequisites
+## Set up project environment
+
+### Prerequisites
 
 The following items could be treated as prerequisites in order to reproduce the project:
 
@@ -66,7 +69,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 - It is supposed that we are going to connect to GCP VM from the local machine trough the SSH.
 - (Optional) A SSH client. It is supposed that you are using a Terminal and SSH.
 
-## Create a GCP project
+### Create a GCP project
 
 - To create a new Google Cloud project go to the [GCP dashboard](https://console.cloud.google.com/) and create a new project.
 - After you have created the project, you need to create a _Service Account_ in the project: 
@@ -91,7 +94,7 @@ The following items could be treated as prerequisites in order to reproduce the 
   - https://console.cloud.google.com/apis/library/iam.googleapis.com
   - https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
 
-## Create and setup a VM instance in GCP Compute Engine
+### Create and setup a VM instance in GCP Compute Engine
 
 - Go the your GCP project dashboard _Compute Engine_ -> _VM instances_ -> _Create instance_
 - Add the following information (the provided iformormation complies with the GCP Free Tier limitations):
@@ -105,7 +108,7 @@ The following items could be treated as prerequisites in order to reproduce the 
      - version: `Ubuntu 20.04 LTS`
      - size: `30Gb`
 
-## Install and setup Google Cloud SDK on local machine
+### Install and setup Google Cloud SDK on local machine
 
 - Download Google Cloud SDK from [this link](https://cloud.google.com/sdk/docs/install-sdk#linux) and install it.
 - Initialize the SDK following [these instructions.](https://cloud.google.com/sdk/docs/install-sdk)
@@ -115,7 +118,7 @@ The following items could be treated as prerequisites in order to reproduce the 
     - Copy this code and paste it into your terminal window prompt. 
   - Make sure that your project is selected with the command `gcloud config list`
    
-## Set up SSH access to the Compute Engine VM instances on local machine
+### Set up SSH access to the Compute Engine VM instances on local machine
 
 - **Create an SSH key pair on local machine.**  
   - If you connect to GCP Compute Engine virtual machine (VM) instances using third party tools or OpenSSH, you need to add a key to your VM before you can connect. If you don't have an SSH key, you must create one.
@@ -147,16 +150,16 @@ The following items could be treated as prerequisites in order to reproduce the 
     - `gcloud compute instances stop <instance_name>` - stops your instance
 
 
-## Setup the created VM instance in GCP
+### Set up the created VM instance in GCP
 
-### Start SSH connection to VM instance
+#### Start SSH connection to VM instance
 
 - Open a terminal window on your local machine and start the VM instance using the command: `gcloud compute instances start <instance_name>`
 - In order to configure the current SSH connection to the VM go to the ~/.ssh folder and run the following command: `gcloud compute config-ssh`
 - Open SSH connection using the provided by the system command: `ssh <instance>.<zone>.<project>`
 - Run the following command in order to keep your VM up to date : `sudo apt update && sudo apt -y upgrade`
 
-### Upload Google Application credentials to VM instance
+#### Upload Google Application credentials to VM instance
 
 - Upload the Service Account credentials file which is located on your local machine in the directory `$HOME/.google/` to the **VM instance** and store it in same folder (if such folder doesn't exist - create it beforehand.
   - The simplest way to do this is scp command. Run the following command: `scp .google/<your_credentials>.json <remoteuser>@<remotehost>:/.google`, where:  
@@ -168,7 +171,7 @@ The following items could be treated as prerequisites in order to reproduce the 
   - Save you changes and close nano: `ctrl+O, ctrl+X`
   - Activate the environment variable, run `source ~/.bashrc`.  
 
-### Install Docker  
+#### Install Docker  
 
 - Run the following command to install docker: `sudo apt install docker.io`.
 - Perform optional [post-installation procedures](https://docs.docker.com/engine/install/linux-postinstall/) to configure your Linux host machine to work with Docker without sudo command:
@@ -178,7 +181,7 @@ The following items could be treated as prerequisites in order to reproduce the 
   - Run `sudo service docker restart`
   - Run `docker run hello-world` in order to check that Docker run successfully
 
-### Install Docker Compose
+#### Install Docker Compose
 
 - Create a folder for binary files for your Linux user in VM:
   - Create a subfolder in your home account: `mkdir ~/bin`
@@ -196,16 +199,15 @@ The following items could be treated as prerequisites in order to reproduce the 
   - Reload the environment variables jfor the current SSH session: `source .bashrc`
   - Check Docker compose installation: `docker-compose version`
 
-### Install Terraform
+#### Install Terraform
 
 - Terraform client installation: [https://www.terraform.io/downloads](https://www.terraform.io/downloads)  
   - `wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg`
   - `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
   - `sudo apt update && sudo apt install terraform`
- 
-  
+   
 
-### Install Miniconda
+#### Install Miniconda
 
 - `cd`
 - Download the latest Miniconda distribution: `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
