@@ -9,9 +9,11 @@
 - [Reproduce the project](#reproduce-the-project)
   - [Prerequisites](#prerequisites)
   - [Create a GCP project](#create-a-gcp-project)
-  - [Create and setup a VM instance in GCP Compute Engine](#create-and-setup-a-vm-instance-in-gcp-compute-engine)
+  - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
   - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
-  - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)  
+  - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
+  - [Setup the created VM instance in GCP](#setup-the-created-vm-instance-in-gcp)
+    - [Upload Google Application credentials](#upload-google-application-credentials)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -77,7 +79,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 - Download the created Service Account credentials file to the **local machine** and store it in your home folder, i.e. in the `$HOME/.google/`.
 - Create an environment variable `GOOGLE_APPLICATION_CREDENTIALS` on the **local machine** and assign to it the path to the your json Service Account credentials file
   - Open your .bashrc file: `nano .bashrc`
-  - At the end of the file, add the following row: `export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/<your_credentials>.json"`y
+  - At the end of the file, add the following row: `export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/<your_credentials>.json"`  
   - Save you changes and close nano: `ctrl+O, ctrl+X`
   - Log out of your current terminal session and log back in, or run `source ~/.bashrc` to activate the environment variable.
 - Then activate the following APIs in your GCP project:  
@@ -138,4 +140,23 @@ The following items could be treated as prerequisites in order to reproduce the 
     - `gcloud compute instances list` - provides a list of your available instances
     - `gcloud compute instances start <instance_name>` - starts your instance
     - `gcloud compute instances stop <instance_name>` - stops your instance
-    
+
+
+## Setup the created VM instance in GCP
+
+- Open a terminal window on your local machine and start the VM instance using the command: `gcloud compute instances start <instance_name>`
+- In order to configure the current SSH connection to the VM go to the ~/.ssh folder and run the following command: `gcloud compute config-ssh`
+- Open SSH connection using the provided by the system command: `ssh <instance>.<zone>.<project>`
+- Run the following command in order to keep your VM up to date : `sudo apt update && sudo apt -y upgrade`
+
+### Upload Google Application credentials
+
+- Upload the Service Account credentials file which is located on your local machine in the directory `$HOME/.google/` to the **VM instance** and store it in same folder (if such folder doesn't exist - create it beforehand.
+  - The simplest way to do this is scp command. Run the following command: `scp .google/<your_credentials>.json <remoteuser>@<remotehost>:/.google`, where:  
+     - <remoteuser> - user name for your VM
+     - <remotehost> - it is your SSH host name `<instance>.<zone>.<project>`  
+- Create an environment variable `GOOGLE_APPLICATION_CREDENTIALS` on the **VM instance** and assign to it the path to the your json Service Account credentials file - the same as have been done on the local machine:
+  - Open your .bashrc file on VM instance: `nano .bashrc`
+  - At the end of the file, add the following row: `export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/<your_credentials>.json"`
+  - Save you changes and close nano: `ctrl+O, ctrl+X`
+  - Activate the environment variable, run `source ~/.bashrc`.  
