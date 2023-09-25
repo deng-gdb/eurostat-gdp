@@ -17,6 +17,7 @@
     - [Upload Google Application credentials to VM instance](#upload-google-application-credentials-to-vm-instance)
     - [Install Docker](#install-docker)
     - [Install Docker Compose](#install-docker-compose)
+    - [Install Terraform](#install-terraform)
     - [Install Miniconda](#install-miniconda)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
@@ -194,6 +195,15 @@ The following items could be treated as prerequisites in order to reproduce the 
   - ctrl+o, ctrl+x
   - Reload the environment variables jfor the current SSH session: `source .bashrc`
   - Check Docker compose installation: `docker-compose version`
+
+### Install Terraform
+
+- Terraform client installation: [https://www.terraform.io/downloads](https://www.terraform.io/downloads)  
+  - `wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg`
+  - `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
+  - `sudo apt update && sudo apt install terraform`
+ 
+  
 
 ### Install Miniconda
 
