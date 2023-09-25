@@ -199,5 +199,5 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 - `cd`
 - Download the latest Miniconda distribution: `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
-- Run the installer: `bash Miniconda3-latest-Linux-x86_64.sh' and follow the instructions.
+- Run the installer: `bash Miniconda3-latest-Linux-x86_64.sh` and follow the instructions.
 - Remove the distribution: `rm Miniconda3-latest-Linux-x86_64.sh`
