@@ -13,8 +13,10 @@
   - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
   - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
   - [Setup the created VM instance in GCP](#setup-the-created-vm-instance-in-gcp)
+    - [Start SSH connection to VM instance](#start-ssh-connection-to-vm-instance)
     - [Upload Google Application credentials to VM instance](#upload-google-application-credentials-to-vm-instance)
     - [Install Docker](#install-docker)
+    - [Install Docker Compose](#install-docker-compose)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -145,6 +147,8 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 ## Setup the created VM instance in GCP
 
+### Start SSH connection to VM instance
+
 - Open a terminal window on your local machine and start the VM instance using the command: `gcloud compute instances start <instance_name>`
 - In order to configure the current SSH connection to the VM go to the ~/.ssh folder and run the following command: `gcloud compute config-ssh`
 - Open SSH connection using the provided by the system command: `ssh <instance>.<zone>.<project>`
@@ -172,5 +176,21 @@ The following items could be treated as prerequisites in order to reproduce the 
   - Run `sudo service docker restart`
   - Run `docker run hello-world` in order to check that Docker run successfully
 
+### Install Docker Compose
 
+- Create a folder for binary files for your Linux user in VM:
+  - Create a subfolder in your home account: `mkdir ~/bin`
+  - Go to this folder: `cd ~/bin`
+- Download the Docker Compose binary file:
+  - `wget https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -O docker-compose`
+    - it is supposed that the latest version is v2.2.3. For the other latest versions of the docker-compose-linux-x86_64 binary see the [following link](https://github.com/docker/compose/releases).
+  - Make sure that the docker-compose file is in the folder
+  - Make the binary file executable running the command: `chmod +x docker-compose`
+- Add path to the created bin directory to the PATH environmental variable:
+  - `cd`
+  - `nano .bashrc`
+  - Add the following line at the end of the file: `export PATH="${HOME}/bin:${PATH}"`
+  - ctrl+o, ctrl+x
+  - Reload the environment variables jfor the current SSH session: `source .bashrc`
+  - Check Docker compose installation: `docker-compose version`
 
