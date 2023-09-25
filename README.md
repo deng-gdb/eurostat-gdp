@@ -13,7 +13,8 @@
   - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
   - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
   - [Setup the created VM instance in GCP](#setup-the-created-vm-instance-in-gcp)
-    - [Upload Google Application credentials](#upload-google-application-credentials)
+    - [Upload Google Application credentials to VM instance](#upload-google-application-credentials-to-vm-instance)
+    - [Install Docker](#install-docker)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -149,7 +150,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 - Open SSH connection using the provided by the system command: `ssh <instance>.<zone>.<project>`
 - Run the following command in order to keep your VM up to date : `sudo apt update && sudo apt -y upgrade`
 
-### Upload Google Application credentials
+### Upload Google Application credentials to VM instance
 
 - Upload the Service Account credentials file which is located on your local machine in the directory `$HOME/.google/` to the **VM instance** and store it in same folder (if such folder doesn't exist - create it beforehand.
   - The simplest way to do this is scp command. Run the following command: `scp .google/<your_credentials>.json <remoteuser>@<remotehost>:/.google`, where:  
@@ -160,3 +161,16 @@ The following items could be treated as prerequisites in order to reproduce the 
   - At the end of the file, add the following row: `export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/<your_credentials>.json"`
   - Save you changes and close nano: `ctrl+O, ctrl+X`
   - Activate the environment variable, run `source ~/.bashrc`.  
+
+### Install Docker  
+
+- Run the following command to install docker: `sudo apt install docker.io`.
+- Perform optional [post-installation procedures](https://docs.docker.com/engine/install/linux-postinstall/) to configure your Linux host machine to work with Docker without sudo command:
+  - Run `sudo groupadd docker`
+  - Run `sudo gpasswd -a $USER docker`
+  - Re-login your SSH session
+  - Run `sudo service docker restart`
+  - Run `docker run hello-world` in order to check that Docker run successfully
+
+
+
