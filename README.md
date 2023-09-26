@@ -94,7 +94,7 @@ The following items could be treated as prerequisites in order to reproduce the 
   - https://console.cloud.google.com/apis/library/iam.googleapis.com
   - https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
 
-### Create and setup a VM instance in GCP Compute Engine
+### Create a VM instance in GCP Compute Engine
 
 - Go the your GCP project dashboard _Compute Engine_ -> _VM instances_ -> _Create instance_
 - Add the following information (the provided iformormation complies with the GCP Free Tier limitations):
