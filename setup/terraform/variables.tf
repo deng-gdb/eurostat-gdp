@@ -16,5 +16,5 @@ variable "storage_class" {
 variable "RAW_BQ_DATASET" {
   description = "BigQuery Dataset that raw data (from GCS) will be written to"
   type = string
-  default = "trips_data_all"
+  default = "eurostat_gdp_raw"
 }
