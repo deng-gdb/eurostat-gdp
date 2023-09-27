@@ -16,7 +16,7 @@ provider "google" {
 
 # Data Lake Bucket
 resource "google_storage_bucket" "data-lake-bucket" {
-  name          = "${local.data_lake_bucket}_${var.project}" # Concatenating DL bucket & Project name for unique naming
+  name          = "${local.data_lake_bucket}_${var.GCP_PROJECT_ID}" # Concatenating DL bucket & Project name for unique naming
   location      = var.region
 
   # Optional, but recommended settings:
@@ -41,7 +41,7 @@ resource "google_storage_bucket" "data-lake-bucket" {
 
 # DWH
 resource "google_bigquery_dataset" "dataset" {
-  dataset_id = var.RAW_BQ_DATASET
-  project    = var.project
+  dataset_id = var.raw_bq_dataset
+  project    = var.GCP_PROJECT_ID
   location   = var.region
 }
