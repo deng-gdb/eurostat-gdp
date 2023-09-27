@@ -19,8 +19,8 @@
       - [Install Docker](#install-docker)
       - [Install Docker Compose](#install-docker-compose)
       - [Install Terraform](#install-terraform)
-      - [Install Miniconda](#install-miniconda)
       - [Clone the project repo in the VM instance](#clone-the-project-repo-in-the-vm-instance)
+      - [Install Miniconda](#install-miniconda)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -207,7 +207,7 @@ The following items could be treated as prerequisites in order to reproduce the 
   - `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
   - `sudo apt update && sudo apt install terraform`
 
-### Clone the project repo in the VM instance
+#### Clone the project repo in the VM instance
 
 - Fork this GitHub repository in your GitHub account and clone the forked repo. It is requred because you should perform some customization changes in the code.  
 - Go to the your VM instance `$HOME` directory
