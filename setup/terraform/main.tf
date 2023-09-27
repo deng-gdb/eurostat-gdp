@@ -16,7 +16,7 @@ provider "google" {
 
 # Data Lake Bucket
 resource "google_storage_bucket" "data-lake-bucket" {
-  name          = "${local.data_lake_bucket}_${var.GCP_PROJECT_ID}" # Concatenating DL bucket & Project name for unique naming
+  name          = "${var.data_lake_bucket}_${var.GCP_PROJECT_ID}" # Concatenating DL bucket & Project name for unique naming
   location      = var.region
 
   # Optional, but recommended settings:
