@@ -20,6 +20,7 @@
       - [Install Docker Compose](#install-docker-compose)
       - [Install Terraform](#install-terraform)
       - [Clone the project repo in the VM instance](#clone-the-project-repo-in-the-vm-instance)
+      - [Create project GCP infrastructure with Terraform](#create-project-gcp-infrastructure-with-terraform)
       - [Install Miniconda](#install-miniconda)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
@@ -220,7 +221,12 @@ Run the following commands:
 - `cd ~/eurostat-gdp/setup/terraform`
 - `terraform init`
 - `terraform plan`
-  - provide the value of your GCP project ID when prompted.
+  - provide the value of your GCP project ID when prompted
+- `terraform apply`
+  - provide the value of your GCP project ID when prompted
+- Go to the your GCP dashboard and make sure that the following resourses were created:
+  - The Cloud Storage bucket: `eurostat_data_lake_<your_gcp_project_id`
+  - The BigQuery dataset: `eurostat_gdp_raw`
 
 #### Install Miniconda
 
