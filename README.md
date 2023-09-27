@@ -210,8 +210,8 @@ The following items could be treated as prerequisites in order to reproduce the 
 #### Clone the project repo in the VM instance
 
 - Fork this GitHub repository in your GitHub account and clone the forked repo. It is requred because you should perform some customization changes in the code.  
-- Go to the your VM instance `$HOME` directory
-- Run the following command: `git clone https://github.com/<your-git-account-name>/eurostat-gdp.git'
+- Go to the your VM instance `$HOME` directory.
+- Run the following command: `git clone https://github.com/<your-git-account-name>/eurostat-gdp.git`
 
 #### Install Miniconda
 
