@@ -13,6 +13,12 @@ variable "storage_class" {
   default = "STANDARD"
 }
 
+variable "data_lake_bucket" {
+  description = "The name of the Cload Storage bucket which is used as a Data Lake"
+  type = string
+  default = "eurostat_data_lake"
+}
+
 variable "raw_bq_dataset" {
   description = "BigQuery Dataset that raw data (from GCS) will be written to"
   type = string
