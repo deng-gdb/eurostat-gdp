@@ -206,12 +206,21 @@ The following items could be treated as prerequisites in order to reproduce the 
   - `wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg`
   - `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
   - `sudo apt update && sudo apt install terraform`
+- Check that Terraform installed successfully. Run: `terraform -version`
 
 #### Clone the project repo in the VM instance
 
 - Fork this GitHub repository in your GitHub account and clone the forked repo. It is requred because you should perform some customization changes in the code.  
 - Go to the your VM instance `$HOME` directory.
 - Run the following command: `git clone https://github.com/<your-git-account-name>/eurostat-gdp.git`
+
+#### Create project GCP infrastructure with Terraform
+
+Run the following commands:
+- `cd ~/eurostat-gdp/setup/terraform`
+- `terraform init`
+- `terraform plan`
+  - provide the value of your GCP project ID when prompted.
 
 #### Install Miniconda
 
