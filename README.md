@@ -225,7 +225,7 @@ Run the following commands:
 - `terraform apply`
   - provide the value of your GCP project ID when prompted
 - Go to the your GCP dashboard and make sure that the following resourses were created:
-  - The Cloud Storage bucket: `eurostat_data_lake_<your_gcp_project_id`
+  - The Cloud Storage bucket: `eurostat_data_lake_<your_gcp_project_id>`
   - The BigQuery dataset: `eurostat_gdp_raw`
 
 #### Install Miniconda
