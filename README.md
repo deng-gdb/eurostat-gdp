@@ -239,3 +239,15 @@ Run the following commands:
 - Download the latest Miniconda distribution: `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
 - Run the installer: `bash Miniconda3-latest-Linux-x86_64.sh` and follow the instructions.
 - Remove the distribution: `rm Miniconda3-latest-Linux-x86_64.sh`
+
+#### Create an Prefect API key
+
+In order to enable you to authenticate your local environment to work with Prefect Cloud you need to create an [API key](https://docs.prefect.io/2.13.4/cloud/users/api-keys/) in the Prefect Cloud UI first.
+- Sign in into your existing Prefect Cloud account.  
+- Select the account icon at the bottom-left corner of the UI.  
+- Select **API Keys** -> **Create API Key +**.  
+- Add a name for the key and an expiration date.  
+- After you generate them, copy the key to a secure location, because that API keys cannot be revealed again in the UI.  
+- In order to log into Prefect Cloud with this API Key you should run the following command: `prefect cloud login -k '<your-api-key>'`  
+ 
+
