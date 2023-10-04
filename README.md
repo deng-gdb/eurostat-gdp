@@ -3,6 +3,7 @@
 - [Dataset](#dataset)
 - [Technologies and Tools](#technologies-and-tools)
 - [Data Pipeline Architecture and Workflow](#data-pipeline-architecture-and-workflow)
+  - [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform)
   - [Orchestration](#orchestration)
   - [Data Ingestion and Data Lake](#data-ingestion-and-data-lake)
   - [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
@@ -50,6 +51,15 @@
 - Language: Python 
 
 # Data Pipeline Architecture and Workflow
+
+## Cloud Infrastructure with Terraform
+
+The GCP Cloud Infrastructure in the project was created using the Terraform.
+The Cloud Infrastructure created by Terraform includes the following items:
+
+- Cloud Storage bucket
+- BigQuery dataset
+- Artifact Registry
 
 ## Orchestration
 
