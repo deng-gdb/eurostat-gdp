@@ -61,6 +61,12 @@ The Cloud Infrastructure created by Terraform includes the following items:
 - BigQuery dataset
 - Artifact Registry
 
+Terraform configuration located in the repo by the path: `eurostat-gdp/setup/terraform/`
+
+The Terraform configuration consists of the following files:
+
+- **.terraform.version**. This file contains the Terraform version that have been installed.
+
 ## Orchestration
 
 The Orchestration in the project implemented using the [Prefect](https://docs.prefect.io/latest/getting-started/quickstart/#quickstart) tool, actually [Prefect Cloud](https://docs.prefect.io/latest/cloud/) version of this tool.
