@@ -72,7 +72,7 @@ Let's review these files briefly.
 
 ### main.tf
 
-This file consists of blocks.
+This file consists of blocks. The syntax of these blocks you can review in the [Terraform official documentation](https://developer.hashicorp.com/terraform/language/resources/syntax).
 - The first block **_terraform_** contains the minimal Terraform version required and the backend to be used.
 - The block **_provider_** defines the service provider and the project information.
 - The block **_resource "google_storage_bucket"_** defines all required information in order to create Google Cloud storage bucket resource. The structure of this block you can find in the official documentation [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket).
