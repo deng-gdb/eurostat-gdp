@@ -134,6 +134,7 @@ The following items could be treated as prerequisites in order to reproduce the 
       - `Storage Object Admin`
       - `Cloud Run Admin`
       - `Service Account User`
+      - `Secret Manager Admin`
       - `Viewer`
 - After that create the Service Account credentials file.
   - **Service Account** -> **Manage Keys** -> **Add Key** -> **Create new key**  
