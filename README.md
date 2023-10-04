@@ -129,8 +129,11 @@ The following items could be treated as prerequisites in order to reproduce the 
     - _***Service Account ID***_. Provide `your own value` or hit `Generate` link.
     - Grant this service account access to the project with the following roles:
       - `BigQuery Admin`
+      - `BigQuery Job User`
       - `Storage Admin`
       - `Storage Object Admin`
+      - `Cloud Run Admin`
+      - `Service Account User`
       - `Viewer`
 - After that create the Service Account credentials file.
   - **Service Account** -> **Manage Keys** -> **Add Key** -> **Create new key**  
