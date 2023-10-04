@@ -11,17 +11,19 @@
   - [Set up project environment](#set-up-project-environment)
     - [Prerequisites](#prerequisites)
     - [Create a GCP project](#create-a-gcp-project)
-    - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
     - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
+    - [Install Terraform on local machine](#install-terraform-on-local-machine)
+    - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform)
+      
+    - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
+    
     - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
     - [Set up the created VM instance in GCP](#set-up-the-created-vm-instance-in-gcp)
       - [Start SSH connection to VM instance](#start-ssh-connection-to-vm-instance)
       - [Upload Google Application credentials to VM instance](#upload-google-application-credentials-to-vm-instance)
       - [Install Docker](#install-docker)
       - [Install Docker Compose](#install-docker-compose)
-      - [Install Terraform](#install-terraform)
       - [Clone the project repo in the VM instance](#clone-the-project-repo-in-the-vm-instance)
-      - [Create project GCP infrastructure with Terraform](#create-project-gcp-infrastructure-with-terraform)
       - [Install Miniconda](#install-miniconda)
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
@@ -101,6 +103,37 @@ The following items could be treated as prerequisites in order to reproduce the 
   - https://console.cloud.google.com/apis/library/iam.googleapis.com
   - https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
 
+### Install and setup Google Cloud SDK on local machine
+
+- Download Google Cloud SDK from [this link](https://cloud.google.com/sdk/docs/install-sdk#linux) and install it.
+- Initialize the SDK following [these instructions.](https://cloud.google.com/sdk/docs/install-sdk)
+  - Run `gcloud init` from a terminal and follow the instructions:
+    - The system will generate a link and will ask you to go to the link in your browser.
+    - When you will go to this link Google will generate the verification code in gcloud CLI on the machine you want to log into.
+    - Copy this code and paste it into your terminal window prompt. 
+  - Make sure that your project is selected with the command `gcloud config list`
+
+### Install Terraform on local machine
+
+- Terraform client installation: [https://www.terraform.io/downloads](https://www.terraform.io/downloads)  
+  - `wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg`
+  - `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
+  - `sudo apt update && sudo apt install terraform`
+- Check that Terraform installed successfully. Run: `terraform -version`
+
+### Create GCP project infrastructure with Terraform
+
+Run the following commands:
+- `cd ~/eurostat-gdp/setup/terraform`
+- `terraform init`
+- `terraform plan`
+  - provide the value of your GCP project ID when prompted
+- `terraform apply`
+  - provide the value of your GCP project ID when prompted
+- Go to the your GCP dashboard and make sure that the following resourses were created:
+  - The Cloud Storage bucket: `eurostat_data_lake_<your_gcp_project_id>`
+  - The BigQuery dataset: `eurostat_gdp_raw`
+
 ### Create a VM instance in GCP Compute Engine
 
 - Go the your GCP project dashboard _Compute Engine_ -> _VM instances_ -> _Create instance_
@@ -115,15 +148,7 @@ The following items could be treated as prerequisites in order to reproduce the 
      - version: `Ubuntu 20.04 LTS`
      - size: `30Gb`
 
-### Install and setup Google Cloud SDK on local machine
 
-- Download Google Cloud SDK from [this link](https://cloud.google.com/sdk/docs/install-sdk#linux) and install it.
-- Initialize the SDK following [these instructions.](https://cloud.google.com/sdk/docs/install-sdk)
-  - Run `gcloud init` from a terminal and follow the instructions:
-    - The system will generate a link and will ask you to go to the link in your browser.
-    - When you will go to this link Google will generate the verification code in gcloud CLI on the machine you want to log into.
-    - Copy this code and paste it into your terminal window prompt. 
-  - Make sure that your project is selected with the command `gcloud config list`
    
 ### Set up SSH access to the Compute Engine VM instances on local machine
 
@@ -206,13 +231,7 @@ The following items could be treated as prerequisites in order to reproduce the 
   - Reload the environment variables jfor the current SSH session: `source .bashrc`
   - Check Docker compose installation: `docker-compose version`
 
-#### Install Terraform
 
-- Terraform client installation: [https://www.terraform.io/downloads](https://www.terraform.io/downloads)  
-  - `wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg`
-  - `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
-  - `sudo apt update && sudo apt install terraform`
-- Check that Terraform installed successfully. Run: `terraform -version`
 
 #### Clone the project repo in the VM instance
 
@@ -220,18 +239,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 - Go to the your VM instance `$HOME` directory.
 - Run the following command: `git clone https://github.com/<your-git-account-name>/eurostat-gdp.git`
 
-#### Create project GCP infrastructure with Terraform
 
-Run the following commands:
-- `cd ~/eurostat-gdp/setup/terraform`
-- `terraform init`
-- `terraform plan`
-  - provide the value of your GCP project ID when prompted
-- `terraform apply`
-  - provide the value of your GCP project ID when prompted
-- Go to the your GCP dashboard and make sure that the following resourses were created:
-  - The Cloud Storage bucket: `eurostat_data_lake_<your_gcp_project_id>`
-  - The BigQuery dataset: `eurostat_gdp_raw`
 
 #### Install Miniconda
 
