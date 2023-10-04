@@ -54,7 +54,7 @@
 
 ## Cloud Infrastructure with Terraform
 
-The GCP Cloud Infrastructure in the project was created using the Terraform.
+The GCP Cloud Infrastructure in the project was implemented using the Terraform.
 The Cloud Infrastructure created by Terraform includes the following items:
 
 - Cloud Storage bucket
@@ -71,6 +71,11 @@ The Terraform configuration consists of the following files:
 - **terraform.tfvars**. This file contains the variables values used in the configuration.
 
 Let's review these files briefly. 
+
+### main.tf
+
+This file consists of blocks.
+- The first block **_terraform_** contains the minimal Terraform version required and the backend to be used.
 
 ## Orchestration
 
