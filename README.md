@@ -142,8 +142,13 @@ The following items could be treated as prerequisites in order to reproduce the 
   - Save you changes and close nano: `ctrl+O, ctrl+X`
   - Log out of your current terminal session and log back in, or run `source ~/.bashrc` to activate the environment variable.
 - Then activate the following APIs in your GCP project:  
-  - https://console.cloud.google.com/apis/library/iam.googleapis.com
-  - https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com
+  - [Identity and Access Management (IAM) API](https://console.cloud.google.com/apis/library/iam.googleapis.com)
+  - [IAM Service Account Credentials API](https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com)
+  - [Compute Engine API](https://console.cloud.google.com/apis/library/compute.googleapis.com)
+  - [Artifact Registry API](https://console.cloud.google.com/apis/library/artifactregistry.googleapis.com)
+  - [Cloud Storage API](https://console.cloud.google.com/apis/library/storage.googleapis.com)
+  - [BigQuery API](https://console.cloud.google.com/apis/library/bigquery.googleapis.com)
+  - [Cloud Run API](https://console.cloud.google.com/apis/library/run.googleapis.com)
 
 ### Install and setup Google Cloud SDK on local machine
 
