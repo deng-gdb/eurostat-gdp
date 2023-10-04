@@ -81,6 +81,18 @@ This file consists of blocks.
 - The block **_resource "google_bigquery_dataset"_** defines all required information in order to create Google BigQuery dataset resource. The structure of this block you can find in the official documentation [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset).
 - The block **_resource "google_artifact_registry_repository"_** defines all required information in order to create Google Artifact registry for containers. The structure of this block you can find in the official documentation [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/artifact_registry_repository).
 
+### variables.tf
+
+This file contains the declarations for Terraform variables. It contains blocks also. 
+Each block contains the name of the variable, the type, description and a default value for the variable if required. 
+In this project the values for the variables were assigned through the defalt values in this file. Meanwhile, there are [other approaches](https://developer.hashicorp.com/terraform/language/values/variables) exist.
+
+- `variable "GCP_PROJECT_ID"`. The value for this variable is not specified. This value should be entered in the prompt field during the applying Terraform changes.
+- `variable "region"`. The value for this variable specified taking into account the GCP free tier requirements.
+- `variable "data_lake_bucket"`. The value for this variable specified the name of the Cloud Storage bucket that should be created.
+- `variable "raw_bq_dataset"`. The value for this variable specified the name of the BigQuery dataset that should be created.
+- `variable "registry_id"`. The value for this variable specified the name of the Artifact repository that should be created.
+
 ## Orchestration
 
 The Orchestration in the project implemented using the [Prefect](https://docs.prefect.io/latest/getting-started/quickstart/#quickstart) tool, actually [Prefect Cloud](https://docs.prefect.io/latest/cloud/) version of this tool.
