@@ -65,10 +65,8 @@ Terraform configuration located in the repo by the path: `eurostat-gdp/setup/ter
 
 The Terraform configuration consists of the following files:
 
-- **.terraform.version**. This file contains the Terraform version that have been installed.
 - **main.tf**. This file contains the main set of configuration for the project.
 - **variables.tf**. This file contains the declarations for variables used in the Terraform configuration.
-- **terraform.tfvars**. This file contains the variables values used in the configuration.
 
 Let's review these files briefly. 
 
@@ -92,6 +90,8 @@ In this project the values for the variables were assigned through the defalt va
 - `variable "data_lake_bucket"`. The value for this variable specified the name of the Cloud Storage bucket that should be created.
 - `variable "raw_bq_dataset"`. The value for this variable specified the name of the BigQuery dataset that should be created.
 - `variable "registry_id"`. The value for this variable specified the name of the Artifact repository that should be created.
+
+The guidance regarding the Terraform execution see in the corresponding section:  [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
 
 ## Orchestration
 
