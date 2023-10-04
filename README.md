@@ -66,6 +66,11 @@ Terraform configuration located in the repo by the path: `eurostat-gdp/setup/ter
 The Terraform configuration consists of the following files:
 
 - **.terraform.version**. This file contains the Terraform version that have been installed.
+- **main.tf**. This file contains the main set of configuration for the project.
+- **variables.tf**. This file contains the declarations for variables used in the Terraform configuration.
+- **terraform.tfvars**. This file contains the variables values used in the configuration.
+
+Let's review these files briefly. 
 
 ## Orchestration
 
