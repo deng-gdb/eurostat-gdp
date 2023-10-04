@@ -45,3 +45,10 @@ resource "google_bigquery_dataset" "dataset" {
   project    = var.GCP_PROJECT_ID
   location   = var.region
 }
+
+#Artifact registry for containers
+resource "google_artifact_registry_repository" "eurostat-gdp-container-registry" {
+  location      = var.region
+  repository_id = var.registry_id
+  format        = "DOCKER"
+}
