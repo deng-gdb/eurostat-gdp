@@ -24,3 +24,10 @@ variable "raw_bq_dataset" {
   type = string
   default = "eurostat_gdp_raw"
 }
+
+variable "registry_id" {
+  type = string
+  description = "Name of artifact registry repository."
+  default = "eurostat_gdp_repository"
+}
+
