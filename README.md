@@ -186,8 +186,9 @@ Run the following commands:
 - `terraform apply`
   - provide the value of your GCP project ID when prompted
 - Go to the your GCP dashboard and make sure that the following resourses were created:
-  - The Cloud Storage bucket: `eurostat_data_lake_<your_gcp_project_id>`
-  - The BigQuery dataset: `eurostat_gdp_raw`
+  - [Cloud Storage bucket](https://console.cloud.google.com/storage): `eurostat_gdp_data_lake_<your_gcp_project_id>`
+  - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
+  - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
 
 ### Create a VM instance in GCP Compute Engine
 
