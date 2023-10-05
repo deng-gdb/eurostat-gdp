@@ -197,6 +197,14 @@ Run the following commands:
   - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
   - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
 
+### Prefect Setup
+
+- Install Prefect and Prefect GCP module on your local environment:  
+  - `pip install -U prefect`
+  - `pip install 'prefect_gcp[cloud_storage]'`
+  - 
+
+
 ### Create a VM instance in GCP Compute Engine
 
 - Go the your GCP project dashboard _Compute Engine_ -> _VM instances_ -> _Create instance_
