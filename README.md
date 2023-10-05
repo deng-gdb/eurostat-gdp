@@ -12,9 +12,11 @@
   - [Set up project environment](#set-up-project-environment)
     - [Prerequisites](#prerequisites)
     - [Create a GCP project](#create-a-gcp-project)
-    - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
-    - [Clone the project repo on local machine](#clone-the-project-repo-on-local-machine)
-    - [Install Terraform on local machine](#install-terraform-on-local-machine)
+    - [Setup environment on local machine](#setup-environment-on-local-machine)
+      - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
+      - [Clone the project repo on local machine](#clone-the-project-repo-on-local-machine)
+      - [Install Terraform on local machine](#install-terraform-on-local-machine)
+      - [Install Prefect on local machine](#install-prefect-on-local-machine)
     - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform)
       
     - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
@@ -159,7 +161,9 @@ The following items could be treated as prerequisites in order to reproduce the 
   - [BigQuery API](https://console.cloud.google.com/apis/library/bigquery.googleapis.com)
   - [Cloud Run API](https://console.cloud.google.com/apis/library/run.googleapis.com)
 
-### Install and setup Google Cloud SDK on local machine
+### Setup environment on local machine
+
+#### Install and setup Google Cloud SDK on local machine
 
 - Download Google Cloud SDK from [this link](https://cloud.google.com/sdk/docs/install-sdk#linux) and install it.
 - Initialize the SDK following [these instructions.](https://cloud.google.com/sdk/docs/install-sdk)
@@ -169,13 +173,13 @@ The following items could be treated as prerequisites in order to reproduce the 
     - Copy this code and paste it into your terminal window prompt. 
   - Make sure that your project is selected with the command `gcloud config list`
  
-### Clone the project repo on local machine
+#### Clone the project repo on local machine
 
 - Fork this GitHub repository in your GitHub account and clone the forked repo. It is requred because you should perform some customization changes in the code.  
 - Go to the your `$HOME` directory.
 - Run the following command: `git clone https://github.com/<your-git-account-name>/eurostat-gdp.git`
 
-### Install Terraform on local machine
+#### Install Terraform on local machine
 
 - Terraform client installation: [https://www.terraform.io/downloads](https://www.terraform.io/downloads)  
   - `wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg`
@@ -183,21 +187,7 @@ The following items could be treated as prerequisites in order to reproduce the 
   - `sudo apt update && sudo apt install terraform`
 - Check that Terraform installed successfully. Run: `terraform -version`
 
-### Create GCP project infrastructure with Terraform
-
-Run the following commands:
-- `cd ~/eurostat-gdp/setup/terraform`
-- `terraform init`
-- `terraform plan`
-  - provide the value of your GCP project ID when prompted
-- `terraform apply`
-  - provide the value of your GCP project ID when prompted
-- Go to the your GCP dashboard and make sure that the following resourses were created:
-  - [Cloud Storage bucket](https://console.cloud.google.com/storage): `eurostat_gdp_data_lake_<your_gcp_project_id>`
-  - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
-  - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
-
-### Prefect Setup
+#### Install Prefect on local machine
 
 - Install Prefect and Prefect GCP module on your local environment:  
   - `pip install -U prefect`
@@ -212,6 +202,19 @@ Run the following commands:
 - Login to Prefect Cloud with this API Key
   - Run the following command: `prefect cloud login -k '<your-api-key>'`  
 
+### Create GCP project infrastructure with Terraform
+
+Run the following commands:
+- `cd ~/eurostat-gdp/setup/terraform`
+- `terraform init`
+- `terraform plan`
+  - provide the value of your GCP project ID when prompted
+- `terraform apply`
+  - provide the value of your GCP project ID when prompted
+- Go to the your GCP dashboard and make sure that the following resourses were created:
+  - [Cloud Storage bucket](https://console.cloud.google.com/storage): `eurostat_gdp_data_lake_<your_gcp_project_id>`
+  - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
+  - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
 
 ### Create a VM instance in GCP Compute Engine
 
