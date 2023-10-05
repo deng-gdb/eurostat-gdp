@@ -13,6 +13,7 @@
     - [Prerequisites](#prerequisites)
     - [Create a GCP project](#create-a-gcp-project)
     - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
+    - [Clone the project repo on local machine](#clone-the-project-repo-on-local-machine)
     - [Install Terraform on local machine](#install-terraform-on-local-machine)
     - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform)
       
@@ -167,6 +168,12 @@ The following items could be treated as prerequisites in order to reproduce the 
     - When you will go to this link Google will generate the verification code in gcloud CLI on the machine you want to log into.
     - Copy this code and paste it into your terminal window prompt. 
   - Make sure that your project is selected with the command `gcloud config list`
+ 
+### Clone the project repo on local machine
+
+- Fork this GitHub repository in your GitHub account and clone the forked repo. It is requred because you should perform some customization changes in the code.  
+- Go to the your `$HOME` directory.
+- Run the following command: `git clone https://github.com/<your-git-account-name>/eurostat-gdp.git`
 
 ### Install Terraform on local machine
 
