@@ -137,6 +137,7 @@ The following items could be treated as prerequisites in order to reproduce the 
       - `Service Account User`
       - `Secret Manager Admin`
       - `Viewer`
+      - `Editor`
 - After that create the Service Account credentials file.
   - **Service Account** -> **Manage Keys** -> **Add Key** -> **Create new key**  
   - Chose Key type: `JSON`
