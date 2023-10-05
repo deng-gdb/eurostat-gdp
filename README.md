@@ -62,8 +62,9 @@ The Cloud Infrastructure created by Terraform includes the following items:
 - Artifact Registry
 
 Terraform configuration located in the repo by the path: `eurostat-gdp/setup/terraform/`
+To get more details regarding the Terraform configuration files see [the official documentation](https://developer.hashicorp.com/terraform/language/modules/develop/structure).
 
-The Terraform configuration consists of the following files:
+The Terraform configuration in the project consists of the following files:
 
 - **main.tf**. This file contains the main set of configuration for the project.
 - **variables.tf**. This file contains the declarations for variables used in the Terraform configuration.
