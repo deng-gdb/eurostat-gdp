@@ -90,6 +90,7 @@ In this project the values for the variables were assigned through the defalt va
 - `variable "region"`. The value for this variable specified taking into account the GCP free tier requirements.
 - `variable "data_lake_bucket"`. The value for this variable specified the name of the Cloud Storage bucket that should be created.
 - `variable "raw_bq_dataset"`. The value for this variable specified the name of the BigQuery dataset that should be created.
+  - Be aware that this value must be alphanumeric (plus underscores). 
 - `variable "registry_id"`. The value for this variable specified the name of the Artifact repository that should be created.  
   - Be aware that this value may only contain lowercase letters, numbers, and hyphens, and must begin with a letter and end with a letter or number.
 
