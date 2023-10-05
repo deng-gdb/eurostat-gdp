@@ -15,7 +15,7 @@ provider "google" {
 }
 
 # Data Lake Bucket
-resource "google_storage_bucket" "data-lake-bucket" {
+resource "google_storage_bucket" "bucket" {
   name          = "${var.data_lake_bucket}_${var.GCP_PROJECT_ID}" # Concatenating DL bucket & Project name for unique naming
   location      = var.region
 
@@ -47,8 +47,9 @@ resource "google_bigquery_dataset" "dataset" {
 }
 
 #Artifact registry for containers
-resource "google_artifact_registry_repository" "eurostat-gdp-container-registry" {
+resource "google_artifact_registry_repository" "artifact-repository" {
   location      = var.region
   repository_id = var.registry_id
   format        = "DOCKER"
 }
+
