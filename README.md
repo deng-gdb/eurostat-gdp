@@ -202,7 +202,15 @@ Run the following commands:
 - Install Prefect and Prefect GCP module on your local environment:  
   - `pip install -U prefect`
   - `pip install 'prefect_gcp[cloud_storage]'`
-  - 
+- Create an Prefect API key  
+  In order to enable you to authenticate your local environment to work with Prefect Cloud you need to create an [API key](https://docs.prefect.io/2.13.4/cloud/users/api-keys/) in the Prefect Cloud UI first.
+  - Sign in into your existing Prefect Cloud account.  
+  - Select the account icon at the bottom-left corner of the UI.  
+  - Select **API Keys** -> **Create API Key +**.  
+  - Add a name for the key and an expiration date.  
+  - After you generate them, copy the key to a secure location, because that API keys cannot be revealed again in the UI.  
+- Login to Prefect Cloud with this API Key
+  - Run the following command: `prefect cloud login -k '<your-api-key>'`  
 
 
 ### Create a VM instance in GCP Compute Engine
