@@ -14,7 +14,7 @@ credentials_block.save("eurostat-gdp-gcp-creds", overwrite=True)
 
 bucket_block = GcsBucket(
     gcp_credentials=GcpCredentials.load("eurostat-gdp-gcp-creds"),
-    bucket="prefect-de-zoomcamp",  # insert your  GCS bucket name
+    bucket="",  # enter your GCS bucket name here
 )
 
 bucket_block.save("eurostat-gdp-gcs-bucket", overwrite=True)
