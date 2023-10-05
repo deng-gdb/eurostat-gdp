@@ -218,11 +218,16 @@ Run the following commands:
   - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
 
 
-### Build Docker image
+### Build Docker image and place it to the Artifact Registry
+
+We are going to store the Docker image in the [GCP Artifact Registry.](https://cloud.google.com/artifact-registry/)
 
 - Run Docker Desctop
 - [Configure Docker to use the Google Cloud CLI to authenticate requests to Artifact Registry](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth).
   - To set up authentication to Docker repositories in the region us-east1, run the following command: `gcloud auth configure-docker us-east1-docker.pkg.dev`
+- Build the Docker image: `docker build -t eurostat-gdp:v1 .`
+- docker tag eurostat-gdp:v1 us-east1-docker.pkg.dev/free-tier-project-397608/eurostat-gdp-repository/eurostat-gdp:v1
+- docker push us-east1-docker.pkg.dev/free-tier-project-397608/eurostat-gdp-repository/eurostat-gdp:v1
 
 
 
