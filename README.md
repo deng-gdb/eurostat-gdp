@@ -17,6 +17,7 @@
       - [Clone the project repo on local machine](#clone-the-project-repo-on-local-machine)
       - [Install Terraform on local machine](#install-terraform-on-local-machine)
       - [Install Prefect on local machine](#install-prefect-on-local-machine)
+      - [Install Docker on local machine](#install-docker-on-local-machine)
     - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform)
       
     - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
