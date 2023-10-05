@@ -217,6 +217,16 @@ Run the following commands:
   - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
   - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
 
+
+### Build Docker image
+
+- Run Docker Desctop
+- [Configure Docker to use the Google Cloud CLI to authenticate requests to Artifact Registry](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth).
+  - To set up authentication to Docker repositories in the region us-east1, run the following command: `gcloud auth configure-docker us-east1-docker.pkg.dev`
+
+
+
+
 ### Create a VM instance in GCP Compute Engine
 
 - Go the your GCP project dashboard _Compute Engine_ -> _VM instances_ -> _Create instance_
