@@ -19,6 +19,7 @@
       - [Install Prefect on local machine](#install-prefect-on-local-machine)
       - [Install Docker on local machine](#install-docker-on-local-machine)
     - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform)
+    - [Build a Docker image and place it to the Artifact Registry](#build-a-docker-image-and-place-it-to-the-artifact-registry)
       
     - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
     
@@ -220,13 +221,13 @@ Run the following commands:
 
 ### Build a Docker image and place it to the Artifact Registry
 
-Be aware of the following:  
+_**Be aware of the following**_:  
   - The Docker image will contain only base environment for a Prefect agent execution: Python, Prefect, etc.
   - The code requred to build the Docker image is located in the setup/docker folder in the project repo.
   - All environment dependencies are captured in the docker-requirements.txt file and will be installed in the base environment in the Docker image.
   - We are going to store the Docker image in the [GCP Artifact Registry.](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth)
 
-Make the following steps:
+_**Make the following steps**_:
 - Run Docker Desctop
 - [Configure Docker to use the Google Cloud CLI to authenticate requests to Artifact Registry](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth).
   - To set up authentication to Docker repositories in the region us-east1, run the following command: `gcloud auth configure-docker us-east1-docker.pkg.dev`
