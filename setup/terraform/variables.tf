@@ -16,7 +16,7 @@ variable "storage_class" {
 variable "data_lake_bucket" {
   description = "The name of the Cload Storage bucket which is used as a Data Lake"
   type = string
-  default = "eurostat_data_lake"
+  default = "eurostat_gdp_data_lake"
 }
 
 variable "raw_bq_dataset" {
@@ -28,6 +28,6 @@ variable "raw_bq_dataset" {
 variable "registry_id" {
   type = string
   description = "Name of artifact registry repository."
-  default = "eurostat_gdp_repository"
+  default = "eurostat-gdp-repository"
 }
 
