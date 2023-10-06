@@ -233,6 +233,15 @@ Run the following commands:
   - GCS Bucket block with the name: eurostat-gdp-gcs-bucket
   - GitHub block with the name: eurostat-gdp-github
 
+Create block GCP Cloud Run Job. It is an infrastructure block used to run GCP Cloud Run Jobs. Because this block is experimental and the interface may change without notice, we create this block mannually through Prefect Cloud UI.
+- Open your Prefect Cloud account, go to the _**Blocks**_ tab and create new _**GCP Cloud Run Job**_ block
+- Enter the following information:
+  - Block name: `eurostat-gdp-cloud-run`
+  - Type: `cloud-run-job`
+  - Image Name: `us-east1-docker.pkg.dev/<your-gcp-project-id>/eurostat-gdp-repository/eurostat-gdp:v1`
+  - Region: `us-east1`
+  - GcpCredentials: `eurostat-gdp-gcp-creds`
+- Save the changes
 
 #### Build a Docker image and place it to the Artifact Registry
 
