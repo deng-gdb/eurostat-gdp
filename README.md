@@ -66,7 +66,7 @@ The GCP Cloud Infrastructure in the project was implemented using the Terraform.
 The Cloud Infrastructure created by Terraform includes the following items:
 
 - Cloud Storage bucket
-- BigQuery dataset
+- BigQuery dataset with the corresponding BigQuery table
 - Artifact Registry
 
 Terraform configuration located in the repo by the path: `eurostat-gdp/setup/terraform/`  
@@ -76,6 +76,7 @@ The Terraform configuration in the project consists of the following files:
 
 - **main.tf**. This file contains the main set of configuration for the project.
 - **variables.tf**. This file contains the declarations for variables used in the Terraform configuration.
+- **table_schema.json**. This file contains the structure of the BigQuery table.
 
 Let's review these files briefly. 
 
@@ -101,6 +102,10 @@ In this project the values for the variables were assigned through the defalt va
   - Be aware that this value must be alphanumeric (plus underscores). 
 - `variable "registry_id"`. The value for this variable specified the name of the Artifact repository that should be created.  
   - Be aware that this value may only contain lowercase letters, numbers, and hyphens, and must begin with a letter and end with a letter or number.
+
+### table_schema.json
+
+This file contains the structure of the BigQuery table, which will be created inside your dataset during Terraform executions. It is a simple json file.
 
 The guidance regarding the Terraform execution see in the corresponding section:  [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
 
@@ -218,7 +223,7 @@ Run the following commands:
   - provide the value of your GCP project ID when prompted
 - Go to the your GCP dashboard and make sure that the following resourses were created:
   - [Cloud Storage bucket](https://console.cloud.google.com/storage): `eurostat_gdp_data_lake_<your_gcp_project_id>`
-  - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
+  - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw` and the table with the name `nama-10r-2gdp` inside this dataset
   - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
 
 ### Setup cloud execution environment
