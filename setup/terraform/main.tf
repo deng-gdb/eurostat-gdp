@@ -46,6 +46,14 @@ resource "google_bigquery_dataset" "dataset" {
   location   = var.region
 }
 
+resource "google_bigquery_table" "table" {
+  dataset_id = "${google_bigquery_dataset.dataset.dataset_id}"
+  table_id   = "nama-10r-2gdp"
+
+  schema = "${file("table_schema.json")}"
+}
+
+
 #Artifact registry for containers
 resource "google_artifact_registry_repository" "artifact-repository" {
   location      = var.region
