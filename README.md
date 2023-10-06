@@ -12,14 +12,15 @@
   - [Set up project environment](#set-up-project-environment)
     - [Prerequisites](#prerequisites)
     - [Create a GCP project](#create-a-gcp-project)
-    - [Setup environment on local machine](#setup-environment-on-local-machine)
+    - [Setup local development environment](#setup-local-development-environment)
       - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
       - [Clone the project repo on local machine](#clone-the-project-repo-on-local-machine)
       - [Install Terraform on local machine](#install-terraform-on-local-machine)
       - [Install Prefect on local machine](#install-prefect-on-local-machine)
       - [Install Docker on local machine](#install-docker-on-local-machine)
-    - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform)
-    - [Build a Docker image and place it to the Artifact Registry](#build-a-docker-image-and-place-it-to-the-artifact-registry)
+    - [Setup cloud execution environment](#setup-cloud-execution-environment)
+      - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform)
+      - [Build a Docker image and place it to the Artifact Registry](#build-a-docker-image-and-place-it-to-the-artifact-registry)
       
     - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
     
@@ -163,7 +164,7 @@ The following items could be treated as prerequisites in order to reproduce the 
   - [BigQuery API](https://console.cloud.google.com/apis/library/bigquery.googleapis.com)
   - [Cloud Run API](https://console.cloud.google.com/apis/library/run.googleapis.com)
 
-### Setup environment on local machine
+### Setup local development environment
 
 #### Install and setup Google Cloud SDK on local machine
 
@@ -204,7 +205,9 @@ The following items could be treated as prerequisites in order to reproduce the 
 - Login to Prefect Cloud with this API Key
   - Run the following command: `prefect cloud login -k '<your-api-key>'`  
 
-### Create GCP project infrastructure with Terraform
+### Setup cloud execution environment
+
+#### Create GCP project infrastructure with Terraform
 
 Run the following commands:
 - `cd ~/eurostat-gdp/setup/terraform`
@@ -219,7 +222,7 @@ Run the following commands:
   - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
 
 
-### Build a Docker image and place it to the Artifact Registry
+#### Build a Docker image and place it to the Artifact Registry
 
 _**Be aware of the following**_:  
   - The Docker image will contain only base environment for a Prefect agent execution: Python, Prefect, etc.
