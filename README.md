@@ -230,7 +230,7 @@ Run the following commands:
 
 #### Create Prefect Cloud Blocks
 
-- Go to the folder `eurostat-gdp/setup/blocks'
+- Go to the folder _**eurostat-gdp/setup/blocks**_
 - Open the file _**block_vars.py**_ and enter your values
 - Run the command: `python create_blocks.py`
 - Open your Prefect Cloud account, go to the _**Blocks**_ tab and check, that the following blocks were created:
