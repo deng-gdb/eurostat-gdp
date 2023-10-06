@@ -19,9 +19,9 @@
       - [Install Terraform on local machine](#install-terraform-on-local-machine)
       - [Install Prefect on local machine](#install-prefect-on-local-machine)
       - [Install Docker on local machine](#install-docker-on-local-machine)
-     
-    - [Setup cloud execution environment](#setup-cloud-execution-environment)
-      - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform)
+    - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
+    - [Setup cloud execution environment](#setup-cloud-execution-environment)      
+      - [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks)
       - [Build a Docker image and place it to the Artifact Registry](#build-a-docker-image-and-place-it-to-the-artifact-registry)
       
     - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
@@ -207,9 +207,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 - Login to Prefect Cloud with this API Key
   - Run the following command: `prefect cloud login -k '<your-api-key>'`  
 
-### Setup cloud execution environment
-
-#### Create GCP project infrastructure with Terraform
+### Create GCP project infrastructure with Terraform
 
 Run the following commands:
 - `cd ~/eurostat-gdp/setup/terraform`
@@ -222,6 +220,18 @@ Run the following commands:
   - [Cloud Storage bucket](https://console.cloud.google.com/storage): `eurostat_gdp_data_lake_<your_gcp_project_id>`
   - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
   - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
+
+### Setup cloud execution environment
+
+#### Create Prefect Cloud Blocks
+
+- Go to the folder `eurostat-gdp/setup/blocks'
+- Open the file _**block_vars.py**_ and enter your values
+- Run the command: `python create_blocks.py`
+- Open your Prefect Cloud account, go to the _**Blocks**_ tab and check, that the following blocks were created:
+  - GCP Credentials block with the name: eurostat-gdp-gcp-creds
+  - GCS Bucket block with the name: eurostat-gdp-gcs-bucket
+  - GitHub block with the name: eurostat-gdp-github
 
 
 #### Build a Docker image and place it to the Artifact Registry
