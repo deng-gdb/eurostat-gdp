@@ -12,12 +12,14 @@
   - [Set up project environment](#set-up-project-environment)
     - [Prerequisites](#prerequisites)
     - [Create a GCP project](#create-a-gcp-project)
+      
     - [Setup local development environment](#setup-local-development-environment)
       - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
       - [Clone the project repo on local machine](#clone-the-project-repo-on-local-machine)
       - [Install Terraform on local machine](#install-terraform-on-local-machine)
       - [Install Prefect on local machine](#install-prefect-on-local-machine)
       - [Install Docker on local machine](#install-docker-on-local-machine)
+     
     - [Setup cloud execution environment](#setup-cloud-execution-environment)
       - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform)
       - [Build a Docker image and place it to the Artifact Registry](#build-a-docker-image-and-place-it-to-the-artifact-registry)
