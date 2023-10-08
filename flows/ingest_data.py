@@ -133,7 +133,6 @@ def ingest_data() -> None:
     write_to_gcs_data_lake(path)
 
     # Load data in the BigQuery table
-    #write_to_bq_table(df_transformed, bq_table_name, table_schema)
     write_to_bq_table(df_transformed, bq_table_name, table_schema)
  
 
