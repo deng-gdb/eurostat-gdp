@@ -103,10 +103,6 @@ In this project the values for the variables were assigned through the defalt va
 - `variable "registry_id"`. The value for this variable specified the name of the Artifact repository that should be created.  
   - Be aware that this value may only contain lowercase letters, numbers, and hyphens, and must begin with a letter and end with a letter or number.
 
-### table_schema.json
-
-This file contains the structure of the BigQuery table, which will be created inside your dataset during Terraform executions. It is a simple json file.
-
 The guidance regarding the Terraform execution see in the corresponding section:  [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
 
 ## Orchestration
@@ -230,8 +226,8 @@ Run the following commands:
 
 #### Create Prefect Cloud Blocks
 
-- Go to the folder _**eurostat-gdp/setup/blocks**_
-- Open the file _**block_vars.py**_ and enter your values
+- Go to the project repo folder _**eurostat-gdp/setup**_. The project repo have already been cloned on local machine on the previous steps.
+- Open the file _**setup.py**_ and enter your own values for all variables.
 - Run the command: `python create_blocks.py`
 - Open your Prefect Cloud account, go to the _**Blocks**_ tab and check, that the following blocks were created:
   - GCP Credentials block with the name: eurostat-gdp-gcp-creds
