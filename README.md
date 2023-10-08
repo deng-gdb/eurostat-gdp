@@ -22,8 +22,7 @@
     - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
     - [Setup cloud execution environment](#setup-cloud-execution-environment)      
       - [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks)
-      - [Build a Docker image and place it to the Artifact Registry](#build-a-docker-image-and-place-it-to-the-artifact-registry)
-      
+      - [Build a Docker image and place it to the Artifact Registry](#build-a-docker-image-and-place-it-to-the-artifact-registry)      
     - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
     
     - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
