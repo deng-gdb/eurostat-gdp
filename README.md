@@ -65,7 +65,8 @@ The GCP Cloud Infrastructure in the project was implemented using the Terraform.
 The Cloud Infrastructure created by Terraform includes the following items:
 
 - Cloud Storage bucket
-- BigQuery dataset with the corresponding BigQuery table
+- BigQuery dataset
+- Virtual Machine instance
 - Artifact Registry
 
 Terraform configuration located in the repo by the path: `eurostat-gdp/setup/terraform/`  
@@ -75,7 +76,6 @@ The Terraform configuration in the project consists of the following files:
 
 - **main.tf**. This file contains the main set of configuration for the project.
 - **variables.tf**. This file contains the declarations for variables used in the Terraform configuration.
-- **table_schema.json**. This file contains the structure of the BigQuery table.
 
 Let's review these files briefly. 
 
@@ -88,6 +88,11 @@ This file consists of blocks. The syntax of these blocks you can review in the [
 - The block **_resource "google_bigquery_dataset"_** defines all required information in order to create Google BigQuery dataset resource. The structure of this block you can find in the official documentation [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset).
 - The block **_resource "google_artifact_registry_repository"_** defines all required information in order to create Google Artifact registry for containers. The structure of this block you can find in the official documentation [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/artifact_registry_repository).
 - The block **_resource "google_compute_instance"_** defines all required information in order to create a Google VM instance resource within Compute Emgine. The structure of this block you can find in the official documentation [here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance).
+  - The values for this block were provided in accordance with with the GCP Free Tier limitations
+  - The value for the argument `image` you can find using the following command, f.e. : `gcloud compute images list | grep ubuntu`
+  - Some considerations regarding the Servive Account for the VM instance you can find in the [official documentation](https://cloud.google.com/compute/docs/access/service-accounts#default_service_account).
+  - Be aware, that after the creation Terraform starts the created VM. So, if you are not going to work further now - don't forget to stop the VM to avoid unnecessary fees.
+
 
 ### variables.tf
 
@@ -214,12 +219,17 @@ Run the following commands:
 - `cd ~/eurostat-gdp/setup/terraform`
 - `terraform init`
 - `terraform plan`
+  - provide the value of your GCP Compute Engine Service Account email
+    - This value you can find in your GCP console: IAM & Admin -> Service Accounts. Find the account with the name "Compute Engine default service account" and take its email.
   - provide the value of your GCP project ID when prompted
 - `terraform apply`
+  - provide the value of your GCP Compute Engine Service Account email
+    - This value you can find in your GCP console: IAM & Admin -> Service Accounts. Find the account with the name "Compute Engine default service account" and take its email.
   - provide the value of your GCP project ID when prompted
 - Go to the your GCP dashboard and make sure that the following resourses were created:
   - [Cloud Storage bucket](https://console.cloud.google.com/storage): `eurostat_gdp_data_lake_<your_gcp_project_id>`
-  - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw` and the table with the name `nama-10r-2gdp` inside this dataset
+  - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`
+  - [VM instances](https://console.cloud.google.com/compute/instances): `eurostat-gdp-vm-instance`
   - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
 
 ### Setup cloud execution environment

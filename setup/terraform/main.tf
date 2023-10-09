@@ -46,10 +46,42 @@ resource "google_bigquery_dataset" "dataset" {
   location   = var.region
 }
 
-#Artifact registry for containers
+# Artifact registry for containers
 resource "google_artifact_registry_repository" "artifact-repository" {
   location      = var.region
   repository_id = var.registry_id
   format        = "DOCKER"
 }
 
+# Compute Engine VM Instance
+
+resource "google_compute_instance" "default" {
+  name         = "eurostat-gdp-vm-instance"
+  machine_type = "e2-micro"
+  zone         = "us-east1-b"
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-2004-focal-v20230918"
+      size = "30"
+      type="pd-standard"
+      
+    }
+  }
+
+  network_interface {
+    network = "default"
+
+    access_config {
+      // Ephemeral public IP
+      network_tier = "PREMIUM"
+    }
+  }
+
+  service_account {
+    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
+    email  = var.CE_SERVICE_ACCOUNT_EMAIL
+    scopes = ["cloud-platform"]
+  }
+
+}

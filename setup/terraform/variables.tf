@@ -2,6 +2,10 @@ variable "GCP_PROJECT_ID" {
   description = "Your GCP Project ID"
 }
 
+variable "CE_SERVICE_ACCOUNT_EMAIL" {
+  description = "Your GCP Compute Engine Service Account email"
+}
+
 variable "region" {
   description = "Region for GCP resources. Choose as per your location: https://cloud.google.com/about/locations"
   default = "us-east1"
