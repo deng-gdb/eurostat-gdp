@@ -101,6 +101,7 @@ Each block contains the name of the variable, the type, description and a defaul
 In this project the values for the variables were assigned through the defalt values in this file. Meanwhile, there are [other approaches](https://developer.hashicorp.com/terraform/language/values/variables) exist.
 
 - `variable "GCP_PROJECT_ID"`. The value for this variable is not specified. This value should be entered in the prompt field during the applying Terraform changes.
+- `variable "CE_SERVICE_ACCOUNT_EMAIL"`. The value for this variable is not specified. This value should be entered in the prompt field during the applying Terraform changes. This value you can find in your GCP console: IAM & Admin -> Service Accounts. Find the account with the name "Compute Engine default service account" and take its email.
 - `variable "region"`. The value for this variable specified taking into account the GCP free tier requirements.
 - `variable "data_lake_bucket"`. The value for this variable specified the name of the Cloud Storage bucket that should be created.
 - `variable "raw_bq_dataset"`. The value for this variable specified the name of the BigQuery dataset that should be created.
