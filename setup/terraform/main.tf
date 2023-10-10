@@ -9,14 +9,14 @@ terraform {
 }
 
 provider "google" {
-  project = var.GCP_PROJECT_ID
+  project = var.gcp_project_id
   region = var.region
   // credentials = file(var.credentials)  # Use this if you do not want to set env-var GOOGLE_APPLICATION_CREDENTIALS
 }
 
 # Data Lake Bucket
 resource "google_storage_bucket" "bucket" {
-  name          = "${var.data_lake_bucket}_${var.GCP_PROJECT_ID}" # Concatenating DL bucket & Project name for unique naming
+  name          = "${var.data_lake_bucket}_${var.gcp_project_id}" # Concatenating DL bucket & Project name for unique naming
   location      = var.region
 
   # Optional, but recommended settings:
@@ -42,7 +42,7 @@ resource "google_storage_bucket" "bucket" {
 # DWH
 resource "google_bigquery_dataset" "dataset" {
   dataset_id = var.raw_bq_dataset
-  project    = var.GCP_PROJECT_ID
+  project    = var.gcp_project_id
   location   = var.region
 }
 
@@ -73,15 +73,33 @@ resource "google_compute_instance" "default" {
     network = "default"
 
     access_config {
-      // Ephemeral public IP
+      # Associate the public IP address to this instance
+      nat_ip = google_compute_address.static.address
       network_tier = "PREMIUM"
+    }
+  }
+
+  # Connect to the instance via Terraform and remotely execute the script using SSH
+  provisioner "remote-exec" {
+    script = var.vm_script_path
+
+    connection {
+      type        = "ssh"
+      host        = google_compute_address.static.address
+      user        = var.ssh_user_name
+      private_key = file(var.ssh_private_key_path)
     }
   }
 
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = var.CE_SERVICE_ACCOUNT_EMAIL
+    email  = var.ce_service_account_email
     scopes = ["cloud-platform"]
   }
 
+}
+
+# Create a public IP address for the google compute instance to utilize
+resource "google_compute_address" "static" {
+  name = "vm-public-ip-address"
 }
