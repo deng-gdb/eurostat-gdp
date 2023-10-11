@@ -20,13 +20,14 @@
       - [Install Terraform on local machine](#install-terraform-on-local-machine)
       - [Install Prefect on local machine](#install-prefect-on-local-machine)
       - [Install Docker on local machine](#install-docker-on-local-machine)
+      - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
     - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
     - [Setup cloud execution environment](#setup-cloud-execution-environment)      
       - [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks)
       - [Build a Docker image and place it to the Artifact Registry](#build-a-docker-image-and-place-it-to-the-artifact-registry)      
     - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
     
-    - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
+    
     - [Set up the created VM instance in GCP](#set-up-the-created-vm-instance-in-gcp)
       - [Start SSH connection to VM instance](#start-ssh-connection-to-vm-instance)
       - [Upload Google Application credentials to VM instance](#upload-google-application-credentials-to-vm-instance)
@@ -60,6 +61,19 @@
 
 # Data Pipeline Architecture and Workflow
 
+## Local Machine
+
+In the project architecture a local machine is used for development purpose and for ssh communication with GCP Compute Engine VM instance.
+
+So, on the local machine the following software should be installed:
+- Python
+- Google Cloud SDK
+- Git
+- Terraform 
+- Prefect
+- Docker
+
+The details see in the section [Setup local development environment](#setup-local-development-environment).
 
 ## GCP Compute Engine VM instance and Prefect Agent
 
@@ -127,6 +141,7 @@ In this project the values for the variables were assigned through the defalt va
   - `variable "ssh_user_name"`. This variable contains the name of the user that will be used to remote exec the script specified in the variable `vm_script_path` trough ssh.
   - `variable "ssh_private_key_path"`. This variable contains the path to the private ssh key which is used to connect to the VM instance.
 
+
 ### terraform.tfvars
 
 This file specifies the values for the variables from the file `variables.tf` which contain private information and should be provided during project setup individually.
@@ -138,9 +153,11 @@ This file specifies the values for the variables from the file `variables.tf` wh
 
 The guidance regarding the Terraform execution see in the corresponding section:  [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
 
+
 ## Orchestration
 
 The Orchestration in the project implemented using the [Prefect](https://docs.prefect.io/latest/getting-started/quickstart/#quickstart) tool, actually [Prefect Cloud](https://docs.prefect.io/latest/cloud/) version of this tool.
+
 
 ## Data Ingestion and Data Lake
 
@@ -153,9 +170,12 @@ The Data Warehouse implementation details, Data Modeling guidance and the corres
 
 Dashbord implementation details, the corresponding description and visualizations you can find [here.](./notes/dashboard_notes.md)
 
+
 # Reproduce the project
 
+
 ## Set up project environment
+
 
 ### Prerequisites
 
@@ -164,6 +184,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 - An active [GCP account.](https://cloud.google.com)
 - It is supposed that we are going to connect to GCP VM from the local machine trough the SSH.
 - (Optional) A SSH client. It is supposed that you are using a Terminal and SSH.
+
 
 ### Create a GCP project
 
@@ -200,7 +221,9 @@ The following items could be treated as prerequisites in order to reproduce the 
   - [BigQuery API](https://console.cloud.google.com/apis/library/bigquery.googleapis.com)
   - [Cloud Run API](https://console.cloud.google.com/apis/library/run.googleapis.com)
 
+
 ### Setup local development environment
+
 
 #### Install and setup Google Cloud SDK on local machine
 
@@ -211,12 +234,14 @@ The following items could be treated as prerequisites in order to reproduce the 
     - When you will go to this link Google will generate the verification code in gcloud CLI on the machine you want to log into.
     - Copy this code and paste it into your terminal window prompt. 
   - Make sure that your project is selected with the command `gcloud config list`
- 
+
+
 #### Clone the project repo on local machine
 
 - Fork this GitHub repository in your GitHub account and clone the forked repo. It is requred because you should perform some customization changes in the code.  
 - Go to the your `$HOME` directory.
 - Run the following command: `git clone https://github.com/<your-git-account-name>/eurostat-gdp.git`
+
 
 #### Install Terraform on local machine
 
@@ -225,6 +250,7 @@ The following items could be treated as prerequisites in order to reproduce the 
   - `echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list`
   - `sudo apt update && sudo apt install terraform`
 - Check that Terraform installed successfully. Run: `terraform -version`
+
 
 #### Install Prefect on local machine
 
@@ -240,6 +266,39 @@ The following items could be treated as prerequisites in order to reproduce the 
   - After you generate them, copy the key to a secure location, because that API keys cannot be revealed again in the UI.  
 - Login to Prefect Cloud with this API Key
   - Run the following command: `prefect cloud login -k '<your-api-key>'`  
+
+  
+#### Set up SSH access to the Compute Engine VM instances on local machine
+
+- **Create an SSH key pair on local machine.**  
+  - If you connect to GCP Compute Engine virtual machine (VM) instances using third party tools or OpenSSH, you need to add a key to your VM before you can connect. If you don't have an SSH key, you must create one.
+  - Create SSH key pair in accordance with the following GCP guidance: [Create SSH keys](https://cloud.google.com/compute/docs/connect/create-ssh-keys)  
+    - Open a terminal window and run the following command: `ssh-keygen -t rsa -f ~/.ssh/<key_file_name> -C <user_name> -b 2048`, where:   
+      - <key_file_name>: the name for your SSH key file, replace it by your own value  
+      - <user_name>: your username on the VM, replace it by your own value  
+    - This comand will create two files in the .ssh folder: <key_file_name> (private key) and <key_file_name>.pub (public key)
+- **Upload the created ssh public key to GCP Compute Engine.**     
+  - Copy the content of the <key_file_name>.pub  
+  - Go to the your `GCP project console -> Compute Engine -> Settings -> Metadata -> SSH keys -> Add SSH Key`.
+  - Insert the copied content of the <key_file_name>.pub -> Save.
+  - All instances in this project will use this ssh key.
+- **Cnfigure SSH access on the local machine.**
+  - Make sure that the gcloud SDK is configured for your project:
+    - Run `gcloud config list` to see your active gcp configuration details.
+    - If you have multiple google accounts but the active configuration does not match the account you want - run the following command: `gcloud config configurations activate my-account`
+    - If the active configuration matches your account but points to a different project - run the following command: `gcloud config set project my-project`
+  - Start the created VM instance in the Google Cloud dashboard.
+  - Go to the ~/.ssh folder and run `gcloud compute config-ssh`
+    - This comand creates `~/.ssh/config` file for your ssh gcp connection
+    - If you did not have already a SSH key, a pair of public and private SSH keys, this command will create them.
+    - The output of this command will provide you the host name for the ssh connection to your instance in the format: `<instance>.<zone>.<project>`.
+    - Now you should be able to open the SSH connection to your VM instance: `ssh <instance>.<zone>.<project>`
+  - **You should run this command** `gcloud compute config-ssh` **each time when your VMs instances are stopped and started again** in order to update `~/.ssh/config` file and set up new value for External IP for your instance. This IP is changed every time when the instance stopped and restart again.
+  - Thease are some other usefull gcloud SDK commands:
+    - `gcloud compute instances list` - provides a list of your available instances
+    - `gcloud compute instances start <instance_name>` - starts your instance
+    - `gcloud compute instances stop <instance_name>` - stops your instance
+
 
 ### Create GCP project infrastructure with Terraform
 
@@ -320,39 +379,6 @@ _**Make the following steps**_:
      - operating system: `Ubuntu`
      - version: `Ubuntu 20.04 LTS`
      - size: `30Gb`
-
-
-   
-### Set up SSH access to the Compute Engine VM instances on local machine
-
-- **Create an SSH key pair on local machine.**  
-  - If you connect to GCP Compute Engine virtual machine (VM) instances using third party tools or OpenSSH, you need to add a key to your VM before you can connect. If you don't have an SSH key, you must create one.
-  - Create SSH key pair in accordance with the following GCP guidance: [Create SSH keys](https://cloud.google.com/compute/docs/connect/create-ssh-keys)  
-    - Open a terminal window and run the following command: `ssh-keygen -t rsa -f ~/.ssh/<key_file_name> -C <user_name> -b 2048`, where:   
-      - <key_file_name>: the name for your SSH key file, replace it by your own value  
-      - <user_name>: your username on the VM, replace it by your own value  
-    - This comand will create two files in the .ssh folder: <key_file_name> (private key) and <key_file_name>.pub (public key)
-- **Upload the created ssh public key to GCP Compute Engine.**     
-  - Copy the content of the <key_file_name>.pub  
-  - Go to the your `GCP project console -> Compute Engine -> Settings -> Metadata -> SSH keys -> Add SSH Key`.
-  - Insert the copied content of the <key_file_name>.pub -> Save.
-  - All instances in this project will use this ssh key.
-- **Cnfigure SSH access on the local machine.**
-  - Make sure that the gcloud SDK is configured for your project:
-    - Run `gcloud config list` to see your active gcp configuration details.
-    - If you have multiple google accounts but the active configuration does not match the account you want - run the following command: `gcloud config configurations activate my-account`
-    - If the active configuration matches your account but points to a different project - run the following command: `gcloud config set project my-project`
-  - Start the created VM instance in the Google Cloud dashboard.
-  - Go to the ~/.ssh folder and run `gcloud compute config-ssh`
-    - This comand creates `~/.ssh/config` file for your ssh gcp connection
-    - If you did not have already a SSH key, a pair of public and private SSH keys, this command will create them.
-    - The output of this command will provide you the host name for the ssh connection to your instance in the format: `<instance>.<zone>.<project>`.
-    - Now you should be able to open the SSH connection to your VM instance: `ssh <instance>.<zone>.<project>`
-  - **You should run this command** `gcloud compute config-ssh` **each time when your VMs instances are stopped and started again** in order to update `~/.ssh/config` file and set up new value for External IP for your instance. This IP is changed every time when the instance stopped and restart again.
-  - Thease are some other usefull gcloud SDK commands:
-    - `gcloud compute instances list` - provides a list of your available instances
-    - `gcloud compute instances start <instance_name>` - starts your instance
-    - `gcloud compute instances stop <instance_name>` - stops your instance
 
 
 ### Set up the created VM instance in GCP
