@@ -3,6 +3,7 @@
 - [Dataset](#dataset)
 - [Technologies and Tools](#technologies-and-tools)
 - [Data Pipeline Architecture and Workflow](#data-pipeline-architecture-and-workflow)
+  - [GCP Compute Engine VM instance and Prefect Agent](#gcp-compute-engine-vm-instance-and-prefect-agent)
   - [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform)
   - [Orchestration](#orchestration)
   - [Data Ingestion and Data Lake](#data-ingestion-and-data-lake)
@@ -59,6 +60,19 @@
 
 # Data Pipeline Architecture and Workflow
 
+
+## GCP Compute Engine VM instance and Prefect Agent
+
+The [Prefect agent](https://docs.prefect.io/2.13.5/concepts/agents/) process is a lightweight polling service that check scheduled flow runs from a Prefect Server work pool and execute the corresponding Prefect flow runs. Agents poll for work every 15 seconds by default. 
+
+In the project architecture the Prefect agent is running on a Google Compute Engine VM instance. 
+- The creation of this part of the architecture completly implemented using Terraform (see the corresponding section [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform)
+- The code that _**creates the VM instance**_ is located in the `setup/terraform/main.tf` file in the section `resource "google_compute_instance"`.
+- The script that _**installs the Python and Prefect Agent**_ on the created VM instance and _**connects it to the Prefect Cloud**_ with Prefect API key is located in the `setup/terraform/scripts/install.sh` file.
+- The code that runs the mentioned script `setup/terraform/scripts/install.sh` is located in the `setup/terraform/main.tf` file in the section `provisioner "remote-exec"`.
+
+
+
 ## Cloud Infrastructure with Terraform
 
 The GCP Cloud Infrastructure in the project was implemented using the Terraform.
@@ -76,6 +90,7 @@ The Terraform configuration in the project consists of the following files:
 
 - **main.tf**. This file contains the main set of configuration for the project.
 - **variables.tf**. This file contains the declarations for variables used in the Terraform configuration.
+- **terraform.tfvars**. This file specifies the values for the Terraform variables from the file `variables.tf` which contain private information and should be provided during project setup individually.
 
 Let's review these files briefly. 
 
@@ -100,14 +115,26 @@ This file contains the declarations for Terraform variables. It contains blocks 
 Each block contains the name of the variable, the type, description and a default value for the variable if required. 
 In this project the values for the variables were assigned through the defalt values in this file. Meanwhile, there are [other approaches](https://developer.hashicorp.com/terraform/language/values/variables) exist.
 
-- `variable "GCP_PROJECT_ID"`. The value for this variable is not specified. This value should be entered in the prompt field during the applying Terraform changes.
-- `variable "CE_SERVICE_ACCOUNT_EMAIL"`. The value for this variable is not specified. This value should be entered in the prompt field during the applying Terraform changes. This value you can find in your GCP console: IAM & Admin -> Service Accounts. Find the account with the name "Compute Engine default service account" and take its email.
+- `variable "gcp_project_id"`. Your own GCP Project ID. The value for this variable is not specified. This value should be entered in the file `terraform.tfvars`.
+- `variable "ce_service_account_email"`. This is email identifier for your default Service Accaount, which is used by the Compute Engine service. The value for this variable is not specified. This value should be entered in the file `terraform.tfvars`. 
 - `variable "region"`. The value for this variable specified taking into account the GCP free tier requirements.
 - `variable "data_lake_bucket"`. The value for this variable specified the name of the Cloud Storage bucket that should be created.
 - `variable "raw_bq_dataset"`. The value for this variable specified the name of the BigQuery dataset that should be created.
   - Be aware that this value must be alphanumeric (plus underscores). 
 - `variable "registry_id"`. The value for this variable specified the name of the Artifact repository that should be created.  
   - Be aware that this value may only contain lowercase letters, numbers, and hyphens, and must begin with a letter and end with a letter or number.
+  - `variable "vm_script_path"`. This variable contains the path to the script which install the required packages on the VM and which should be run on the Virtual Machine compute instance just after of its creation by Terraform.
+  - `variable "ssh_user_name"`. This variable contains the name of the user that will be used to remote exec the script specified in the variable `vm_script_path` trough ssh.
+  - `variable "ssh_private_key_path"`. This variable contains the path to the private ssh key which is used to connect to the VM instance.
+
+### terraform.tfvars
+
+This file specifies the values for the variables from the file `variables.tf` which contain private information and should be provided during project setup individually.
+
+- `gcp_project_id`.  You can find this value on the your GCP Project Dashboard.
+- `ce_service_account_email`. This value you can find in your GCP console: IAM & Admin -> Service Accounts. Find the account with the name "Compute Engine default service account" and take its email.
+- `ssh_user_name`.  Insert your own value here.
+- `ssh_private_key_path`. Insert the value, which your provided when you created the SSH key pair on your local machine.
 
 The guidance regarding the Terraform execution see in the corresponding section:  [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
 

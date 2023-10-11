@@ -1,11 +1,9 @@
 # Provide your own values here
 
-gcp_project_id = "free-tier-project-397608"
+gcp_project_id = "<your-own-value>"
 
-ce_service_account_email = "651227145058-compute@developer.gserviceaccount.com"
+ce_service_account_email = "<your-own-value>"
 
-vm_script_path = "scripts/install.sh"
+ssh_private_key_path = "<your-own-value>"
 
-ssh_private_key_path = "~/.ssh/google_compute_engine"
-
-ssh_user_name = "dmitri"
+ssh_user_name = "<your-own-value>"

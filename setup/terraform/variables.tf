@@ -38,6 +38,7 @@ variable "registry_id" {
 variable "vm_script_path" {
   type        = string
   description = "The path to the script locally on the machine, which Terraform run on the created VM"
+  default = "scripts/install.sh"
 }
 
 variable "ssh_user_name" {
