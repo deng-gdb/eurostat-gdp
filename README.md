@@ -322,15 +322,11 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 Run the following commands:
 - `cd ~/eurostat-gdp/setup/terraform`
+- edit a file `terraform.tfvars` - insert your own values for the variables here.
+- edit a file `scripts/instal.sh` - insert your own value for the statement `prefect cloud login -k ...`
 - `terraform init`
 - `terraform plan`
-  - provide the value of your GCP Compute Engine Service Account email
-    - This value you can find in your GCP console: IAM & Admin -> Service Accounts. Find the account with the name "Compute Engine default service account" and take its email.
-  - provide the value of your GCP project ID when prompted
 - `terraform apply`
-  - provide the value of your GCP Compute Engine Service Account email
-    - This value you can find in your GCP console: IAM & Admin -> Service Accounts. Find the account with the name "Compute Engine default service account" and take its email.
-  - provide the value of your GCP project ID when prompted
 - Go to the your GCP dashboard and make sure that the following resourses were created:
   - [Cloud Storage bucket](https://console.cloud.google.com/storage): `eurostat_gdp_data_lake_<your_gcp_project_id>`
   - [BigQuery dataset](https://console.cloud.google.com/bigquery): `eurostat_gdp_raw`

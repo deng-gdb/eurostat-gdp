@@ -21,5 +21,5 @@ export PATH
 
 pip3 install prefect prefect-gcp
 
-prefect cloud login -k pnu_b93Qhwps6ot8VTP2F6rXz4URDuKTZZ1HV7yZ
+prefect cloud login -k <enter-here-your-prefect-cloud-api-key-value>
 
