@@ -28,17 +28,7 @@
     - [Build Docker image and put it in the Artifact Registry](#build-docker-image-and-put-it-in-the-artifact-registry) 
     - [Setup cloud execution environment](#setup-cloud-execution-environment)      
       - [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks)
-           
-    - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
-    
-    
-    - [Set up the created VM instance in GCP](#set-up-the-created-vm-instance-in-gcp)
-      - [Start SSH connection to VM instance](#start-ssh-connection-to-vm-instance)
-      - [Upload Google Application credentials to VM instance](#upload-google-application-credentials-to-vm-instance)
-      - [Install Docker](#install-docker)
-      - [Install Docker Compose](#install-docker-compose)
-      - [Clone the project repo in the VM instance](#clone-the-project-repo-in-the-vm-instance)
-      - [Install Miniconda](#install-miniconda)
+
   - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
 
 
@@ -357,10 +347,11 @@ Run the following commands:
 
 ### Build Docker image and put it in the Artifact Registry
 
-- All actions are performed on the local machine
+- All actions are performed on the local machine.
 - Run Docker Desctop.
 - [Configure Docker to use the Google Cloud CLI to authenticate requests to Artifact Registry](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth).
   - To set up authentication to Docker repositories in the region us-east1, run the following command: `gcloud auth configure-docker us-east1-docker.pkg.dev`
+- `cd eurostat-gdp/setup/docker`
 - Build the Docker image: `docker build -t eurostat-gdp:v1 .`
 - Before you push the Docker image to Artifact Registry, you must [tag it with the repository name](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#tag). Run the following command:  
   - `docker tag eurostat-gdp:v1 us-east1-docker.pkg.dev/<gcp_project_id>/eurostat-gdp-repository/eurostat-gdp:v1` , where:
@@ -368,7 +359,8 @@ Run the following commands:
     - **<gcp_project_id>** - is your Google Cloud project ID. You should enter your value here.
     - eurostat-gdp-repository - is the name of the repository you created
     - eurostat-gdp:v1 - is the image name you want to use in the repository. 
-- Push the Docker image to the registry: `docker push us-east1-docker.pkg.dev/free-tier-project-397608/eurostat-gdp-repository/eurostat-gdp:v1`
+- Push the Docker image to the registry: `docker push us-east1-docker.pkg.dev/<gcp_project_id>/eurostat-gdp-repository/eurostat-gdp:v1`
+  - **<gcp_project_id>** - is your Google Cloud project ID. You should enter your value here.
 - Open your [Artifact Registry](https://console.cloud.google.com/artifacts) and check that the Docker image exists in the repository.
 
 
@@ -394,89 +386,4 @@ Create block GCP Cloud Run Job. It is an infrastructure block used to run GCP Cl
   - Region: `us-east1`
   - GcpCredentials: `eurostat-gdp-gcp-creds`
 - Save the changes
-
-
-### Create a VM instance in GCP Compute Engine
-
-- Go the your GCP project dashboard _Compute Engine_ -> _VM instances_ -> _Create instance_
-- Add the following information (the provided iformormation complies with the GCP Free Tier limitations):
-  -  Name: whatever you want
-  -  Region: `us-east1` (this is a free tier limit)
-  -  Series: `E2`
-  -  Machine type: `e2-micro` (this is a free tier limit)
-  -  Boot disk:
-     - boot disk type: `Standard persistent disk` (this is a free tier limit)
-     - operating system: `Ubuntu`
-     - version: `Ubuntu 20.04 LTS`
-     - size: `30Gb`
-
-
-### Set up the created VM instance in GCP
-
-#### Start SSH connection to VM instance
-
-- Open a terminal window on your local machine and start the VM instance using the command: `gcloud compute instances start <instance_name>`
-- In order to configure the current SSH connection to the VM go to the ~/.ssh folder and run the following command: `gcloud compute config-ssh`
-- Open SSH connection using the provided by the system command: `ssh <instance>.<zone>.<project>`
-- Run the following command in order to keep your VM up to date : `sudo apt update && sudo apt -y upgrade`
-
-#### Upload Google Application credentials to VM instance
-
-- Upload the Service Account credentials file which is located on your local machine in the directory `$HOME/.google/` to the **VM instance** and store it in same folder (if such folder doesn't exist - create it beforehand.
-  - The simplest way to do this is scp command. Run the following command: `scp .google/<your_credentials>.json <remoteuser>@<remotehost>:/.google`, where:  
-     - <remoteuser> - user name for your VM
-     - <remotehost> - it is your SSH host name `<instance>.<zone>.<project>`  
-- Create an environment variable `GOOGLE_APPLICATION_CREDENTIALS` on the **VM instance** and assign to it the path to the your json Service Account credentials file - the same as have been done on the local machine:
-  - Open your .bashrc file on VM instance: `nano .bashrc`
-  - At the end of the file, add the following row: `export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.google/<your_credentials>.json"`
-  - Save you changes and close nano: `ctrl+O, ctrl+X`
-  - Activate the environment variable, run `source ~/.bashrc`.  
-
-#### Install Docker  
-
-- Run the following command to install docker: `sudo apt install docker.io`.
-- Perform optional [post-installation procedures](https://docs.docker.com/engine/install/linux-postinstall/) to configure your Linux host machine to work with Docker without sudo command:
-  - Run `sudo groupadd docker`
-  - Run `sudo gpasswd -a $USER docker`
-  - Re-login your SSH session
-  - Run `sudo service docker restart`
-  - Run `docker run hello-world` in order to check that Docker run successfully
-
-#### Install Docker Compose
-
-- Create a folder for binary files for your Linux user in VM:
-  - Create a subfolder in your home account: `mkdir ~/bin`
-  - Go to this folder: `cd ~/bin`
-- Download the Docker Compose binary file:
-  - `wget https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -O docker-compose`
-    - it is supposed that the latest version is v2.2.3. For the other latest versions of the docker-compose-linux-x86_64 binary see the [following link](https://github.com/docker/compose/releases).
-  - Make sure that the docker-compose file is in the folder
-  - Make the binary file executable running the command: `chmod +x docker-compose`
-- Add path to the created bin directory to the PATH environmental variable:
-  - `cd`
-  - `nano .bashrc`
-  - Add the following line at the end of the file: `export PATH="${HOME}/bin:${PATH}"`
-  - ctrl+o, ctrl+x
-  - Reload the environment variables jfor the current SSH session: `source .bashrc`
-  - Check Docker compose installation: `docker-compose version`
-
-
-
-#### Clone the project repo in the VM instance
-
-- Fork this GitHub repository in your GitHub account and clone the forked repo. It is requred because you should perform some customization changes in the code.  
-- Go to the your VM instance `$HOME` directory.
-- Run the following command: `git clone https://github.com/<your-git-account-name>/eurostat-gdp.git`
-
-
-
-#### Install Miniconda
-
-- `cd`
-- Download the latest Miniconda distribution: `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
-- Run the installer: `bash Miniconda3-latest-Linux-x86_64.sh` and follow the instructions.
-- Remove the distribution: `rm Miniconda3-latest-Linux-x86_64.sh`
-
- 
- 
 
