@@ -91,9 +91,9 @@ In the project such execution environment consists of two parts: **Docker image*
 
 **Be aware of the following**_:  
   - The Docker image contains _**only base environment for Prefect execution**_: Python, Prefect, etc.
-  - The Prefect flows scripts itself are located in the corresponding GitHub repository.
-  - The code requred to build the Docker image is located in the setup/docker folder in the project repo.
-  - All environment dependencies are captured in the docker-requirements.txt file and will be installed in the base environment in the Docker image.
+  - The Prefect _**flows scripts**_ itself are located in the corresponding _**GitHub repository**_.
+  - The code requred to build the Docker image is located in the `setup/docker` folder in the project repo.
+  - All environment dependencies are captured in the `setup/docker/docker-requirements.txt` file and will be installed in the base environment in the Docker image.
 
 
 ## Prefect Agent and GCP VM instance
