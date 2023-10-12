@@ -25,9 +25,10 @@
       - [Install Docker on local machine](#install-docker-on-local-machine)
       - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
     - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
+    - [Build Docker image and put it in the Artifact Registry](#build-docker-image-and-put-it-in-the-artifact-registry) 
     - [Setup cloud execution environment](#setup-cloud-execution-environment)      
       - [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks)
-      - [Build a Docker image and place it to the Artifact Registry](#build-a-docker-image-and-place-it-to-the-artifact-registry)      
+           
     - [Create a VM instance in GCP Compute Engine](#create-a-vm-instance-in-gcp-compute-engine)
     
     
@@ -94,6 +95,7 @@ In the project such execution environment consists of two parts: **Docker image*
   - The Prefect _**flows scripts**_ itself are located in the corresponding _**GitHub repository**_.
   - The code requred to build the Docker image is located in the `setup/docker` folder in the project repo.
   - All environment dependencies are captured in the `setup/docker/docker-requirements.txt` file and will be installed in the base environment in the Docker image.
+  - The implementation details see in the section [Build Docker image and put it in the Artifact Registry](#build-docker-image-and-put-it-in-the-artifact-registry) 
 
 
 ## Prefect Agent and GCP VM instance
@@ -352,6 +354,25 @@ Run the following commands:
   - [VM instances](https://console.cloud.google.com/compute/instances): `eurostat-gdp-vm-instance`
   - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
 
+
+### Build Docker image and put it in the Artifact Registry
+
+- All actions are performed on the local machine
+- Run Docker Desctop.
+- [Configure Docker to use the Google Cloud CLI to authenticate requests to Artifact Registry](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth).
+  - To set up authentication to Docker repositories in the region us-east1, run the following command: `gcloud auth configure-docker us-east1-docker.pkg.dev`
+- Build the Docker image: `docker build -t eurostat-gdp:v1 .`
+- Before you push the Docker image to Artifact Registry, you must [tag it with the repository name](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#tag). Run the following command:  
+  - `docker tag eurostat-gdp:v1 us-east1-docker.pkg.dev/<gcp_project_id>/eurostat-gdp-repository/eurostat-gdp:v1` , where:
+    - us-east1-docker.pkg.dev - is the hostname for the Docker repository you created.
+    - **<gcp_project_id>** - is your Google Cloud project ID. You should enter your value here.
+    - eurostat-gdp-repository - is the name of the repository you created
+    - eurostat-gdp:v1 - is the image name you want to use in the repository. 
+- Push the Docker image to the registry: `docker push us-east1-docker.pkg.dev/free-tier-project-397608/eurostat-gdp-repository/eurostat-gdp:v1`
+- Open your [Artifact Registry](https://console.cloud.google.com/artifacts) and check that the Docker image exists in the repository.
+
+
+
 ### Setup cloud execution environment
 
 #### Create Prefect Cloud Blocks
@@ -373,25 +394,6 @@ Create block GCP Cloud Run Job. It is an infrastructure block used to run GCP Cl
   - Region: `us-east1`
   - GcpCredentials: `eurostat-gdp-gcp-creds`
 - Save the changes
-
-#### Build a Docker image and place it to the Artifact Registry
-
-_
-_**Make the following steps**_:
-- Run Docker Desctop
-- [Configure Docker to use the Google Cloud CLI to authenticate requests to Artifact Registry](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth).
-  - To set up authentication to Docker repositories in the region us-east1, run the following command: `gcloud auth configure-docker us-east1-docker.pkg.dev`
-- Build the Docker image: `docker build -t eurostat-gdp:v1 .`
-- Before you push the Docker image to Artifact Registry, you must [tag it with the repository name](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#tag). Run the following command:  
-  - `docker tag eurostat-gdp:v1 us-east1-docker.pkg.dev/<gcp_project_id>/eurostat-gdp-repository/eurostat-gdp:v1` , where:
-    - us-east1-docker.pkg.dev - is the hostname for the Docker repository you created.
-    - **<gcp_project_id>** - is your Google Cloud project ID. You should enter your value here.
-    - eurostat-gdp-repository - is the name of the repository you created
-    - eurostat-gdp:v1 - is the image name you want to use in the repository. 
-- Push the Docker image to the registry: `docker push us-east1-docker.pkg.dev/free-tier-project-397608/eurostat-gdp-repository/eurostat-gdp:v1`
-- Open your [Artifact Registry](https://console.cloud.google.com/artifacts) and check that the Docker image exists in the repository.
-
-
 
 
 ### Create a VM instance in GCP Compute Engine
