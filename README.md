@@ -4,6 +4,7 @@
 - [Technologies and Tools](#technologies-and-tools)
 - [Data Pipeline Architecture and Workflow](#data-pipeline-architecture-and-workflow)
   - [Local Machine](#local-machine)
+  - [Prefect Cloud](#prefect-cloud)
   - [Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run](#prefect-execution-environment-docker-google-artifact-registry-google-cloud-run)
   - [Prefect Agent and GCP VM instance](#prefect-agent-and-gcp-vm-instance)
   - [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform) 
@@ -70,6 +71,30 @@ So, on the local machine the following software should be installed:
 - Docker
 
 The details see in the section [Setup local development environment](#setup-local-development-environment).
+
+
+## Prefect Cloud
+
+Much of Prefect's functionality is backed by an API that located on the  _**Prefect server**_. 
+There are two versions of Prefect server: self-hosting and Prefect Cloud.
+- If self-hosting, you'll need to start the Prefect webserver and related services yourself.
+- If Prefect Cloud, you'll need only to sign up for a forever free Prefect Cloud account.
+
+The project uses Prefect Cloud version. [Prefect Cloud](https://docs.prefect.io/2.13.5/cloud/) is a workflow orchestration platform that provides all the capabilities of _**Prefect server**_ plus additional features.
+
+In order to perform orchestration Prefect server should have information about all components of the system.   
+[Prefect blocks](https://docs.prefect.io/2.13.5/concepts/blocks/) is a Prefect feature that enable the storage of configuration and provide an interface for interacting with external systems.
+
+The project uses the following Prefect Block types:
+- [GCP Credentials](https://prefecthq.github.io/prefect-gcp/credentials/#prefect_gcp.credentials.GcpCredentials). Block used to manage authentication with GCP. 
+- [GCS Bucket](https://prefecthq.github.io/prefect-gcp/cloud_storage/#prefect_gcp.cloud_storage.GcsBucket). Block used to store f configuration regarding the GCP Cloud Storage Buckets.
+- [BigQuery Warehouse](https://prefecthq.github.io/prefect-gcp/bigquery/#prefect_gcp.bigquery.BigQueryWarehouse). A block for querying a database with BigQuery.
+- [GCP Cloud Run Job](https://prefecthq.github.io/prefect-gcp/cloud_run/#prefect_gcp.cloud_run.CloudRunJob). Infrastructure block used to run GCP Cloud Run Jobs.
+- [GitHub](https://docs.prefect.io/2.13.5/concepts/filesystems/#github). The GitHub filesystem block enables interaction with GitHub repositories. This block is read-only and works with both public and private repositories.
+
+The Prefect blocks in the project are created through the Python scripts. These scripts are located in the `eurostat-gdp/setup/blocks` folder.
+
+Implementation details see in the section [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks).
 
 
 ## Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run
