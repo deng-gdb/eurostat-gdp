@@ -3,8 +3,10 @@
 - [Dataset](#dataset)
 - [Technologies and Tools](#technologies-and-tools)
 - [Data Pipeline Architecture and Workflow](#data-pipeline-architecture-and-workflow)
-  - [GCP Compute Engine VM instance and Prefect Agent](#gcp-compute-engine-vm-instance-and-prefect-agent)
-  - [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform)
+  - [Local Machine](#local-machine)
+  - [Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run](#prefect-execution-environment--docker--google-artifact-registry--google-cloud-run)
+  - [Prefect Agent and GCP VM instance](#prefect-agent-and-gcp-vm-instance)
+  - [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform) 
   - [Orchestration](#orchestration)
   - [Data Ingestion and Data Lake](#data-ingestion-and-data-lake)
   - [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
@@ -60,7 +62,9 @@
 - Data Visualization: Looker Studio
 - Language: Python 
 
+
 # Data Pipeline Architecture and Workflow
+
 
 ## Local Machine
 
@@ -76,16 +80,31 @@ So, on the local machine the following software should be installed:
 
 The details see in the section [Setup local development environment](#setup-local-development-environment).
 
-## GCP Compute Engine VM instance and Prefect Agent
 
-The [Prefect agent](https://docs.prefect.io/2.13.5/concepts/agents/) process is a lightweight polling service that check scheduled flow runs from a Prefect Server work pool and execute the corresponding Prefect flow runs. Agents poll for work every 15 seconds by default. 
+## Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run
+
+To run Prefect workflows scripts in the Cloud an execution environment is required. 
+In the project such execution environment consists of two parts: **Docker image** which is stored in the **Google Artifact Registry** and **Google Cloud Run**.
+- Docker image contains the base environment for execution: Python, Prefect and all required dependencies that should be installed in the base environment in the Docker image. 
+- [GCP Artifact Registry.](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth) is used to store the Docker image. 
+- [Google Cloud Run](https://cloud.google.com/run/?hl=en) is used to run the corresponding Docker container.
+
+**Be aware of the following**_:  
+  - The Docker image contains _**only base environment for Prefect execution**_: Python, Prefect, etc.
+  - The Prefect flows scripts itself are located in the corresponding GitHub repository.
+  - The code requred to build the Docker image is located in the setup/docker folder in the project repo.
+  - All environment dependencies are captured in the docker-requirements.txt file and will be installed in the base environment in the Docker image.
+
+
+## Prefect Agent and GCP VM instance
+
+The [Prefect agent](https://docs.prefect.io/2.13.5/concepts/agents/) is a lightweight polling service that periodically check scheduled flow runs from a Prefect Server work pool (located in the Prefect Cloud) and execute the corresponding Prefect flow runs. Agents poll for work every 15 seconds by default. 
 
 In the project architecture the Prefect agent is running on a Google Compute Engine VM instance. 
 - The creation of this part of the architecture completly implemented using Terraform (see the corresponding section [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform)
 - The code that _**creates the VM instance**_ is located in the `setup/terraform/main.tf` file in the section `resource "google_compute_instance"`.
 - The script that _**installs the Python and Prefect Agent**_ on the created VM instance and _**connects it to the Prefect Cloud**_ with Prefect API key is located in the `setup/terraform/scripts/install.sh` file.
 - The code that runs the mentioned script `setup/terraform/scripts/install.sh` is located in the `setup/terraform/main.tf` file in the section `provisioner "remote-exec"`.
-
 
 
 ## Cloud Infrastructure with Terraform
@@ -357,12 +376,7 @@ Create block GCP Cloud Run Job. It is an infrastructure block used to run GCP Cl
 
 #### Build a Docker image and place it to the Artifact Registry
 
-_**Be aware of the following**_:  
-  - The Docker image will contain only base environment for a Prefect agent execution: Python, Prefect, etc.
-  - The code requred to build the Docker image is located in the setup/docker folder in the project repo.
-  - All environment dependencies are captured in the docker-requirements.txt file and will be installed in the base environment in the Docker image.
-  - We are going to store the Docker image in the [GCP Artifact Registry.](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth)
-
+_
 _**Make the following steps**_:
 - Run Docker Desctop
 - [Configure Docker to use the Google Cloud CLI to authenticate requests to Artifact Registry](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth).
