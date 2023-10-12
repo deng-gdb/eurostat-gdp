@@ -4,7 +4,7 @@
 - [Technologies and Tools](#technologies-and-tools)
 - [Data Pipeline Architecture and Workflow](#data-pipeline-architecture-and-workflow)
   - [Local Machine](#local-machine)
-  - [Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run](#prefect-execution-environment--docker--google-artifact-registry--google-cloud-run)
+  - [Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run](#prefect%20execution%20environment%3a%20docker%2c%20google%20artifact%20registry%2c%20google%20cloud%20run)
   - [Prefect Agent and GCP VM instance](#prefect-agent-and-gcp-vm-instance)
   - [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform) 
   - [Orchestration](#orchestration)
