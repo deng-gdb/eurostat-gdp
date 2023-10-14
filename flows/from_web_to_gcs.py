@@ -1,6 +1,6 @@
 from pathlib import Path
 import pandas as pd
-from prefect import flow, task
+from prefect import flow, task, get_run_logger
 from prefect_gcp.cloud_storage import GcsBucket
 from prefect_gcp import GcpCredentials
 import os.path
@@ -17,6 +17,8 @@ def get_table_schema(config_path: str) -> pd.DataFrame:
     
     # read the BigQuery table schema from the configuration
     table_schema_path = os.path.abspath(config_path)
+    logger = get_run_logger()
+    logger.info(table_schema_path)
     df_table_schema = pd.read_json(table_schema_path, orient='records')
 
     return df_table_schema
