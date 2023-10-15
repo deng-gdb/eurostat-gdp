@@ -81,7 +81,7 @@ def write_to_gcs_data_lake(path: Path) -> None:
     return
        
 
-@flow()
+@flow(log_prints=True)
 def from_web_to_gcs() -> None:
     """The main ingest function"""
 
