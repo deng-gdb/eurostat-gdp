@@ -15,7 +15,8 @@ def get_table_schema(config_path: str) -> pd.DataFrame:
     table_schema_path = os.path.abspath(config_path)
     logger = get_run_logger()
     logger.info(table_schema_path)
-    df_table_schema = pd.read_json(table_schema_path, orient='records')
+    #df_table_schema = pd.read_json(table_schema_path, orient='records')
+    df_table_schema = pd.DataFrame()
 
     return df_table_schema
 
@@ -93,7 +94,7 @@ def from_web_to_gcs() -> None:
     bq_table_name = 'eurostat_gdp_raw.nama-10r-2gdp'
 
     table_schema = get_table_schema(config_path)
-
+    '''
     # fetch dataset from the eurostat site and put it into dataframe
     df = fetch(dataset_url)
 
@@ -105,4 +106,4 @@ def from_web_to_gcs() -> None:
 
     # Upload local csv file to GCS data lake bucket
     write_to_gcs_data_lake(path)
-
+    '''
