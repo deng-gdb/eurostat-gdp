@@ -8,7 +8,7 @@ def ingest_data():
     """Main flow to ingest data from web into Big Query"""
 
     from_web_to_gcs()
-    #from_gcs_to_bq()
+    from_gcs_to_bq()
 
 
 
