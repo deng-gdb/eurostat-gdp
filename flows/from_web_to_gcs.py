@@ -7,7 +7,7 @@ import os.path
 import sys
 
 
-@task()
+@task(name="log-get-table-schema-task")
 def get_table_schema(config_path: str) -> pd.DataFrame:
     """Read the BigQuery table schema from the configuration"""
     
