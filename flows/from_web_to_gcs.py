@@ -17,6 +17,7 @@ def get_table_schema(config_path: str) -> pd.DataFrame:
     logger.info('AAAAAAAAAAAAAAAAAAAAAAAAAA')
     #df_table_schema = pd.read_json(table_schema_path, orient='records')
     df_table_schema = pd.DataFrame()
+    зкште(WWWWWWWWWWWWWWWWWWWWWWWWW)
 
     return df_table_schema
 
