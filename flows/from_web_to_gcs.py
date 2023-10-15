@@ -88,7 +88,8 @@ def from_web_to_gcs() -> None:
     dataset_format = "TSV"
     dataset_url = f"https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/{dataset_name}?format={dataset_format}&compressed=false"
     dataset_file_name = "eurostat_gdp"
-    config_path = '../setup/table_schema.json'
+    #config_path = '../setup/table_schema.json'
+    config_path = 'table_schema.json'
     bq_table_name = 'eurostat_gdp_raw.nama-10r-2gdp'
 
     table_schema = get_table_schema(config_path)
