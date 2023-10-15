@@ -9,7 +9,7 @@ import sys
 # in order to be able to import modules from the setup directory
 sys.path.insert(0, os.path.abspath('../setup'))
 
-import setup
+import proj_setup
 
 
 @task(retries=3)
@@ -38,7 +38,7 @@ def upload_to_bq(path: Path, table_name: str) -> None:
     # https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq
     df.to_gbq(
         destination_table=table_name,
-        project_id=setup.project_id,
+        project_id=proj_setup.project_id,
         credentials=gcp_credentials_block.get_credentials_from_service_account(),
         chunksize=500000,
         if_exists="replace",
