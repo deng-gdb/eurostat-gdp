@@ -13,11 +13,10 @@ def get_table_schema(config_path: str) -> pd.DataFrame:
     
     # read the BigQuery table schema from the configuration
     table_schema_path = os.path.abspath(config_path)
-    logger = get_run_logger()
-    logger.info('AAAAAAAAAAAAAAAAAAAAAAAAAA')
-    #df_table_schema = pd.read_json(table_schema_path, orient='records')
+    #logger = get_run_logger()
+    #logger.info('')
+    df_table_schema = pd.read_json(table_schema_path, orient='records')
     df_table_schema = pd.DataFrame()
-    print('dddddddddd')
 
     return df_table_schema
 
