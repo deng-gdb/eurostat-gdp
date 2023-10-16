@@ -54,5 +54,5 @@ def from_gcs_to_bq():
     
     path = download_from_gcs(file_name)
 
-    upload_to_bq(path, bq_table_name)
+    #upload_to_bq(path, bq_table_name)
 
