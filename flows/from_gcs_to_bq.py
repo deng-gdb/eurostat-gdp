@@ -19,9 +19,13 @@ def download_from_gcs(file_name: str) -> Path:
     gcs_block = GcsBucket.load("eurostat-gdp-gcs-bucket")
 
     # https://prefecthq.github.io/prefect-gcp/cloud_storage/#prefect_gcp.cloud_storage.GcsBucket.get_directory
-    gcs_block.get_directory()
+    gcs_block.get_directory(local_path = os.path.dirname(__file__))
 
-    return Path(os.path.join(os.path.dirname(__file__), file_name))
+    path = Path(os.path.join(os.path.dirname(__file__), file_name))
+
+    df = pd.read_csv(path)
+
+    return path
 
 
 @task()
