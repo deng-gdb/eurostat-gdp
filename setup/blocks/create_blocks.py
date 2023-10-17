@@ -5,3 +5,4 @@ sys.path.insert(0, os.path.abspath('..'))
 
 import gcp_blocks
 import github_blocks
+import secret_block
