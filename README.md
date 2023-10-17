@@ -10,10 +10,9 @@
     - [Prefect Deployment](#prefect-deployment)
   - [Prefect Agent and GCP VM instance](#prefect-agent-and-gcp-vm-instance)
   - [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform) 
-  - [Orchestration](#orchestration)
-  - [Data Ingestion and Data Lake](#data-ingestion-and-data-lake)
-  - [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
-  - [Data Visualization](#data-visualization)
+- [Data Ingestion and Data Lake](#data-ingestion-and-data-lake)
+- [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
+- [Data Visualization](#data-visualization)
 - [Reproduce the project](#reproduce-the-project)
   - [Set up project environment](#set-up-project-environment)
     - [Prerequisites](#prerequisites)
@@ -212,21 +211,43 @@ This file specifies the values for the variables from the file `variables.tf` wh
 The guidance regarding the Terraform execution see in the corresponding section:  [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
 
 
-## Orchestration
+# Data Ingestion and Data Lake
+
+Data Ingestion stage comprise the following activities:
+- Download the corresponding dataset from the Eurostat site.
+- Upload this dataset into the Google Cloud Storage in the Data lake.
+- Load this dataset form the Data Lake into the BigQuery dataset in the Data Warehouse.
 
 The Orchestration in the project implemented using the [Prefect](https://docs.prefect.io/latest/getting-started/quickstart/#quickstart) tool, actually [Prefect Cloud](https://docs.prefect.io/latest/cloud/) version of this tool.
 
+Prerequisites: you should complete all required activities mentioned in the section [Set up project environment](#set-up-project-environment).
 
-## Data Ingestion and Data Lake
+In order to fulfil Data Ingestion stage do the following:
+
+- On the local machine:
+  - Start the corresponding VM instance in the Google Cloud, run the command: `gcloud compute instances start eurostat-gdp-vm-instance`
+  - Connect through SSH to the VM instance:  
+    - `cd ~/.ssh`
+    - `gcloud compute config-ssh`
+    - run the command that is provided in the output of the previous command: `ssh eurostat-gdp-vm-instance.us-east1-b.<your-google-projet-id>`, where <your-google-projet-id> - the value specific for your own environment
+- On the VM instance:
+  - Start the Prefect Agent on the VM instance: `prefect agent start -q default`
+- On the Prefect Cloud
+  - Login to your Prefect Cloud account
+  - Go to the Deployments tab and find the Deployment `ingest-data/ingest_euro_gdp_data`
+  - Select this deployment and perform `Quick run` action
 
 
-## Data Warehouse and Data Modeling
+
+
+
+# Data Warehouse and Data Modeling
 
 The project uses Google BigQuery as a Data Warehouse.   
 The Data Warehouse implementation details, Data Modeling guidance and the corresponding workflow you can find [here.](./notes/dbt_notes.md)
 
 
-## Data Visualization
+# Data Visualization
 
 Dashbord implementation details, the corresponding description and visualizations you can find [here.](./notes/dashboard_notes.md)
 
@@ -396,7 +417,7 @@ Run the following commands:
 ### Build Docker image and put it in the Artifact Registry
 
 - All actions are performed on the local machine.
-- Run Docker Desctop.
+- Run Docker Desktop.
 - [Configure Docker to use the Google Cloud CLI to authenticate requests to Artifact Registry](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth).
   - To set up authentication to Docker repositories in the region us-east1, run the following command: `gcloud auth configure-docker us-east1-docker.pkg.dev`
 - `cd eurostat-gdp/setup/docker`
@@ -437,16 +458,16 @@ Create block GCP Cloud Run Job. It is an infrastructure block used to run GCP Cl
 
 Run the following commands on the local machine:
 
-- `cd eurostat-gdp/flows`
-- `prefect deployment build ingest_data.py:ingest_data -n ingest_euro_gdp_data -sb github/eurostat-gdp-github -ib cloud-run-job/eurostat-gdp-cloud-run -o ingest_euro_gdp_data`
+- `cd eurostat-gdp`
+- `prefect deployment build flows/ingest_data.py:ingest_data -n ingest_euro_gdp_data -sb github/eurostat-gdp-github -ib cloud-run-job/eurostat-gdp-cloud-run -o deploy_euro_gdp_data`
 
     where:
 
-    - `ingest_data.py:ingest_data` - the path to a flow entrypoint, in the form of ./path/to/file.py:flow_func_name.
+    - `flows/ingest_data.py:ingest_data` - the path to a flow entrypoint, in the form of ./path/to/file.py:flow_func_name.
     - `-n ingest_euro_gdp_data` - the name to give the deployment.
     - `-sb github/eurostat-gdp-github`- the name of the remote storage block of the flow code (Use the syntax: 'block_type/block_name') , in our case it is GitHub block.
     - `-ib cloud-run-job/eurostat-gdp-cloud-run` - the name of the infrastructure block, in our case - Cloud Run block.
-    - `-o ingest_euro_gdp_data` - the name of the deployment yaml file that will be created.
+    - `-o deploy_euro_gdp_data` - the name of the deployment yaml file that will be created.
 
-- `prefect deployment apply ingest_euro_gdp_data.yaml`
+- `prefect deployment apply deploy_euro_gdp_data.yaml`
 - Go the your Prefect Cloud account -> Deployments, and check, that the deployment `ingest-data/ingest_euro_gdp_data` was created.

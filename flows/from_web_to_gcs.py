@@ -91,7 +91,6 @@ def from_web_to_gcs() -> None:
     dataset_url = f"https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/{dataset_name}?format={dataset_format}&compressed=false"
     dataset_file_name = "eurostat_gdp"
     file_path = '../setup/table_schema.json'
-    #config_path = Path(os.path.join(os.path.dirname(__file__), 'table_schema.json'))
     config_path = Path(os.path.join(os.path.dirname(__file__), file_path))
 
     bq_table_name = 'eurostat_gdp_raw.nama-10r-2gdp'
