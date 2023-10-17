@@ -110,6 +110,7 @@ The project uses the following Prefect Block types:
 - [GCP Credentials](https://prefecthq.github.io/prefect-gcp/credentials/#prefect_gcp.credentials.GcpCredentials). Block used to manage authentication with GCP. 
 - [GCS Bucket](https://prefecthq.github.io/prefect-gcp/cloud_storage/#prefect_gcp.cloud_storage.GcsBucket). Block used to store f configuration regarding the GCP Cloud Storage Buckets.
 - [BigQuery Warehouse](https://prefecthq.github.io/prefect-gcp/bigquery/#prefect_gcp.bigquery.BigQueryWarehouse). A block for querying a database with BigQuery.
+- [Secret](https://discourse.prefect.io/t/how-to-securely-store-secrets-in-prefect-2-0/1209). A block to secure store project id value.
 - [GitHub](https://docs.prefect.io/2.13.5/concepts/filesystems/#github). The GitHub filesystem block enables interaction with GitHub repositories. This block is read-only and works with both public and private repositories.
 - [GCP Cloud Run Job](https://prefecthq.github.io/prefect-gcp/cloud_run/#prefect_gcp.cloud_run.CloudRunJob). Infrastructure block used to run GCP Cloud Run Jobs. This block contains all information required to run Perfect flows, namely:
     - Docker Image name - the full location of the Docker image in the Google Artifact Registry
@@ -233,7 +234,7 @@ In order to fulfil Data Ingestion stage do the following:
 
 - On the VM instance:
   - Start the Prefect Agent on the VM instance: `prefect agent start -q default`  
-  
+
 - On the Prefect Cloud
   - Login to your Prefect Cloud account
   - Go to the Deployments tab and find the Deployment `ingest-data/ingest_euro_gdp_data`
@@ -440,9 +441,10 @@ Run the following commands:
 - Open the file _**eurostat-gdp/setup/proj_setup.py**_ in the project repo. The project repo have already been cloned on local machine on the previous steps. Enter your own values for all variables in this file.
 - Run the command: `python blocks/create_blocks.py`
 - Open your Prefect Cloud account, go to the _**Blocks**_ tab and check, that the following blocks were created:
-  - GCP Credentials block with the name: eurostat-gdp-gcp-creds
-  - GCS Bucket block with the name: eurostat-gdp-gcs-bucket
-  - GitHub block with the name: eurostat-gdp-github
+  - GCP Credentials block with the name: `eurostat-gdp-gcp-creds`
+  - GCS Bucket block with the name: `eurostat-gdp-gcs-bucket`
+  - GitHub block with the name: `eurostat-gdp-github`
+  - Secret block with the name: `project-id`
 
 Create block GCP Cloud Run Job. It is an infrastructure block used to run GCP Cloud Run Jobs. Because this block is experimental and the interface may change without notice, we create this block mannually through Prefect Cloud UI.
 - Open your Prefect Cloud account, go to the _**Blocks**_ tab and create new _**GCP Cloud Run Job**_ block
