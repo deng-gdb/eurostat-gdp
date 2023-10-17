@@ -5,6 +5,7 @@ from prefect_gcp.cloud_storage import GcsBucket
 from prefect_gcp import GcpCredentials
 import os.path
 import sys
+import flows_setup
 
 
 @task(retries=3)
@@ -25,11 +26,6 @@ def download_from_gcs(file_name: str) -> Path:
 def upload_to_bq(path: Path, table_name: str) -> None:
     """Upload DataFrame to BiqQuery"""
 
-    #sys.path.insert(0, os.path.abspath('../setup'))
-    sys.path.insert(0, Path(os.path.join(os.path.dirname(__file__), '../setup')))
-
-    import proj_setup
-
     # read csv file in the dataframe
     df = pd.read_csv(path)
 
@@ -40,7 +36,7 @@ def upload_to_bq(path: Path, table_name: str) -> None:
     # https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq
     df.to_gbq(
         destination_table=table_name,
-        project_id=proj_setup.project_id,
+        project_id=flows_setup.project_id,
         credentials=gcp_credentials_block.get_credentials_from_service_account(),
         chunksize=500000,
         if_exists="replace",
