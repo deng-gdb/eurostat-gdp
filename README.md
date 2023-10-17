@@ -2,7 +2,7 @@
 
 - [Dataset](#dataset)
 - [Technologies and Tools](#technologies-and-tools)
-- [Data Pipeline Architecture and Workflow](#data-pipeline-architecture-and-workflow)
+- [Data Pipeline Architecture](#data-pipeline-architecture)
   - [Local Machine](#local-machine)
   - [Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run](#prefect-execution-environment-docker-google-artifact-registry-google-cloud-run)
   - [Prefect Cloud](#prefect-cloud)
@@ -57,7 +57,7 @@
 - Language: Python 
 
 
-# Data Pipeline Architecture and Workflow
+# Data Pipeline Architecture
 
 
 ## Local Machine
@@ -436,7 +436,7 @@ Run the following commands:
 ### Create Prefect Cloud Blocks
 
 - Go to the project repo folder _**eurostat-gdp/setup**_. The project repo have already been cloned on local machine on the previous steps.
-- Open the file _**setup.py**_ and enter your own values for all variables.
+- Open the file _**proj_setup.py**_ and enter your own values for all variables.
 - Run the command: `python create_blocks.py`
 - Open your Prefect Cloud account, go to the _**Blocks**_ tab and check, that the following blocks were created:
   - GCP Credentials block with the name: eurostat-gdp-gcp-creds
