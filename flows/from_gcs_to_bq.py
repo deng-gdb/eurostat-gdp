@@ -6,13 +6,6 @@ from prefect_gcp import GcpCredentials
 import os.path
 import sys
 
-# in order to be able to import modules from the setup directory
-#sys.path.insert(0, os.path.abspath('../setup'))
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../setup'))
-
-import proj_setup
-
 
 @task(retries=3)
 def download_from_gcs(file_name: str) -> Path:
@@ -31,6 +24,11 @@ def download_from_gcs(file_name: str) -> Path:
 @task()
 def upload_to_bq(path: Path, table_name: str) -> None:
     """Upload DataFrame to BiqQuery"""
+
+    #sys.path.insert(0, os.path.abspath('../setup'))
+    sys.path.insert(0, Path(os.path.join(os.path.dirname(__file__), '../setup')))
+
+    import proj_setup
 
     # read csv file in the dataframe
     df = pd.read_csv(path)
