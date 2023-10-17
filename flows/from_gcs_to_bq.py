@@ -5,7 +5,7 @@ from prefect_gcp.cloud_storage import GcsBucket
 from prefect_gcp import GcpCredentials
 import os.path
 import sys
-import flows_setup
+from prefect.blocks.system import Secret
 
 
 @task(retries=3)
@@ -31,12 +31,14 @@ def upload_to_bq(path: Path, table_name: str) -> None:
 
     gcp_credentials_block = GcpCredentials.load("eurostat-gdp-gcp-creds")
 
+    secret_block = Secret.load("project-id")
+
     # upload the dataframe to the BigQuery
     # if the destination table doesn't exisit - it will be created 
     # https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq
     df.to_gbq(
         destination_table=table_name,
-        project_id=flows_setup.project_id,
+        project_id=secret_block.get(),
         credentials=gcp_credentials_block.get_credentials_from_service_account(),
         chunksize=500000,
         if_exists="replace",
