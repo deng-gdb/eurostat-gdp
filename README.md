@@ -229,9 +229,11 @@ In order to fulfil Data Ingestion stage do the following:
   - Connect through SSH to the VM instance:  
     - `cd ~/.ssh`
     - `gcloud compute config-ssh`
-    - run the command that is provided in the output of the previous command: `ssh eurostat-gdp-vm-instance.us-east1-b.<your-google-projet-id>`, where <your-google-projet-id> - the value specific for your own environment
+    - run the command that is provided in the output of the previous command: `ssh eurostat-gdp-vm-instance.us-east1-b.<your-google-projet-id>`, where <your-google-projet-id> - the value specific for your own environment  
+
 - On the VM instance:
-  - Start the Prefect Agent on the VM instance: `prefect agent start -q default`
+  - Start the Prefect Agent on the VM instance: `prefect agent start -q default`  
+  
 - On the Prefect Cloud
   - Login to your Prefect Cloud account
   - Go to the Deployments tab and find the Deployment `ingest-data/ingest_euro_gdp_data`
@@ -434,10 +436,9 @@ Run the following commands:
 
 
 ### Create Prefect Cloud Blocks
-
-- Go to the project repo folder _**eurostat-gdp/setup**_. The project repo have already been cloned on local machine on the previous steps.
-- Open the file _**proj_setup.py**_ and enter your own values for all variables.
-- Run the command: `python create_blocks.py`
+ 
+- Open the file _**eurostat-gdp/setup/proj_setup.py**_ in the project repo. The project repo have already been cloned on local machine on the previous steps. Enter your own values for all variables in this file.
+- Run the command: `python blocks/create_blocks.py`
 - Open your Prefect Cloud account, go to the _**Blocks**_ tab and check, that the following blocks were created:
   - GCP Credentials block with the name: eurostat-gdp-gcp-creds
   - GCS Bucket block with the name: eurostat-gdp-gcs-bucket

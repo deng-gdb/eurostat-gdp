@@ -7,7 +7,9 @@ import os.path
 import sys
 
 # in order to be able to import modules from the setup directory
-sys.path.insert(0, os.path.abspath('../setup'))
+#sys.path.insert(0, os.path.abspath('../setup'))
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../setup'))
 
 import proj_setup
 
