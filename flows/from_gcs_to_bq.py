@@ -29,8 +29,10 @@ def upload_to_bq(path: Path, table_name: str) -> None:
     # read csv file in the dataframe
     df = pd.read_csv(path)
 
+    # get gcp credentials from the GcpCredentials Prefect block
     gcp_credentials_block = GcpCredentials.load("eurostat-gdp-gcp-creds")
 
+    # get gcp project_id value from the Secret Prefect block
     secret_block = Secret.load("project-id")
 
     # upload the dataframe to the BigQuery
