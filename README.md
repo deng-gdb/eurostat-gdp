@@ -355,9 +355,9 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 #### Install Prefect on local machine
 
-- Install Prefect and Prefect GCP module on your local environment:  
-  - `pip install -U prefect`
-  - `pip install 'prefect_gcp[cloud_storage]'`
+- Install Prefect and all required dependencies on your local environment:  
+  - `cd eurostat-gdp`
+  - `pip install -r requirements.txt`  
 - Create an Prefect API key  
   In order to enable you to authenticate your local environment to work with Prefect Cloud you need to create an [API key](https://docs.prefect.io/2.13.4/cloud/users/api-keys/) in the Prefect Cloud UI first.
   - Sign in into your existing Prefect Cloud account.  
@@ -438,8 +438,8 @@ Run the following commands:
 
 ### Create Prefect Cloud Blocks
  
-- Open the file _**eurostat-gdp/setup/proj_setup.py**_ in the project repo. The project repo have already been cloned on local machine on the previous steps. Enter your own values for all variables in this file.
-- Run the command: `python blocks/create_blocks.py`
+- `cd eurostat-gdp`
+- Run the command: `python setup.py`
 - Open your Prefect Cloud account, go to the _**Blocks**_ tab and check, that the following blocks were created:
   - GCP Credentials block with the name: `eurostat-gdp-gcp-creds`
   - GCS Bucket block with the name: `eurostat-gdp-gcs-bucket`
