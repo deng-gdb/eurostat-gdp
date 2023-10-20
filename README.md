@@ -439,6 +439,14 @@ Run the following commands:
 ### Create Prefect Cloud Blocks
  
 - `cd eurostat-gdp`
+- Rename the file `.env_template` to `.env`.
+- Fill all values in the .env file providing your own . In order to fill the value for the variable `SERVICE_ACCOUNT_CREDENTIALS` you need to convert the corresponding json file with credentials to the string beforehand:
+  - run python interpreter: `python`
+  - `import json`
+  - `service_key ={enter here your json}`
+  - `service_key = json.dumps(service_key)`
+  - `print(service_key)`
+  - copy this value from the output and assing it to the `SERVICE_ACCOUNT_CREDENTIALS` variable in the .env file. 
 - Run the command: `python setup.py`
 - Open your Prefect Cloud account, go to the _**Blocks**_ tab and check, that the following blocks were created:
   - GCP Credentials block with the name: `eurostat-gdp-gcp-creds`
