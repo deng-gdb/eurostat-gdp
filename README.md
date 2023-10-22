@@ -440,13 +440,17 @@ Run the following commands:
  
 - `cd eurostat-gdp`
 - Rename the file `.env_template` to `.env`.
-- Fill all values in the .env file providing your own . In order to fill the value for the variable `SERVICE_ACCOUNT_CREDENTIALS` you need to convert the corresponding json file with credentials to the string beforehand:
-  - run python interpreter: `python`
-  - `import json`
-  - `service_key ={enter here your json}`
-  - `service_key = json.dumps(service_key)`
-  - `print(service_key)`
-  - copy this value from the output and assing it to the `SERVICE_ACCOUNT_CREDENTIALS` variable in the .env file. 
+- Open .env file and add assignments for all variables in the .env file providing your own values: 
+  - `SERVICE_ACCOUNT_CREDENTIALS`. It is the json file with GCP service account credentials, that you have already created in the section [Create a GCP project](#create-a-gcp-project).  In order to get the value for this variable  you need to convert the corresponding json file to the string beforehand:  
+    - run python interpreter: `python`
+    - `import json`
+    - `service_key ={enter here your json}`
+    - `service_key = json.dumps(service_key)`
+    - `print(service_key)`
+    - copy this value from the output and assing it to the `SERVICE_ACCOUNT_CREDENTIALS` variable in the .env file  
+  - `DBT_CLOUD_ACCOUNT_ID`. To get this value you should login to the your dbt Cloud account, go to Account Settings, and in the URL, you should see the your dbt Cloud account ID. 
+    ![dbt-cloud-id](./img/p16.png)
+  - `DBT_CLOUD_API_KEY`. To get this value you should login to the your dbt Cloud account, go to _**Profile Settings**_ -> _**API**_ -> _**API Key**_.
 - Run the command: `python setup.py`
 - Open your Prefect Cloud account, go to the _**Blocks**_ tab and check, that the following blocks were created:
   - GCP Credentials block with the name: `eurostat-gdp-gcp-creds`
