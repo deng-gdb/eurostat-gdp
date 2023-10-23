@@ -99,6 +99,7 @@ def from_web_to_gcs() -> None:
     
     # fetch dataset from the eurostat site and put it into dataframe
     df = fetch(dataset_url)
+    df = df.astype(str)
 
     # make the required transformations for the fetched dataframe
     df_transformed = transform(df, table_schema)
