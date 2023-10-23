@@ -3,18 +3,10 @@ from prefect_gcp import GcpCredentials
 from prefect_gcp.cloud_storage import GcsBucket
 from prefect.filesystems import GitHub
 from prefect.blocks.system import Secret
+from prefect_dbt.cli.credentials import DbtCliProfile
+from prefect_dbt.cloud import DbtCloudCredentials
 import os
 
-'''
-import os.path
-import sys
-
-sys.path.insert(0, os.path.abspath('..'))
-
-import gcp_blocks
-import github_blocks
-import secret_block
-'''
 
 load_dotenv()
 
@@ -41,5 +33,13 @@ gh_block.get_directory("flows") # specify a subfolder of repo where your flows c
 gh_block.save("eurostat-gdp-github", overwrite=True)
 
 # create Prefect Secret block with the name "project-id"
-Secret(value=os.environ.get("GCP_PROJECT_ID", "default")).save(name="project-id")
+Secret(value=os.environ.get("GCP_PROJECT_ID", "default")).save(name="project-id", overwrite=True)
+
+
+# create dbt Cloud credentials block
+dbt_cloud = DbtCloudCredentials(
+    account_id=os.environ.get("DBT_CLOUD_ACCOUNT_ID", 12345),
+    api_key=os.environ.get("DBT_CLOUD_API_KEY", "default"),
+)
+dbt_cloud.save("dbt-cloud", overwrite=True)
 
