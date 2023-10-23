@@ -5,7 +5,7 @@ sources:
       This source contains Eurostat dataset: "Gross domestic product (GDP) at current market prices by NUTS 2 regions".
       Dataset code in the Eurostat classification: nama_10r_2gdp.
     database: free-tier-project-397608
-    schema: eurostat
+    schema: eurostat_gdp_raw
     tables:
         - name: nama-10r-2gdp
 
