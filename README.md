@@ -14,23 +14,22 @@
 - [Data Ingestion and Data Lake](#data-ingestion-and-data-lake)
 - [Data Transformation and Data Warehouse](#data-transformation-and-data-warehouse)
 - [Data Visualization](#data-visualization)
-- [Reproduce the project](#reproduce-the-project)
-  - [Set up project environment](#set-up-project-environment)
-    - [Prerequisites](#prerequisites)
-    - [Create a GCP project](#create-a-gcp-project)
-    - [Create a Prefect Cloud Account and Workspace](#create-a-prefect-cloud-account-and-workspace)
-      - [Create an Prefect Cloud API key](#create-an-prefect-cloud-api-key)  
-    - [Setup local development environment](#setup-local-development-environment)
-      - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
-      - [Clone the project repo on local machine](#clone-the-project-repo-on-local-machine)
-      - [Install Terraform on local machine](#install-terraform-on-local-machine)
-      - [Install Prefect on local machine](#install-prefect-on-local-machine)
-      - [Install Docker on local machine](#install-docker-on-local-machine)
-      - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
-    - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
-    - [Build Docker image and put it in the Artifact Registry](#build-docker-image-and-put-it-in-the-artifact-registry)  
-    - [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks)
-    - [Create Prefect Deployment](#create-prefect-deployment)
+- [Set up project environment](#set-up-project-environment)
+  - [Prerequisites](#prerequisites)
+  - [Create a GCP project](#create-a-gcp-project)
+  - [Create a Prefect Cloud Account and Workspace](#create-a-prefect-cloud-account-and-workspace)
+  - [Create an Prefect Cloud API key](#create-an-prefect-cloud-api-key)  
+  - [Setup local development environment](#setup-local-development-environment)
+    - [Install and setup Google Cloud SDK on local machine](#install-and-setup-google-cloud-sdk-on-local-machine)
+    - [Clone the project repo on local machine](#clone-the-project-repo-on-local-machine)
+    - [Install Terraform on local machine](#install-terraform-on-local-machine)
+    - [Install Prefect on local machine](#install-prefect-on-local-machine)
+    - [Install Docker on local machine](#install-docker-on-local-machine)
+    - [Set up SSH access to the Compute Engine VM instances on local machine](#set-up-ssh-access-to-the-compute-engine-vm-instances-on-local-machine)
+  - [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
+  - [Build Docker image and put it in the Artifact Registry](#build-docker-image-and-put-it-in-the-artifact-registry)  
+  - [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks)
+  - [Create Prefect Deployment](#create-prefect-deployment)
 
 
 # Dataset
@@ -267,13 +266,10 @@ The Data Transformation implementation details, Data Warehouse Modeling guidance
 Dashbord implementation details, the corresponding description and visualizations you can find [here.](./notes/dashboard_notes.md)
 
 
-# Reproduce the project
+# Set up project environment
 
 
-## Set up project environment
-
-
-### Prerequisites
+## Prerequisites
 
 The following items could be treated as prerequisites in order to reproduce the project:
 
@@ -282,7 +278,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 - (Optional) A SSH client. It is supposed that you are using a Terminal and SSH.
 
 
-### Create a GCP project
+## Create a GCP project
 
 - To create a new Google Cloud project go to the [GCP dashboard](https://console.cloud.google.com/) and create a new project.
 - After you have created the project, you need to create a _Service Account_ in the project: 
@@ -318,14 +314,14 @@ The following items could be treated as prerequisites in order to reproduce the 
   - [Cloud Run API](https://console.cloud.google.com/apis/library/run.googleapis.com)
 
 
-### Create a Prefect Cloud Account and Workspace
+## Create a Prefect Cloud Account and Workspace
 
 - [Sign in or register](https://docs.prefect.io/2.13.5/cloud/cloud-quickstart/#sign-in-or-register) a Prefect Cloud account.
 - [Create a workspace](https://docs.prefect.io/2.13.5/cloud/cloud-quickstart/#create-a-workspace) for your account.
 - Create an Prefect API key. In order to enable you to authenticate your local (and other) environment to work with Prefect Cloud you need to create an [API key](https://docs.prefect.io/2.13.4/cloud/users/api-keys/) in the Prefect Cloud UI first. See the next section.
 
 
-#### Create an Prefect Cloud API key
+### Create an Prefect Cloud API key
 
 - Sign in into your existing Prefect Cloud account.  
 - Select the account icon at the bottom-left corner of the UI.  
@@ -335,10 +331,10 @@ The following items could be treated as prerequisites in order to reproduce the 
 - In order to log into Prefect Cloud with this API Key you should run the following command: `prefect cloud login -k '<your-api-key>'` 
 
 
-### Setup local development environment
+## Setup local development environment
 
 
-#### Install and setup Google Cloud SDK on local machine
+### Install and setup Google Cloud SDK on local machine
 
 - Download Google Cloud SDK from [this link](https://cloud.google.com/sdk/docs/install-sdk#linux) and install it.
 - Initialize the SDK following [these instructions.](https://cloud.google.com/sdk/docs/install-sdk)
@@ -349,14 +345,14 @@ The following items could be treated as prerequisites in order to reproduce the 
   - Make sure that your project is selected with the command `gcloud config list`
 
 
-#### Clone the project repo on local machine
+### Clone the project repo on local machine
 
 - Fork this GitHub repository in your GitHub account and clone the forked repo. It is requred because you should perform some customization changes in the code.  
 - Go to the your `$HOME` directory.
 - Run the following command: `git clone https://github.com/<your-git-account-name>/eurostat-gdp.git`
 
 
-#### Install Terraform on local machine
+### Install Terraform on local machine
 
 - Terraform client installation: [https://www.terraform.io/downloads](https://www.terraform.io/downloads)  
   - `wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg`
@@ -365,7 +361,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 - Check that Terraform installed successfully. Run: `terraform -version`
 
 
-#### Install Prefect on local machine
+### Install Prefect on local machine
 
 - Install Prefect and all required dependencies on your local environment:  
   - `cd eurostat-gdp`
@@ -381,7 +377,7 @@ The following items could be treated as prerequisites in order to reproduce the 
   - Run the following command: `prefect cloud login -k '<your-api-key>'`  
 
   
-#### Set up SSH access to the Compute Engine VM instances on local machine
+### Set up SSH access to the Compute Engine VM instances on local machine
 
 - **Create an SSH key pair on local machine.**  
   - If you connect to GCP Compute Engine virtual machine (VM) instances using third party tools or OpenSSH, you need to add a key to your VM before you can connect. If you don't have an SSH key, you must create one.
@@ -413,7 +409,7 @@ The following items could be treated as prerequisites in order to reproduce the 
     - `gcloud compute instances stop <instance_name>` - stops your instance
 
 
-### Create GCP project infrastructure with Terraform
+## Create GCP project infrastructure with Terraform
 
 Run the following commands:
 - `cd ~/eurostat-gdp/setup/terraform`
@@ -429,7 +425,7 @@ Run the following commands:
   - [Artifact Registry](https://console.cloud.google.com/artifacts): `eurostat-gdp-repository`
 
 
-### Build Docker image and put it in the Artifact Registry
+## Build Docker image and put it in the Artifact Registry
 
 - All actions are performed on the local machine.
 - Run Docker Desktop.
@@ -448,7 +444,7 @@ Run the following commands:
 - Open your [Artifact Registry](https://console.cloud.google.com/artifacts) and check that the Docker image exists in the repository.
 
 
-### Create Prefect Cloud Blocks
+## Create Prefect Cloud Blocks
  
 - `cd eurostat-gdp`
 - Rename the file `.env_template` to `.env`.
@@ -481,7 +477,7 @@ Create block GCP Cloud Run Job. It is an infrastructure block used to run GCP Cl
 - Save the changes
 
 
-### Create Prefect Deployment
+## Create Prefect Deployment
 
 Run the following commands on the local machine:
 
