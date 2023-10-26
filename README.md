@@ -11,8 +11,8 @@
       - [Prefect Deployment](#prefect-deployment)
     - [Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run](#prefect-execution-environment-docker-google-artifact-registry-google-cloud-run)
     - [Prefect Agent and GCP VM instance](#prefect-agent-and-gcp-vm-instance)  
-- [Data Ingestion](#data-ingestion)
-- [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
+- [Data Ingestion and Data Lake](#data-ingestion-and-data-lake)
+- [Data Transformation and Data Warehouse](#data-transformation-and-data-warehouse)
 - [Data Visualization](#data-visualization)
 - [Reproduce the project](#reproduce-the-project)
   - [Set up project environment](#set-up-project-environment)
@@ -228,7 +228,7 @@ In the project architecture the Prefect agent is running on a Google Compute Eng
 - The code that runs the mentioned script `setup/terraform/scripts/install.sh` is located in the `setup/terraform/main.tf` file in the section `provisioner "remote-exec"`.
 
 
-# Data Ingestion
+# Data Ingestion and Data Lake
 
 Data Ingestion stage comprise the following activities:
 - Download the corresponding dataset from the **Eurostat site**.
@@ -239,25 +239,28 @@ Prerequisites: you should complete all required activities mentioned in the sect
 
 In order to fulfil Data Ingestion stage do the following:
 
-- On the local machine:
+- On the **local machine**:
   - Start the corresponding VM instance in the Google Cloud, run the command: `gcloud compute instances start eurostat-gdp-vm-instance`
   - Connect through SSH to the VM instance:  
     - `cd ~/.ssh`
     - `gcloud compute config-ssh`
     - run the command that is provided in the output of the previous command: `ssh eurostat-gdp-vm-instance.us-east1-b.<your-google-projet-id>`, where <your-google-projet-id> - the value specific for your own environment  
 
-- On the VM instance:
+- On the **VM instance**:
   - Start the Prefect Agent on the VM instance: `prefect agent start -q default`  
 
-- On the Prefect Cloud
+- On the **Prefect Cloud**
   - Login to your Prefect Cloud account
   - Go to the Deployments tab and find the Deployment `ingest-data/ingest_euro_gdp_data`
   - Select this deployment and perform `Quick run` action
 
 
-# Data Warehouse and Data Modeling
+# Data Transformation and Data Warehouse
 
-The project uses Google BigQuery as a Data Warehouse.   
+The project uses Google BigQuery as a **Data Warehouse**. 
+During the Data Transformation stage the data is carried over through the various transformations from the Raw data schema to the production Data Warehouse schema.
+This process is implemented using the dbt Cloud
+
 The Data Warehouse implementation details, Data Modeling guidance and the corresponding workflow you can find [here.](./notes/dbt_notes.md)
 
 
