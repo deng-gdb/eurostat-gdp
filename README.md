@@ -255,7 +255,7 @@ In order to fulfil Data Ingestion stage do the following:
 # Data Transformation and Data Warehouse
 
 The project uses Google BigQuery as a **Data Warehouse**. 
-During the Data Transformation stage the data is carried over through the various transformations from the Raw data schema to the production Data Warehouse schema.
+During the Data Transformation stage the data is carried over through the various transformations from the Raw data schema to the production Data Warehouse schema.  
 This process is implemented using the [dbt Cloud](https://www.getdbt.com/product/dbt-cloud).  
 
 The Data Transformation implementation details, Data Warehouse Modeling guidance and the corresponding workflow you can find [here.](./notes/dbt_notes.md)
