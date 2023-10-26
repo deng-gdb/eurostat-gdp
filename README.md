@@ -59,6 +59,7 @@
 
 # Data Pipeline Architecture
 
+![project-architecture](./img/project_architecture.png)
 
 ## Local Machine
 
