@@ -161,15 +161,15 @@ There are many variants how to make Orchestration using the Prefect. The followi
 
 ### Prefect Cloud
 
-
-#### Prefect Blocks
-
 Much of Prefect's functionality is backed by an API that located on the  _**Prefect server**_. 
 There are two versions of Prefect server: self-hosting and Prefect Cloud.
 - If self-hosting, you'll need to start the Prefect webserver and related services yourself.
 - If Prefect Cloud, you'll need only to sign up for a forever free Prefect Cloud account.
 
 The project uses Prefect Cloud version. [Prefect Cloud](https://docs.prefect.io/2.13.5/cloud/) is a workflow orchestration platform that provides all the capabilities of _**Prefect server**_ plus additional features.
+
+
+#### Prefect Blocks
 
 In order to perform orchestration Prefect server should have information about all components of the system.   
 [Prefect blocks](https://docs.prefect.io/2.13.5/concepts/blocks/) is a Prefect feature that enable the storage of configuration and provide an interface for interacting with external systems.
