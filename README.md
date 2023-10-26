@@ -4,12 +4,13 @@
 - [Technologies and Tools](#technologies-and-tools)
 - [Data Pipeline Architecture](#data-pipeline-architecture)
   - [Local Machine](#local-machine)
-  - [Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run](#prefect-execution-environment-docker-google-artifact-registry-google-cloud-run)
-  - [Prefect Cloud](#prefect-cloud)
-    - [Prefect Blocks](#prefect-blocks)
-    - [Prefect Deployment](#prefect-deployment)
-  - [Prefect Agent and GCP VM instance](#prefect-agent-and-gcp-vm-instance)
-  - [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform) 
+  - [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform)
+  - [Orchestration](#orchestration)
+    - [Prefect Cloud](#prefect-cloud)
+      - [Prefect Blocks](#prefect-blocks)
+      - [Prefect Deployment](#prefect-deployment)
+    - [Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run](#prefect-execution-environment-docker-google-artifact-registry-google-cloud-run)
+    - [Prefect Agent and GCP VM instance](#prefect-agent-and-gcp-vm-instance)  
 - [Data Ingestion](#data-ingestion)
 - [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
 - [Data Visualization](#data-visualization)
@@ -61,9 +62,10 @@
 
 ![project-architecture](./img/project_architecture.png)
 
+
 ## Local Machine
 
-In the project architecture a local machine is used in order to create project infrastructure in the Cloud, and for ssh communication with GCP Compute Engine VM instance.
+In the project architecture a local machine is used in order to create the project infrastructure in the Cloud, to create a Docker image for the Prefect flows execution environment, and for ssh communication with GCP Compute Engine VM instance.
 
 So, on the local machine the following software should be installed:
 - Python
@@ -74,75 +76,6 @@ So, on the local machine the following software should be installed:
 - Docker
 
 The details see in the section [Setup local development environment](#setup-local-development-environment).
-
-
-## Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run
-
-To run Prefect workflows scripts in the Cloud an execution environment is required. 
-In the project such execution environment consists of two parts: **Docker image** which is stored in the **Google Artifact Registry** and **Google Cloud Run**.
-- Docker image contains the base environment for execution: Python, Prefect and all required dependencies that should be installed in the base environment in the Docker image. 
-- [GCP Artifact Registry.](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth) is used to store the Docker image. 
-- [Google Cloud Run](https://cloud.google.com/run/?hl=en) is used to run the corresponding Docker container.
-
-**Be aware of the following**_:  
-  - The Docker image contains _**only base environment for Prefect execution**_: Python, Prefect, etc.
-  - The Prefect _**flows scripts**_ itself are located in the corresponding _**GitHub repository**_.
-  - The code requred to build the Docker image is located in the `setup/docker` folder in the project repo.
-  - All environment dependencies are captured in the `setup/docker/docker-requirements.txt` file and will be installed in the base environment in the Docker image.
-  - The implementation details see in the section [Build Docker image and put it in the Artifact Registry](#build-docker-image-and-put-it-in-the-artifact-registry) 
-
-
-## Prefect Cloud
-
-
-### Prefect Blocks
-
-Much of Prefect's functionality is backed by an API that located on the  _**Prefect server**_. 
-There are two versions of Prefect server: self-hosting and Prefect Cloud.
-- If self-hosting, you'll need to start the Prefect webserver and related services yourself.
-- If Prefect Cloud, you'll need only to sign up for a forever free Prefect Cloud account.
-
-The project uses Prefect Cloud version. [Prefect Cloud](https://docs.prefect.io/2.13.5/cloud/) is a workflow orchestration platform that provides all the capabilities of _**Prefect server**_ plus additional features.
-
-In order to perform orchestration Prefect server should have information about all components of the system.   
-[Prefect blocks](https://docs.prefect.io/2.13.5/concepts/blocks/) is a Prefect feature that enable the storage of configuration and provide an interface for interacting with external systems.
-
-The project uses the following Prefect Block types:
-- [GCP Credentials](https://prefecthq.github.io/prefect-gcp/credentials/#prefect_gcp.credentials.GcpCredentials). Block used to manage authentication with GCP. 
-- [GCS Bucket](https://prefecthq.github.io/prefect-gcp/cloud_storage/#prefect_gcp.cloud_storage.GcsBucket). Block used to store f configuration regarding the GCP Cloud Storage Buckets.
-- [BigQuery Warehouse](https://prefecthq.github.io/prefect-gcp/bigquery/#prefect_gcp.bigquery.BigQueryWarehouse). A block for querying a database with BigQuery.
-- [Secret](https://discourse.prefect.io/t/how-to-securely-store-secrets-in-prefect-2-0/1209). A block to secure store project id value.
-- [GitHub](https://docs.prefect.io/2.13.5/concepts/filesystems/#github). The GitHub filesystem block enables interaction with GitHub repositories. This block is read-only and works with both public and private repositories.
-- [GCP Cloud Run Job](https://prefecthq.github.io/prefect-gcp/cloud_run/#prefect_gcp.cloud_run.CloudRunJob). Infrastructure block used to run GCP Cloud Run Jobs. This block contains all information required to run Perfect flows, namely:
-    - Docker Image name - the full location of the Docker image in the Google Artifact Registry
-    - GCP Credentials block
-
-The Prefect blocks in the project are created through the Python scripts. These scripts are located in the `eurostat-gdp/setup/blocks` folder.
-
-Implementation details see in the section [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks).
-
-
-### Prefect Deployment
-
-[Prefect Deployments](https://docs.prefect.io/2.13.6/concepts/deployments/) are server-side representations of Prefect flows. They store the all metadata needed for remote orchestration including when, where, and how a workflow should run. So, a deployment allows to trigger and schedule Prefect flows instead of running them manually.
-
-Prefect CLI is used in the project for the deployment creation.
-In order to create Prefect deployment on the Prefect Server we need to run two commands on the local machine:
-- `prefect deployment build ...` - [this command](https://docs.prefect.io/2.13.6/api-ref/prefect/cli/deployment/) will create a deployment yaml file. 
-- `prefect deployment apply ...` - this command will create and upload the deployment, specified in the yaml file, to the Prefect server.
-
-Implementation details see in the section [Create Prefect Deployment](#create-prefect-deployment).
-
-
-## Prefect Agent and GCP VM instance
-
-The [Prefect agent](https://docs.prefect.io/2.13.5/concepts/agents/) is a lightweight polling service that periodically check scheduled flow runs from a Prefect Server work pool (located in the Prefect Cloud) and execute the corresponding Prefect flow runs. Agents poll for work every 15 seconds by default. 
-
-In the project architecture the Prefect agent is running on a Google Compute Engine VM instance. 
-- The creation of this part of the architecture completly implemented using Terraform (see the corresponding section [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform)
-- The code that _**creates the VM instance**_ is located in the `setup/terraform/main.tf` file in the section `resource "google_compute_instance"`.
-- The script that _**installs the Python and Prefect Agent**_ on the created VM instance and _**connects it to the Prefect Cloud**_ with Prefect API key is located in the `setup/terraform/scripts/install.sh` file.
-- The code that runs the mentioned script `setup/terraform/scripts/install.sh` is located in the `setup/terraform/main.tf` file in the section `provisioner "remote-exec"`.
 
 
 ## Cloud Infrastructure with Terraform
@@ -213,14 +146,94 @@ This file specifies the values for the variables from the file `variables.tf` wh
 The guidance regarding the Terraform execution see in the corresponding section:  [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
 
 
+## Orchestration
+
+The Orchestration in the project is implemented using the [Prefect](https://docs.prefect.io/latest/getting-started/quickstart/#quickstart) tool, actually [Prefect Cloud](https://docs.prefect.io/latest/cloud/) version of this tool. 
+
+The Orchestration is implemented only for the Data Ingestion stage. The Orchestration for the Transformation stage (for dbt transformations) is not implemented due to the dbt free pricing plan limitations (API access is not available for the dbt free pricing plan).
+
+There are many variants how to make Orchestration using the Prefect. The following orchestration variant was implemented in the project:  
+- Prefect server - cloud based hosting - Prefect Cloud.
+- Prefect flows Python scripts, which contain the orchestration logic, are located in the separate GitHub repository, outside the Prefect server.
+- Prefect execution environment is implemented using Docker image which is stored in the Google Artifact Registry and Google Cloud Run service.
+- Prefect Agent is running in the Compute Engine Virtual Machine instance.
+
+
+### Prefect Cloud
+
+
+#### Prefect Blocks
+
+Much of Prefect's functionality is backed by an API that located on the  _**Prefect server**_. 
+There are two versions of Prefect server: self-hosting and Prefect Cloud.
+- If self-hosting, you'll need to start the Prefect webserver and related services yourself.
+- If Prefect Cloud, you'll need only to sign up for a forever free Prefect Cloud account.
+
+The project uses Prefect Cloud version. [Prefect Cloud](https://docs.prefect.io/2.13.5/cloud/) is a workflow orchestration platform that provides all the capabilities of _**Prefect server**_ plus additional features.
+
+In order to perform orchestration Prefect server should have information about all components of the system.   
+[Prefect blocks](https://docs.prefect.io/2.13.5/concepts/blocks/) is a Prefect feature that enable the storage of configuration and provide an interface for interacting with external systems.
+
+The project uses the following Prefect Block types:
+- [GCP Credentials](https://prefecthq.github.io/prefect-gcp/credentials/#prefect_gcp.credentials.GcpCredentials). Block used to manage authentication with GCP. 
+- [GCS Bucket](https://prefecthq.github.io/prefect-gcp/cloud_storage/#prefect_gcp.cloud_storage.GcsBucket). Block used to store f configuration regarding the GCP Cloud Storage Buckets.
+- [BigQuery Warehouse](https://prefecthq.github.io/prefect-gcp/bigquery/#prefect_gcp.bigquery.BigQueryWarehouse). A block for querying a database with BigQuery.
+- [Secret](https://discourse.prefect.io/t/how-to-securely-store-secrets-in-prefect-2-0/1209). A block to secure store project id value.
+- [GitHub](https://docs.prefect.io/2.13.5/concepts/filesystems/#github). The GitHub filesystem block enables interaction with GitHub repositories. This block is read-only and works with both public and private repositories.
+- [GCP Cloud Run Job](https://prefecthq.github.io/prefect-gcp/cloud_run/#prefect_gcp.cloud_run.CloudRunJob). Infrastructure block used to run GCP Cloud Run Jobs. This block contains all information required to run Perfect flows, namely:
+    - Docker Image name - the full location of the Docker image in the Google Artifact Registry
+    - GCP Credentials block
+
+The Prefect blocks in the project are created through the Python scripts. These scripts are located in the `eurostat-gdp/setup/blocks` folder.
+
+Implementation details see in the section [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks).
+
+
+#### Prefect Deployment
+
+[Prefect Deployments](https://docs.prefect.io/2.13.6/concepts/deployments/) are server-side representations of Prefect flows. They store the all metadata needed for remote orchestration including when, where, and how a workflow should run. So, a deployment allows to trigger and schedule Prefect flows instead of running them manually.
+
+Prefect CLI is used in the project for the deployment creation.
+In order to create Prefect deployment on the Prefect Server we need to run two commands on the local machine:
+- `prefect deployment build ...` - [this command](https://docs.prefect.io/2.13.6/api-ref/prefect/cli/deployment/) will create a deployment yaml file. 
+- `prefect deployment apply ...` - this command will create and upload the deployment, specified in the yaml file, to the Prefect server.
+
+Implementation details see in the section [Create Prefect Deployment](#create-prefect-deployment).
+
+
+### Prefect execution environment: Docker, Google Artifact Registry, Google Cloud Run
+
+To run Prefect workflows scripts in the Cloud an execution environment is required. 
+In the project such execution environment consists of two parts: **Docker image** which is stored in the **Google Artifact Registry** and **Google Cloud Run**.
+- Docker image contains the base environment for execution: Python, Prefect and all required dependencies that should be installed in the base environment in the Docker image. 
+- [GCP Artifact Registry.](https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images#auth) is used to store the Docker image. 
+- [Google Cloud Run](https://cloud.google.com/run/?hl=en) is used to run the corresponding Docker container.
+
+**Be aware of the following**_:  
+  - The Docker image contains _**only base environment for Prefect execution**_: Python, Prefect, etc.
+  - The Prefect _**flows scripts**_ itself are located in the corresponding _**GitHub repository**_.
+  - The code requred to build the Docker image is located in the `setup/docker` folder in the project repo.
+  - All environment dependencies are captured in the `setup/docker/docker-requirements.txt` file and will be installed in the base environment in the Docker image.
+  - The implementation details see in the section [Build Docker image and put it in the Artifact Registry](#build-docker-image-and-put-it-in-the-artifact-registry)
+
+
+### Prefect Agent and GCP VM instance
+
+The [Prefect agent](https://docs.prefect.io/2.13.5/concepts/agents/) is a lightweight polling service that periodically check scheduled flow runs from a Prefect Server work pool (located in the Prefect Cloud) and execute the corresponding Prefect flow runs. Agents poll for work every 15 seconds by default. 
+
+In the project architecture the Prefect agent is running on a Google Compute Engine VM instance. 
+- The creation of this part of the architecture completly implemented using Terraform (see the corresponding section [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform)
+- The code that _**creates the VM instance**_ is located in the `setup/terraform/main.tf` file in the section `resource "google_compute_instance"`.
+- The script that _**installs the Python and Prefect Agent**_ on the created VM instance and _**connects it to the Prefect Cloud**_ with Prefect API key is located in the `setup/terraform/scripts/install.sh` file.
+- The code that runs the mentioned script `setup/terraform/scripts/install.sh` is located in the `setup/terraform/main.tf` file in the section `provisioner "remote-exec"`.
+
+
 # Data Ingestion
 
 Data Ingestion stage comprise the following activities:
 - Download the corresponding dataset from the **Eurostat site**.
 - Upload this dataset into the Google Cloud Storage in the **Data lake**.
-- Load this dataset form the Data Lake into the BigQuery dataset in the **Data Warehouse** in the schema that contains raw source data.
-
-The Orchestration in the project implemented using the [Prefect](https://docs.prefect.io/latest/getting-started/quickstart/#quickstart) tool, actually [Prefect Cloud](https://docs.prefect.io/latest/cloud/) version of this tool.
+- Load this dataset form the Data Lake into the BigQuery dataset in the **Data Warehouse** in the schema that contains raw source data.  
 
 Prerequisites: you should complete all required activities mentioned in the section [Set up project environment](#set-up-project-environment).
 
