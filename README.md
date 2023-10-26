@@ -10,7 +10,7 @@
     - [Prefect Deployment](#prefect-deployment)
   - [Prefect Agent and GCP VM instance](#prefect-agent-and-gcp-vm-instance)
   - [Cloud Infrastructure with Terraform](#cloud-infrastructure-with-terraform) 
-- [Data Ingestion and Data Lake](#data-ingestion-and-data-lake)
+- [Data Ingestion](#data-ingestion)
 - [Data Warehouse and Data Modeling](#data-warehouse-and-data-modeling)
 - [Data Visualization](#data-visualization)
 - [Reproduce the project](#reproduce-the-project)
@@ -36,7 +36,7 @@
 
 # Dataset
 
-- This project is related to the processing of the Eurostat dataset: `"Gross domestic product (GDP) at current market prices by NUTS 2 regions"`. Eurostat online data code of this dataset: NAMA_10R_2GDP.
+- This project is related to the processing of the **Eurostat** dataset: `"Gross domestic product (GDP) at current market prices by NUTS 2 regions"`. Eurostat online data code of this dataset: _**NAMA_10R_2GDP**_.
 - The dataset is available at this [link.](https://ec.europa.eu/eurostat/web/products-datasets/-/nama_10r_2gdp)
 - Metadata regarding this dataset you can find [here.](https://ec.europa.eu/eurostat/cache/metadata/en/reg_eco10_esms.htm)
 - API for dataset access description is available at this [link.](https://wikis.ec.europa.eu/display/EUROSTATHELP/Transition+-+from+Eurostat+Bulk+Download+to+API)
@@ -63,7 +63,7 @@
 
 ## Local Machine
 
-In the project architecture a local machine is used for development purpose and for ssh communication with GCP Compute Engine VM instance.
+In the project architecture a local machine is used in order to create project infrastructure in the Cloud, and for ssh communication with GCP Compute Engine VM instance.
 
 So, on the local machine the following software should be installed:
 - Python
@@ -213,12 +213,12 @@ This file specifies the values for the variables from the file `variables.tf` wh
 The guidance regarding the Terraform execution see in the corresponding section:  [Create GCP project infrastructure with Terraform](#create-gcp-project-infrastructure-with-terraform) 
 
 
-# Data Ingestion and Data Lake
+# Data Ingestion
 
 Data Ingestion stage comprise the following activities:
-- Download the corresponding dataset from the Eurostat site.
-- Upload this dataset into the Google Cloud Storage in the Data lake.
-- Load this dataset form the Data Lake into the BigQuery dataset in the Data Warehouse.
+- Download the corresponding dataset from the **Eurostat site**.
+- Upload this dataset into the Google Cloud Storage in the **Data lake**.
+- Load this dataset form the Data Lake into the BigQuery dataset in the **Data Warehouse** in the schema that contains raw source data.
 
 The Orchestration in the project implemented using the [Prefect](https://docs.prefect.io/latest/getting-started/quickstart/#quickstart) tool, actually [Prefect Cloud](https://docs.prefect.io/latest/cloud/) version of this tool.
 
@@ -240,9 +240,6 @@ In order to fulfil Data Ingestion stage do the following:
   - Login to your Prefect Cloud account
   - Go to the Deployments tab and find the Deployment `ingest-data/ingest_euro_gdp_data`
   - Select this deployment and perform `Quick run` action
-
-
-
 
 
 # Data Warehouse and Data Modeling
