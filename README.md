@@ -32,8 +32,6 @@
     - [Create Prefect Cloud Blocks](#create-prefect-cloud-blocks)
     - [Create Prefect Deployment](#create-prefect-deployment)
 
-  - [Set up dbt Cloud and deploy dbt models in Production](#set-up-dbt-cloud-and-deploy-dbt-models-in-production)
-
 
 # Dataset
 
@@ -259,9 +257,9 @@ In order to fulfil Data Ingestion stage do the following:
 
 The project uses Google BigQuery as a **Data Warehouse**. 
 During the Data Transformation stage the data is carried over through the various transformations from the Raw data schema to the production Data Warehouse schema.
-This process is implemented using the dbt Cloud
+This process is implemented using the [dbt Cloud](https://www.getdbt.com/product/dbt-cloud).  
 
-The Data Warehouse implementation details, Data Modeling guidance and the corresponding workflow you can find [here.](./notes/dbt_notes.md)
+The Data Transformation implementation details, Data Warehouse Modeling guidance and the corresponding workflow you can find [here.](./notes/dbt_notes.md)
 
 
 # Data Visualization
