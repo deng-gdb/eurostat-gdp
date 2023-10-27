@@ -74,6 +74,7 @@ So, on the local machine the following software should be installed:
 
 The details see in the section [Setup local development environment](#setup-local-development-environment).
 
+[Index](#local_machine)
 
 ## Cloud Infrastructure with Terraform
 
