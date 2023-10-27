@@ -61,7 +61,7 @@
 
 
 ## Local Machine 
-[&uarr; Top](#index)
+[&uarr;Top](#index)
 
 In the project architecture a local machine is used in order to create the project infrastructure in the Cloud, to create a Docker image for the Prefect flows execution environment, and for ssh communication with GCP Compute Engine VM instance.
 
