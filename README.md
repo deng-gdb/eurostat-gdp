@@ -76,6 +76,8 @@ The details see in the section [Setup local development environment](#setup-loca
 
 [Index](#local_machine)
 
+[Local Machine](#local-machine)
+
 ## Cloud Infrastructure with Terraform
 
 The GCP Cloud Infrastructure in the project was implemented using the Terraform.
