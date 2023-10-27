@@ -61,8 +61,6 @@
 
 
 ## Local Machine 
-[Top &uarr;](#index)
-
 [To Index](#index)
 
 In the project architecture a local machine is used in order to create the project infrastructure in the Cloud, to create a Docker image for the Prefect flows execution environment, and for ssh communication with GCP Compute Engine VM instance.
@@ -79,6 +77,7 @@ The details see in the section [Setup local development environment](#setup-loca
 
 
 ## Cloud Infrastructure with Terraform
+[To Index](#index)
 
 The GCP Cloud Infrastructure in the project was implemented using the Terraform.
 The Cloud Infrastructure created by Terraform includes the following items:
@@ -147,6 +146,7 @@ The guidance regarding the Terraform execution see in the corresponding section:
 
 
 ## Orchestration
+[To Index](#index)
 
 The Orchestration in the project is implemented using the [Prefect](https://docs.prefect.io/latest/getting-started/quickstart/#quickstart) tool, actually [Prefect Cloud](https://docs.prefect.io/latest/cloud/) version of this tool. 
 
@@ -229,6 +229,7 @@ In the project architecture the Prefect agent is running on a Google Compute Eng
 
 
 # Data Ingestion and Data Lake
+[To Index](#index)
 
 Data Ingestion stage comprise the following activities:
 - Download the corresponding dataset from the **Eurostat site**.
@@ -256,6 +257,7 @@ In order to fulfil Data Ingestion stage do the following:
 
 
 # Data Transformation and Data Warehouse
+[To Index](#index)
 
 The project uses Google BigQuery as a **Data Warehouse**. 
 During the Data Transformation stage the data is carried over through the various transformations from the Raw data schema to the production Data Warehouse schema.  
@@ -265,6 +267,7 @@ The Data Transformation implementation details, Data Warehouse Modeling guidance
 
 
 # Data Visualization
+[To Index](#index)
 
 Dashbord implementation details, the corresponding description and visualizations you can find [here.](./notes/dashboard_notes.md)
 
@@ -273,6 +276,7 @@ Dashbord implementation details, the corresponding description and visualization
 
 
 ## Prerequisites
+[To Index](#index)
 
 The following items could be treated as prerequisites in order to reproduce the project:
 
@@ -282,6 +286,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 
 ## Create a GCP project
+[To Index](#index)
 
 - To create a new Google Cloud project go to the [GCP dashboard](https://console.cloud.google.com/) and create a new project.
 - After you have created the project, you need to create a _Service Account_ in the project: 
@@ -318,6 +323,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 
 ## Create a Prefect Cloud Account and Workspace
+[To Index](#index)
 
 - [Sign in or register](https://docs.prefect.io/2.13.5/cloud/cloud-quickstart/#sign-in-or-register) a Prefect Cloud account.
 - [Create a workspace](https://docs.prefect.io/2.13.5/cloud/cloud-quickstart/#create-a-workspace) for your account.
@@ -335,7 +341,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 
 ## Setup local development environment
-
+[To Index](#index)
 
 ### Install and setup Google Cloud SDK on local machine
 
@@ -413,6 +419,7 @@ The following items could be treated as prerequisites in order to reproduce the 
 
 
 ## Create GCP project infrastructure with Terraform
+[To Index](#index)
 
 Run the following commands:
 - `cd ~/eurostat-gdp/setup/terraform`
@@ -429,6 +436,7 @@ Run the following commands:
 
 
 ## Build Docker image and put it in the Artifact Registry
+[To Index](#index)
 
 - All actions are performed on the local machine.
 - Run Docker Desktop.
@@ -448,6 +456,7 @@ Run the following commands:
 
 
 ## Create Prefect Cloud Blocks
+[To Index](#index)
  
 - `cd eurostat-gdp`
 - Rename the file `.env_template` to `.env`.
@@ -481,6 +490,7 @@ Create block GCP Cloud Run Job. It is an infrastructure block used to run GCP Cl
 
 
 ## Create Prefect Deployment
+[To Index](#index)
 
 Run the following commands on the local machine:
 
